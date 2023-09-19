@@ -1,0 +1,31 @@
+spring:
+ cloud:
+   gateway:
+     routes:
+       - id: app-service
+         uri: lb://SPCOM-APP-SERVICE
+         predicates:
+           - Path=/app/**
+         filters:
+           - AuthenticationFilter
+
+       - id: auth-server
+         uri: lb://SPCOM-AUTH-SERVER
+         predicates:
+           - Path=/auth/**
+         filters:
+           - AuthenticationFilter
+
+ application:
+   name: SPCOM-GATEWAY-SERVER
+# main:
+#    web-application-type: none
+    
+eureka:
+  client:
+    service-url:
+      defaultZone : http://localhost:8761/eureka/
+      
+springdoc:
+   swagger-ui:
+    path: /ms-ui.html

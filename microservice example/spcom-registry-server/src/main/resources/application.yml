@@ -1,0 +1,25 @@
+server:
+  port: 8761
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info
+  info:
+    env:
+      enabled: true
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    fetch-registry: 'false'
+    register-with-eureka: 'false'
+  renewalPercentThreshold: '0.85'
+info:
+  application:
+    version: 0.0.1-SNAPSHOT
+    description: 'microservice : ${info.application.name}'
+    name: SPCOM-REGISTRY-SERVER
+spring:
+  application:
+    name: ${info.application.name}

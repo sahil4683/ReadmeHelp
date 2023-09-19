@@ -1,0 +1,38 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info
+  info:
+    env:
+      enabled: true
+spring:
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  application:
+    name: ${info.application.name}
+  datasource:
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    url: jdbc:mysql://localhost:3306/javatechie?useUnicode=yes&characterEncoding=UTF-8&createDatabaseIfNotExist=true
+info:
+  application:
+    version: 0.0.1-SNAPSHOT
+    description: 'microservice : ${info.application.name}'
+    name: SPCOM-AUTH-SERVER
+springdoc:
+  swagger-ui:
+    path: /ms-ui.html
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+server:
+  port: 9898
