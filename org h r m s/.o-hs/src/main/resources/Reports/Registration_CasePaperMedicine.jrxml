@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CashDueReceipt" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="94003013-7c73-4ae8-a8b5-dd6b2e40c850">
+	<parameter name="consultant" class="java.lang.String"/>
+	<parameter name="uhid" class="java.lang.String"/>
+	<parameter name="organization" class="java.lang.String"/>
+	<parameter name="patientName" class="java.lang.String"/>
+	<parameter name="address" class="java.lang.String"/>
+	<parameter name="date" class="java.lang.String"/>
+	<parameter name="age" class="java.lang.String"/>
+	<parameter name="mobile" class="java.lang.String"/>
+	<parameter name="userName" class="java.lang.String"/>
+	<field name="medicine" class="java.lang.String"/>
+	<field name="dose" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="366" splitType="Stretch">
+			<staticText>
+				<reportElement x="157" y="12" width="280" height="19" uuid="36cab9a5-44a8-49eb-a06d-ccc35f1e2c8e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font fontName="DejaVu Sans" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Orange Hospital Heart & Superspeciality Institute ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="34" y="90" width="519" height="2" uuid="c9c33dec-4559-4509-9b86-c5f15c466b60">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.05" lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="157" y="32" width="280" height="13" uuid="c478543d-3273-4f20-8972-5b0b89a0012e">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="DejaVu Sans" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Thakor Wadi Street,Beside H.P.Petrol Pump ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="157" y="45" width="280" height="13" uuid="dc6ed7e6-f831-4fa8-ae6c-aafa3a7e953e">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="DejaVu Sans" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Station Road, Navsari-396445]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="157" y="58" width="280" height="13" uuid="06036a22-b95a-414d-9d45-1ae9d992124e">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="DejaVu Sans" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[PH:242200,245500 / +91 6354 910 363
+]]></text>
+			</staticText>
+			<image scaleImage="FillFrame">
+				<reportElement x="40" y="10" width="100" height="70" uuid="3619164e-6820-4f38-a7ad-985c93f62cb3"/>
+				<imageExpression><![CDATA["oh_logo.jpg"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="105" y="168" width="151" height="19" uuid="080199a4-9c6e-43b6-aa8d-d8e59dbdbab9">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="9" isBold="false"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{patientName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="385" y="188" width="163" height="19" uuid="a9227963-a768-4bc7-93e7-02e473dd448c">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="9" isBold="false"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{consultant}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="105" y="187" width="151" height="19" uuid="a02f6fbd-30dd-4cf7-a546-21946ef57c4f">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="9" isBold="false"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{address}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="35" y="230" width="100" height="30" uuid="1fee2168-1b80-47c1-8128-782bb68821ea"/>
+				<text><![CDATA[Notes:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="187" width="76" height="19" uuid="82942958-ed5d-4b33-9885-ce4cab40eb8c"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Address         :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="168" width="76" height="19" uuid="2e282a48-d0d7-453d-80bf-1e51c7e9efa0"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Name             :]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="29" y="224" width="508" height="121" uuid="b82b79ef-42b1-45bb-ac9e-2763391d09f8"/>
+			</rectangle>
+			<textField>
+				<reportElement x="105" y="130" width="151" height="19" uuid="767ec2c6-e8ac-4ce7-97f3-597b0d8aff30">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="9" isBold="false"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{uhid}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="316" y="130" width="69" height="19" uuid="a50e8051-b115-4df5-863b-fc2909b34431"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date            :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="105" y="149" width="151" height="19" uuid="61697525-0fca-4a66-b488-3ca53ec3181e">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="9" isBold="false"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{organization}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="29" y="130" width="76" height="19" uuid="8bbd7025-5a1b-431d-aff3-482217963660"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[UHID              :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="385" y="169" width="163" height="19" uuid="9fe6147b-88f9-4f29-a619-abe9487ba8f2">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="9" isBold="false"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{mobile}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="385" y="150" width="163" height="19" uuid="5d1b69ef-1dfd-469a-8265-5a7a048704cd">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="9" isBold="false"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{age}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="385" y="130" width="163" height="19" uuid="a0e355a3-3389-42a3-aa1c-31d33100507e">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="9" isBold="false"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="316" y="169" width="69" height="19" uuid="d39481b2-0b1f-43c6-aa38-68e87ac5c107"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Mobile No    :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="316" y="188" width="69" height="19" uuid="089cfe71-ae73-4044-b25f-adeddc07974b"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Consulting Dr.    :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="30" y="100" width="345" height="19" uuid="9b92125e-0438-40ae-87c5-bbab2fdbaa7c">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="10" isBold="true"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{consultant}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="29" y="149" width="76" height="19" uuid="f45c762e-0eb9-413e-a215-4fb792f9d5c0"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Organization  :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="316" y="150" width="69" height="19" uuid="114b81a4-dd05-4d2e-9678-c0b6b463c686"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Age/Sex       :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="35" y="350" width="70" height="13" uuid="8206769c-2281-4de1-9503-9db228a8e593">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Rx]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="15">
+			<textField>
+				<reportElement x="455" y="0" width="80" height="15" uuid="51b61c2e-8bcf-4ccc-b5ed-340da30808c7"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dose}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="34" y="0" width="420" height="15" uuid="557cfa5a-a5f6-4b7b-9e70-8cdb9a2ccfc4">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="DejaVu Sans" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{medicine}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="30">
+			<staticText>
+				<reportElement x="39" y="10" width="70" height="19" uuid="fb276154-d5f4-48c3-8a2e-a82d2ee2cffc"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[User Name    :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="109" y="10" width="90" height="19" uuid="7f41e9fa-1b0e-4f4b-91d5-74b118dfa5c4">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="9" isBold="false"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{userName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="360" y="10" width="88" height="19" uuid="376b7776-5b8e-4fcf-9841-ab8d7ad8d956"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Print Date/Time :]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy hh:mm:ss">
+				<reportElement x="448" y="10" width="104" height="19" uuid="b4bc833d-15aa-4662-a565-0849c195b1bb"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>
