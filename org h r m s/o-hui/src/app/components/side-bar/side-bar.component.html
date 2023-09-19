@@ -1,0 +1,632 @@
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <a href="../../index3.html" class="brand-link" style="background-color: aliceblue;color:black">
+        <img src="../assets/oh_logo_single.png" alt="AdminLTE Logo" class="brand-image" style="margin-top:3px;">
+        <h2 class="brand-text font-weight-light">OHIMS</h2>
+    </a>
+    <div style="padding-left:0;" class="sidebar os-host os-theme-light os-host-overflow os-host-overflow-y os-host-resize-disabled os-host-scrollbar-horizontal-hidden os-host-transition">
+        <div class="os-resize-observer-host observed">
+            <div class="os-resize-observer" style="left: 0px; right: auto;"></div>
+        </div>
+        <div class="os-size-auto-observer observed" style="height: calc(100% + 1px); float: left;">
+            <div class="os-resize-observer"></div>
+        </div>
+        <div class="os-padding">
+            <div class="os-viewport os-viewport-native-scrollbars-invisible">
+                <div class="os-content" style="height: 100%; width: 100%;">
+                    <nav class="mt-2">
+                        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                            <li class="nav-item has-treeview">
+                                <a href="#" class="nav-link active">
+                                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                                    <p>Dashboard<i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="./index.html" class="nav-link active">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Dashboard v1</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="pages/widgets.html" class="nav-link">
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>
+                                        Widgets
+                                        <span class="right badge badge-danger">New</span>
+                                    </p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item has-treeview">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-table"></i>
+                                    <p>
+                                        Tables
+                                        <i class="fas fa-angle-left right"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="pages/tables/simple.html" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Simple Tables</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="pages/tables/data.html" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>DataTables</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="pages/tables/jsgrid.html" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>jsGrid</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class="os-scrollbar os-scrollbar-horizontal os-scrollbar-unusable">
+            <div class="os-scrollbar-track">
+                <div class="os-scrollbar-handle" style="width: 100%; transform: translate(0px, 0px);"></div>
+            </div>
+        </div>
+        <div class="os-scrollbar os-scrollbar-vertical">
+            <div class="os-scrollbar-track">
+                <div class="os-scrollbar-handle" style="height: 17.965%; transform: translate(0px, 0px);"></div>
+            </div>
+        </div>
+        <div class="os-scrollbar-corner"></div>
+    </div>
+</aside>
+
+
+
+
+<!-- <nav class="navbar navbar-expand-lg navbar-light" *ngIf="isHIMS" style="border: 1px solid rgba(0, 0, 0, 0.3);border-left: none;border-right: none;margin: 0;padding: 0;">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item" *ngIf="notAccess">
+                <a class="nav-link"><h1 style="color: white; background-color: red;">&nbsp;<span class="fa fa-warning"></span> Restricted! Please Contact Administrator!&nbsp;</h1></a>
+            </li>
+            <li class="nav-item" *ngIf="hm_0">
+                <a href="#" class="nav-link" routerLinkActive="active" routerLink="hims/home"><b>Home</b></a>
+            </li>
+            <li class="nav-item dropdown" *ngIf="hm_1">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdownSubMenu1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <b>Reception</b>
+                </a>
+                <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+                    <li class="dropdown-submenu dropdown-hover" *ngIf="hm_1_1">
+                        <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Reception </a>
+                        <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+                            <li *ngIf="hm_1_1_1"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_1_1_1')" routerLinkActive="active" routerLink="hims/reception-reception-registration">Registration</a>
+                            </li>
+                            <li class="dropdown-divider"></li>
+                            <li *ngIf="hm_1_1_2"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_1_1_2')" routerLinkActive="active" routerLink="hims/reception-reception-admission">Admission</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-divider"></li>
+                    <li class="dropdown-submenu dropdown-hover" *ngIf="hm_1_2">
+                        <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Bill </a>
+                        <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+                            <li *ngIf="hm_1_2_1"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_1_2_1')" routerLinkActive="active" routerLink="hims/reception-bill-opd">OPD</a>
+                            </li>
+                            <li class="dropdown-divider"></li>
+                            <li *ngIf="hm_1_2_2"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_1_2_2')" routerLinkActive="active" routerLink="hims/reception-bill-radio">RADIO</a>
+                            </li>
+                            <li class="dropdown-divider"></li>
+                            <li *ngIf="hm_1_2_3"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_1_2_3')" routerLinkActive="active" routerLink="hims/reception-bill-lab">LAB</a>
+                            </li>
+                            <li class="dropdown-divider"></li>
+                            <li *ngIf="hm_1_2_4"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_1_2_4')" routerLinkActive="active" routerLink="hims/reception-bill-opdhealth_checkup">OPDHEALTH CHECKUP</a>
+                            </li>
+                            <li class="dropdown-divider"></li>
+                            <li *ngIf="hm_1_2_5"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_1_2_5')" routerLinkActive="active" routerLink="hims/reception-bill-cash_dues">CASH DUES</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-divider"></li>
+                    <li class="dropdown-submenu dropdown-hover" *ngIf="hm_1_3">
+                        <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Bill Refund </a>
+                        <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+                            <li *ngIf="hm_1_3_1"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_1_3_1')" routerLinkActive="active" routerLink="hims/reception-bill_refund-opd_refund">OPD Refund</a>
+                            </li>
+                            <li class="dropdown-divider"></li>
+                            <li *ngIf="hm_1_3_2"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_1_3_2')" routerLinkActive="active" routerLink="hims/reception-bill_refund-radio_refund">RADIO Refund</a>
+                            </li>
+                            <li class="dropdown-divider"></li>
+                            <li *ngIf="hm_1_3_3"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_1_3_3')" routerLinkActive="active" routerLink="hims/reception-bill_refund-lab_refund">LAB Refund</a>
+                            </li>
+                            <li class="dropdown-divider"></li>
+                            <li *ngIf="hm_1_3_4"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_1_3_4')" routerLinkActive="active" routerLink="hims/reception-bill_refund-opdhealth_checkup_refund">OPDHEALTHCHECKUP Refund</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown" *ngIf="hm_2">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdownSubMenu1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <b>IPD</b>
+                </a>
+                <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+                    <li class="dropdown-submenu dropdown-hover" *ngIf="hm_2_1">
+                        <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Bill </a>
+                        <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+                            <li *ngIf="hm_2_1_1"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_2_1_1')" routerLinkActive="active" routerLink="hims/ipd-bill-bill_detail_sheet">Bill Detail Sheet</a>
+                            </li>
+                            <li class="dropdown-divider"></li>
+                            <li *ngIf="hm_2_1_2"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_2_1_2')" routerLinkActive="active" routerLink="hims/ipd-bill-provisional_bill">Provisional Bill</a>
+                            </li>
+                            <li class="dropdown-divider"></li>
+                            <li *ngIf="hm_2_1_3"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_2_1_3')" routerLinkActive="active" routerLink="hims/ipd-bill-final_ipd_bill">Final IPD Bill</a>
+                            </li>
+                            <li class="dropdown-divider"></li>
+                            <li *ngIf="hm_2_1_4"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_2_1_4')" routerLinkActive="active" routerLink="hims/account-entry-receipt">IPD Advanced</a>
+                            </li>
+                            <li class="dropdown-divider"></li>
+                            <li *ngIf="hm_2_1_5"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_2_1_5')" routerLinkActive="active" routerLink="hims/account-entry-payment">Payment/Refund</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-divider"></li>
+                    <li class="dropdown-submenu dropdown-hover" *ngIf="hm_2_2">
+                        <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Bed </a>
+                        <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+                            <li *ngIf="hm_2_2_1"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_2_2_1')" routerLinkActive="active" routerLink="hims/ipd-bed-bed_shifting">Bed Shifting</a>
+                            </li>
+                            <li class="dropdown-divider"></li>
+                            <li *ngIf="hm_2_2_2"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_2_2_2')" routerLinkActive="active" routerLink="hims/ipd-bed-bed_status">Bed Status</a>
+                            </li>
+                            <li class="dropdown-divider"></li>
+                            <li *ngIf="hm_2_2_3"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_2_2_3')" routerLinkActive="active" routerLink="hims/ipd-bed-vacant_bed">Vacant Bed</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-divider"></li>
+                    <li class="dropdown-submenu dropdown-hover" *ngIf="hm_2_3">
+                        <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Discharge </a>
+                        <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+                            <li *ngIf="hm_2_3_1"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_2_3_1')" routerLinkActive="active" routerLink="hims/ipd-dischange-bed_discharge">Bed Discharge</a>
+                            </li>
+                            <li class="dropdown-divider"></li>
+                            <li *ngIf="hm_2_3_2"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_2_3_2')" routerLinkActive="active" routerLink="hims/ipd-dischange-discharge_clearance">Discharge Clearance</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown" *ngIf="hm_3">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdownSubMenu1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <b>Account</b>
+                </a>
+                <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+                    <li class="dropdown-submenu dropdown-hover" *ngIf="hm_3_1">
+                        <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Entry </a>
+                        <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+                            <li *ngIf="hm_3_1_1"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_3_1_1')" routerLinkActive="active" routerLink="hims/account-entry-receipt">Receipt</a>
+                            </li>
+                            <li class="dropdown-divider"></li>
+                            <li *ngIf="hm_3_1_2"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_3_1_2')" routerLinkActive="active" routerLink="hims/account-entry-payment">Payment</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown" *ngIf="hm_4">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdownSubMenu1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <b>Reports</b>
+                </a>
+                <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+                    <li class="dropdown-submenu dropdown-hover" *ngIf="hm_4_1">
+                        <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Register Reports </a>
+                        <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+                            <li *ngIf="hm_4_1_1"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_4_1_1')" routerLinkActive="active" routerLink="hims/report-register_report-ipd_register">IPD Register</a>
+                            </li>
+                            <li class="dropdown-divider"></li>
+                            <li *ngIf="hm_4_1_2"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_4_1_2')" routerLinkActive="active" routerLink="hims/report-register_report-ipd_receipt_register">IPD Receipt Register</a>
+                            </li>
+                            <li class="dropdown-divider"></li>
+                            <li *ngIf="hm_4_1_3"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_4_1_3')" routerLinkActive="active" routerLink="hims/report-register_report-opd_register">OPD Register</a>
+                            </li>
+                            <li class="dropdown-divider"></li>
+                            <li *ngIf="hm_4_1_4"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_4_1_4')" routerLinkActive="active" routerLink="hims/report-register_report-lab_register">LAB Register</a>
+                            </li>
+                            <li class="dropdown-divider"></li>
+                            <li *ngIf="hm_4_1_5"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_4_1_5')" routerLinkActive="active" routerLink="hims/report-register_report-radio_register">RADIO Register</a>
+                            </li>
+                            <li class="dropdown-divider"></li>
+                            <li *ngIf="hm_4_1_6"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_4_1_6')" routerLinkActive="active" routerLink="hims/report-register_report-health_checkup_register">Health Checkup Register</a>
+                            </li>
+                            <li class="dropdown-divider"></li>
+                            <li *ngIf="hm_4_1_7"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_4_1_7')" routerLinkActive="active" routerLink="hims/report-register_report-cash_due_report">Cash Due Report</a>
+                            </li>
+                            <li class="dropdown-divider"></li>
+                            <li *ngIf="hm_4_1_8"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_4_1_8')" routerLinkActive="active" routerLink="hims/report-register_report-organization_report">Organization Report</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-divider"></li>
+                    <li class="dropdown-submenu dropdown-hover" *ngIf="hm_4_2">
+                        <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Analysis Reports </a>
+                        <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+                            <li *ngIf="hm_4_2_1"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_4_2_1')" routerLinkActive="active" routerLink="hims/report-analysis_report-mis">MIS</a>
+                            </li>
+                            <li class="dropdown-divider"></li>
+                            <li *ngIf="hm_4_2_2"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_4_2_2')" routerLinkActive="active" routerLink="hims/report-analysis_report-groupwise_testwise_analysis">Groupwise Testwise Analysis</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-divider"></li>
+                    <li class="dropdown-submenu dropdown-hover" *ngIf="hm_4_3">
+                        <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Routine Reports</a>
+                        <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+                            <li *ngIf="hm_4_3_1"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_4_3_1')" routerLinkActive="active" routerLink="hims/report-routine_report-admission_discharge">Admission/Discharge</a>
+                            </li>
+                            <li class="dropdown-divider"></li>
+                            <li *ngIf="hm_4_3_2"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_4_3_2')" routerLinkActive="active" routerLink="hims/report-routine_report-fee_collection_report">Fee Collection Report</a>
+                            </li>
+                            <li class="dropdown-divider"></li>
+                            <li *ngIf="hm_4_3_2"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_4_3_3')" routerLinkActive="active" routerLink="hims/report_routine_doctor_incentive_report">Doctor Incentive Report</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown" *ngIf="hm_5">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdownSubMenu1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <b>Master</b>
+                </a>
+                <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+                    <li class="dropdown-submenu dropdown-hover" *ngIf="hm_5_1">
+                        <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Test Master </a>
+                        <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+                            <li *ngIf="hm_5_1_1"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_5_1_1')" routerLinkActive="active" routerLink="hims/master-test_master-ipd_test">IPD</a>
+                            </li>
+                            <li *ngIf="hm_5_1_2"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_5_1_2')" routerLinkActive="active" routerLink="hims/master-test_master-opd_test">OPD</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-divider"></li>
+                    <li class="dropdown-submenu dropdown-hover" *ngIf="hm_5_2">
+                        <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Doctor </a>
+                        <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+                            <li *ngIf="hm_5_2_1"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_5_2_1')" routerLinkActive="active" routerLink="hims/master-doctor-consultant_doctor">Consultant Doctor</a>
+                            </li>
+                            <li *ngIf="hm_5_2_2"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_5_2_2')" routerLinkActive="active" routerLink="hims/master-doctor-referring_doctor">Referring Doctor</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-divider"></li>
+                    <li class="dropdown-submenu dropdown-hover" *ngIf="hm_5_3">
+                        <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Bill Master </a>
+                        <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+                            <li *ngIf="hm_5_3_1"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_5_3_1')" routerLinkActive="active" routerLink="hims/master-bill_master-opd_bill_master">OPD Bill Master</a>
+                            </li>
+                            <li *ngIf="hm_5_3_2"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_5_3_2')" routerLinkActive="active" routerLink="hims/master-bill_master-lab_bill_master">LAB Bill Master</a>
+                            </li>
+                            <li *ngIf="hm_5_3_3"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_5_3_3')" routerLinkActive="active" routerLink="hims/master-bill_master-radio_bill_master">Radio Bill Master</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-divider"></li>
+                    <li class="dropdown-submenu dropdown-hover" *ngIf="hm_5_4">
+                        <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Appointment</a>
+                        <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+                            <li *ngIf="hm_5_4_1"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_5_4_1')" routerLinkActive="active" routerLink="hims/master-appointment_master-appointment_scheduler">Appointment Scheduler</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-divider"></li>
+                    <li class="dropdown-submenu dropdown-hover" *ngIf="hm_5_5">
+                        <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Package Master </a>
+                        <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+                            <li *ngIf="hm_5_5_1"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_5_5_1')" routerLinkActive="active" routerLink="hims/master-package_master-ipd_package_master">IPD Package Master</a>
+                            </li>
+                            <li *ngIf="hm_5_5_2"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_5_5_2')" routerLinkActive="active" routerLink="hims/master-package_master-opd_package_master">OPD Package Master</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-divider"></li>
+                    <li class="dropdown-submenu dropdown-hover" *ngIf="hm_5_6">
+                        <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Others Master 1</a>
+                        <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+                            <li *ngIf="hm_5_6_1"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_5_6_1')" routerLinkActive="active" routerLink="hims/master-other_masters1-department">Department</a>
+                            </li>
+                            <li *ngIf="hm_5_6_2"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_5_6_2')" routerLinkActive="active" routerLink="hims/master-other_masters1-subdepartment">Sub Department</a>
+                            </li>
+                            <li *ngIf="hm_5_6_3"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_5_6_3')" routerLinkActive="active" routerLink="hims/master-other_masters1-concession">Concession</a>
+                            </li>
+                            <li *ngIf="hm_5_6_4"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_5_6_4')" routerLinkActive="active" routerLink="hims/master-other_masters1-super_group">Super Group</a>
+                            </li>
+                            <li *ngIf="hm_5_6_5"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_5_6_5')" routerLinkActive="active" routerLink="hims/master-other_masters1-group">Group</a>
+                            </li>
+                            <li *ngIf="hm_5_6_6"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_5_6_6')" routerLinkActive="active" routerLink="hims/master-other_masters1-sub_group">Sub Group</a>
+                            </li>
+                            <li *ngIf="hm_5_6_7"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_5_6_7')" routerLinkActive="active" routerLink="hims/master-other_masters1-sub_group1">Sub Group 1</a>
+                            </li>
+                            <li *ngIf="hm_5_6_8"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_5_6_8')" routerLinkActive="active" routerLink="hims/master-other_masters1-sub_group2">Sub Group 2</a>
+                            </li>
+                            <li *ngIf="hm_5_6_9"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_5_6_9')" routerLinkActive="active" routerLink="hims/master-other_masters1-doctor_incentive_master">Doctor Incentive Master</a>
+                            </li>
+                            <li *ngIf="hm_5_6_10"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_5_6_10')" routerLinkActive="active" routerLink="hims/master-other_masters1-ref_doctor_incentive_master">Ref Doctor Incentive Master</a>
+                            </li>
+                            <li *ngIf="hm_5_6_11"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_5_6_11')" routerLinkActive="active" routerLink="hims/master-other_masters1-insurance_master">Insurance Master</a>
+                            </li>
+                            <li *ngIf="hm_5_6_12"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_5_6_12')" routerLinkActive="active" routerLink="hims/master-other_masters1-cashless_authorized">Cashless Authorized</a>
+                            </li>
+                            <li *ngIf="hm_5_6_13"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_5_6_13')" routerLinkActive="active" routerLink="hims/master-other_masters1-discharge_summary">Discharge Summary</a>
+                            </li>
+                            <li *ngIf="hm_5_6_14"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_5_6_14')" routerLinkActive="active" routerLink="hims/master-other_masters1-discharge_summary_template_master">Discharge Summary template Master</a>
+                            </li>
+                            <li *ngIf="hm_5_6_15"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_5_6_15')" routerLinkActive="active" routerLink="hims/master-other_masters1-doctor_hours_absentee_entry">Doctor Hours/Absentee Entry</a>
+                            </li>
+                            <li *ngIf="hm_5_6_16"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_5_6_16')" routerLinkActive="active" routerLink="hims/master-other_masters1-death_summary">Death Summary</a>
+                            </li>
+                            <li *ngIf="hm_5_6_17"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_5_6_17')" routerLinkActive="active" routerLink="hims/master-other_masters1-tds_master">TDS Master</a>
+                            </li>
+                            <li *ngIf="hm_5_6_18"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_5_6_18')" routerLinkActive="active" routerLink="hims/master-other_masters1-casepaper_medicine_master">Casepaper Medicine Master</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown-divider"></li>
+                    <li class="dropdown-submenu dropdown-hover" *ngIf="hm_5_7">
+                        <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Others Master 2</a>
+                        <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+                            <li *ngIf="hm_5_7_1"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_5_7_1')" routerLinkActive="active" routerLink="hims/master-other_masters2-organization">Organization</a>
+                            </li>
+                            <li *ngIf="hm_5_7_2"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_5_7_2')" routerLinkActive="active" routerLink="hims/master-other_masters2-tpa_master">TPA Master</a>
+                            </li>
+                            <li *ngIf="hm_5_7_3"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_5_7_3')" routerLinkActive="active" routerLink="hims/master-other_masters2-class_master">Class Master</a>
+                            </li>
+                            <li *ngIf="hm_5_7_4"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_5_7_4')" routerLinkActive="active" routerLink="hims/master-other_masters2-ward_master">Ward Master</a>
+                            </li>
+                            <li *ngIf="hm_5_7_5"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_5_7_5')" routerLinkActive="active" routerLink="hims/master-other_masters2-party_master">Party Master</a>
+                            </li>
+                            <li *ngIf="hm_5_7_6"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_5_7_6')" routerLinkActive="active" routerLink="hims/master-other_masters2-plastic_money_master">Plastic Money Master</a>
+                            </li>
+                            <li *ngIf="hm_5_7_7"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_5_7_7')" routerLinkActive="active" routerLink="hims/master-other_masters2-patient_type_matser">Patient Type Master</a>
+                            </li>
+                            <li *ngIf="hm_5_7_8"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_5_7_8')" routerLinkActive="active" routerLink="hims/master-other_masters2-doctor_payable_entry">Doctor Payable Entry</a>
+                            </li>
+                            <li *ngIf="hm_5_7_9"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_5_7_9')" routerLinkActive="active" routerLink="hims/master-other_masters2-external_lab_master">External Lab Master</a>
+                            </li>
+                            <li *ngIf="hm_5_7_10"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_5_7_10')" routerLinkActive="active" routerLink="hims/master-other_masters2-external_radio_master">External Radio Master</a>
+                            </li>
+                            <li *ngIf="hm_5_7_11"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_5_7_11')" routerLinkActive="active" routerLink="hims/master-other_masters2-external_lab_test_master">External Lab Test Master</a>
+                            </li>
+                            <li *ngIf="hm_5_7_12"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('hm_5_7_12')" routerLinkActive="active" routerLink="hims/master-other_masters2-external_radio_test_master">External Radio Test Master</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+            <li class="nav-item">
+                <div class="d-inline-block">
+                    <app-theme-toggle></app-theme-toggle>
+                </div>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link"><b style="color: white;"><i class="fas fa-user"></i> {{ username | uppercase }}</b></a>
+            </li>
+            <li class="nav-item">
+                <a href class="nav-link" (click)="logout()"><b><i class="fas fa-share-square"></i> LogOut</b></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light" *ngIf="isIPD" style="border: 1px solid rgba(0, 0, 0, 0.3);border-left: none;border-right: none;margin: 0;padding: 0;">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item" *ngIf="notAccess">
+                <a class="nav-link"><h1 style="color: white; background-color: red;">&nbsp;<span class="fa fa-warning"></span> Restricted! Please Contact Administrator!&nbsp;</h1></a>
+            </li>
+            <li class="nav-item" *ngIf="im_0">
+                <a href="#" class="nav-link" routerLinkActive="active" routerLink="ipd/home"><b>Home</b></a>
+            </li>
+            <li>&nbsp;&nbsp;&nbsp;</li>
+            <li class="nav-item dropdown" *ngIf="im_1">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdownSubMenu1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><b>IPD Reception</b></a>
+                <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+                    <li *ngIf="im_1_1"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('im_1_1')" routerLinkActive="active" routerLink="ipd/webipd_ipddashboard">IPD Dashboard</a>
+                    </li>
+                    <li class="dropdown-divider"></li>
+                    <li *ngIf="im_1_2"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('im_1_2')" routerLinkActive="active" routerLink="ipd/webipd_discharge_summery">Discharge Summary</a>
+                    </li>
+                    <li class="dropdown-divider"></li>
+                    <li *ngIf="im_1_3"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('im_1_3')" routerLinkActive="active" routerLink="ipd/webipd_death_summery">Death Summary</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+            <li class="nav-item">
+                <div class="d-inline-block">
+                    <app-theme-toggle></app-theme-toggle>
+                </div>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link"><b style="color: white;"><i class="fas fa-user"></i> {{ username | uppercase }}</b></a>
+            </li>
+            <li class="nav-item">
+                <a href class="nav-link" (click)="logout()"><b><i class="fas fa-share-square"></i> LogOut</b></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light" *ngIf="isUSER" style="border: 1px solid rgba(0, 0, 0, 0.3);border-left: none;border-right: none;margin: 0;padding: 0;">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a href="#" class="nav-link" routerLinkActive="active" routerLink="user/home"><b>Home</b></a>
+            </li>
+            <li>&nbsp;&nbsp;&nbsp;</li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><b>Management Utility</b></a>
+                <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+                    <li><a class="dropdown-item" href="#" routerLinkActive="active" routerLink="user/console_user_management">Console User Management</a>
+                    </li>
+                    <li class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#" routerLinkActive="active" routerLink="user/user_management">Create User</a>
+                    </li>
+                    <li class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#" routerLinkActive="active" routerLink="user/number_sequence">Number Sequence</a>
+                    </li>
+                    <li class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#" routerLinkActive="active" routerLink="user/role_permission_management">Role And Permission Management</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+            <li class="nav-item">
+                <div class="d-inline-block">
+                    <app-theme-toggle></app-theme-toggle>
+                </div>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link"><b style="color: white;"><i class="fas fa-user"></i> {{ username | uppercase }}</b></a>
+            </li>
+            <li class="nav-item">
+                <a href class="nav-link" (click)="logout()"><b><i class="fas fa-share-square"></i> LogOut</b></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light" *ngIf="isPATHO" style="border: 1px solid rgba(0, 0, 0, 0.3);border-left: none;border-right: none;margin: 0;padding: 0;">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item" *ngIf="notAccess">
+                <a class="nav-link"><h1 style="color: white; background-color: red;">&nbsp;<span class="fa fa-warning"></span> Restricted! Please Contact Administrator!&nbsp;</h1></a>
+            </li>
+            <li class="nav-item" *ngIf="pm_0">
+                <a href="#" class="nav-link" routerLinkActive="active" routerLink="patho/home"><b>Home</b></a>
+            </li>
+            <li>&nbsp;&nbsp;&nbsp;</li>
+            <li class="nav-item" *ngIf="pm_1">
+                <a href="#" class="nav-link" (click)="setSessionPrivileges('pm_1')" routerLinkActive="active" routerLink="patho/patho_lab_report"><b>Lab Reports</b></a>
+            </li>
+            <li>&nbsp;&nbsp;&nbsp;</li>
+            <li class="nav-item dropdown" *ngIf="pm_2">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdownSubMenu1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><b>Reports</b></a>
+                <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+                    <li *ngIf="pm_2_1"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('pm_2_1')" routerLinkActive="active" routerLink="patho/patho_external_lab_test_report">External Lab Test  Report</a>
+                    </li>
+                    <li class="dropdown-divider"></li>
+                    <li *ngIf="pm_2_2"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('pm_2_2')" routerLinkActive="active" routerLink="patho/patho_lab_test_count_report">Lab Test Count Report</a>
+                    </li>
+                </ul>
+            </li>
+            <li>&nbsp;&nbsp;&nbsp;</li>
+            <li class="nav-item dropdown" *ngIf="pm_3">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdownSubMenu1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><b>Master</b></a>
+                <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+                    <li *ngIf="pm_3_1"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('pm_3_1')" routerLinkActive="active" routerLink="patho/patho_group_master">Group Master</a>
+                    </li>
+                    <li class="dropdown-divider"></li>
+                    <li *ngIf="pm_3_2"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('pm_3_2')" routerLinkActive="active" routerLink="patho/patho_format_master">Format Master</a>
+                    </li>
+                    <li class="dropdown-divider"></li>
+                    <li *ngIf="pm_3_3"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('pm_3_3')" routerLinkActive="active" routerLink="patho/patho_observation_master">Observation Master</a>
+                    </li>
+                    <li class="dropdown-divider"></li>
+                    <li *ngIf="pm_3_4"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('pm_3_4')" routerLinkActive="active" routerLink="patho/patho_format_group_master">Format Group Master</a>
+                    </li>
+                    <li class="dropdown-divider"></li>
+                    <li *ngIf="pm_3_5"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('pm_3_5')" routerLinkActive="active" routerLink="patho/patho_external_lab_master">External lab Master</a>
+                    </li>
+                    <li class="dropdown-divider"></li>
+                    <li *ngIf="pm_3_6"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('pm_3_6')" routerLinkActive="active" routerLink="patho/patho_external_lab_test_master">External Lab Test Master</a>
+                    </li>
+                    <li class="dropdown-divider"></li>
+                    <li *ngIf="pm_3_7"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('pm_3_7')" routerLinkActive="active" routerLink="patho/patho_lis_master">LIS Test Master</a>
+                    </li>
+                    <li class="dropdown-divider"></li>
+                    <li *ngIf="pm_3_8"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('pm_3_8')" routerLinkActive="active" routerLink="patho/patho_machine_master">Machine Master</a>
+                    </li>
+                    <li class="dropdown-divider"></li>
+                    <li *ngIf="pm_3_9"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('pm_3_9')" routerLinkActive="active" routerLink="patho/patho_sample_device_master">Sample Device Master</a>
+                    </li>
+                    <li class="dropdown-divider"></li>
+                    <li *ngIf="pm_3_10"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('pm_3_10')" routerLinkActive="active" routerLink="patho/patho_template_master">Template Master</a>
+                    </li>
+                    <li class="dropdown-divider"></li>
+                    <li *ngIf="pm_3_11"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('pm_3_11')" routerLinkActive="active" routerLink="patho/patho_format_test_master">Format Test Master</a>
+                    </li>
+                    <li class="dropdown-divider"></li>
+                    <li *ngIf="pm_3_12"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('pm_3_12')" routerLinkActive="active" routerLink="patho/patho_status_master">Status Master</a>
+                    </li>
+                </ul>
+            </li>
+            <li>&nbsp;&nbsp;&nbsp;</li>
+            <li class="nav-item dropdown" *ngIf="pm_4">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdownSubMenu1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><b>Utility</b></a>
+                <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+                    <li *ngIf="pm_4_1"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('pm_4_1')" routerLinkActive="active" routerLink="patho/patho_footer_updation">Footer Updation</a>
+                    </li>
+                    <li class="dropdown-divider"></li>
+                    <li *ngIf="pm_4_2"><a class="dropdown-item" href="#" (click)="setSessionPrivileges('pm_4_2')" routerLinkActive="active" routerLink="patho/patho_utility_update_sample">Utility Update Sample</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+            <li class="nav-item">
+                <div class="d-inline-block">
+                    <app-theme-toggle></app-theme-toggle>
+                </div>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link"><b style="color: white;"><i class="fas fa-user"></i> {{ username | uppercase }}</b></a>
+            </li>
+            <li class="nav-item">
+                <a href class="nav-link" (click)="logout()"><b><i class="fas fa-share-square"></i> LogOut</b></a>
+            </li>
+        </ul>
+    </div>
+</nav> -->

@@ -1,0 +1,218 @@
+<div class="row justify-content-center mt-4">
+    <div style="width: 70%;" class="card card-outline card-danger">
+        <div class="card-header text-center">
+            <b style="font-size: 18px;"> {{"Observation Master" | uppercase}} </b>
+        </div>
+        <div class="card-body ">
+            <form name="form" (ngSubmit)="f.form.valid && onSave()" #f="ngForm" novalidate>
+                <input type="hidden" name="id" [(ngModel)]="form.id" #id="ngModel">
+                <h2 *ngIf="isEdit" style="color: orangered;"><b>Edit Mode</b></h2>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="card card-body ">
+                            <div class="form-group row">
+  
+                                <div class="form-group col-md-6 col-6 col-sm-6">
+                                    <label>Test Name</label>
+                                    <input type="text" class="form-control" name="testName" [(ngModel)]="form.testName" #testName="ngModel" required />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && testName.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6 col-6 col-sm-6">
+                                    <label>Specimen</label>
+                                    <ng-select [(ngModel)]="form.specimen" name="specimen" #specimen="ngModel" required [ngModelOptions]="{standalone: true}" [dropdownPosition]="'down'" [virtualScroll]="true" placeholder="Type to search">
+                                        <ng-option *ngFor="let o of categoryList" [value]="o.categoryName">
+                                            {{o.categoryName}}
+                                        </ng-option>
+                                    </ng-select>
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && specimen.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6 col-6 col-sm-6">
+                                    <label>Format Name</label>
+                                    <ng-select [(ngModel)]="form.formatName" name="formatName" #formatName="ngModel" required [ngModelOptions]="{standalone: true}" [dropdownPosition]="'down'" [virtualScroll]="true" placeholder="Type to search">
+                                        <ng-option *ngFor="let o of formatNameList" [value]="o.formatName">
+                                            {{o.formatName}}
+                                        </ng-option>
+                                    </ng-select>
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && formatName.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6 col-6 col-sm-6">
+                                    <label>Multi Line</label>
+                                    <select class="form-control" name="multiline" [(ngModel)]="form.multiline" #multiline="ngModel">
+                                        <option value="NO" selected="selected">NO</option>
+                                        <option value="YES">YES</option>
+                                    </select>
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && multiline.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6 col-6 col-sm-6">
+                                    <label>Group Name</label>
+                                    <ng-select [(ngModel)]="form.mgroup" name="mgroup" #mgroup="ngModel" required [ngModelOptions]="{standalone: true}" [dropdownPosition]="'down'" [virtualScroll]="true" placeholder="Type to search">
+                                        <ng-option *ngFor="let o of groupNameList" [value]="o.groupName">
+                                            {{o.groupName}}
+                                        </ng-option>
+                                    </ng-select>
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && mgroup.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6 col-6 col-sm-6">
+                                    <label>Formula YN</label>
+                                    <select class="form-control" name="formula" [(ngModel)]="form.formula" #formula="ngModel">
+                                        <option value="NO" selected="selected">NO</option>
+                                        <option value="YES">YES</option>
+                                    </select>
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && formula.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6 col-6 col-sm-6">
+                                    <label>Method</label>
+                                    <input type="text" class="form-control" name="method" [(ngModel)]="form.method" #method="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && method.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6 col-6 col-sm-6">
+                                    <label>Default Value</label>
+                                    <input type="text" class="form-control" name="defaultValue" [(ngModel)]="form.defaultValue" #defaultValue="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && defaultValue.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6 col-6 col-sm-6 form-check">
+                                    <label class="form-check-label">Is Lable</label>    
+                                    <input class="form-input" style="margin-left: revert;" type="checkbox" name="isLable" [(ngModel)]="form.isLable">
+                                </div>
+                                <div class="form-group col-md-12 col-12 col-sm-12">
+                                    <hr>
+                                </div>
+
+                                <div style="border: 1px solid green;" class="card-body">
+                                    <div class="row justify-content-between">
+                                        <p style="margin-top:45px;">Male</p>
+                                        <div class="text-center" >
+                                            <p>From</p>
+                                            <input type="text" class="form-control" name="mfrom1" [(ngModel)]="form.mfrom1" #mfrom1="ngModel" />
+                                            <textarea type="text" class="form-control" name="mfrom2" [(ngModel)]="form.mfrom2" #mfrom2="ngModel"></textarea>
+                                        </div>
+                                        <div class="text-center">
+                                            <p>Unit</p>
+                                            <input type="text" class="form-control" name="mfunit1" [(ngModel)]="form.mfunit1" #mfunit1="ngModel" />
+                                            <input type="text" class="form-control" name="mfunit2" [(ngModel)]="form.mfunit2" #mfunit2="ngModel" />
+                                        </div>
+                                        <div class="text-center">
+                                            <p>To</p>
+                                            <input type="text" class="form-control" name="mto1" [(ngModel)]="form.mto1" #mto1="ngModel" />
+                                            <textarea type="text" class="form-control" name="mto2" [(ngModel)]="form.mto2" #mto2="ngModel"></textarea>
+                                        </div>
+                                        <div class="text-center">
+                                            <p>Unit</p>
+                                            <input type="text" class="form-control" name="mtunit1" [(ngModel)]="form.mtunit1" #mtunit1="ngModel" />
+                                            <input type="text" class="form-control" name="mtunit2" [(ngModel)]="form.mtunit2" #mtunit2="ngModel" />
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    <div class="row justify-content-between mt-4">
+                                        <p>Female</p>
+                                        <div class="text-center" >
+                                            <input type="text" class="form-control" name="ffrom1" [(ngModel)]="form.ffrom1" #ffrom1="ngModel" />
+                                            <textarea type="text" class="form-control" name="ffrom2" [(ngModel)]="form.ffrom2" #ffrom2="ngModel"></textarea>
+                                        </div>
+                                        <div class="text-center">
+                                            <input type="text" class="form-control" name="ffunit1" [(ngModel)]="form.ffunit1" #ffunit1="ngModel" />
+                                            <input type="text" class="form-control" name="ffunit2" [(ngModel)]="form.ffunit2" #ffunit2="ngModel" />
+                                        </div>
+                                        <div class="text-center">
+                                            <input type="text" class="form-control" name="fto1" [(ngModel)]="form.fto1" #fto1="ngModel" />
+                                            <textarea type="text" class="form-control" name="fto2" [(ngModel)]="form.fto2" #fto2="ngModel"></textarea>
+                                        </div>
+                                        <div class="text-center">
+                                            <input type="text" class="form-control" name="ftunit1" [(ngModel)]="form.ftunit1" #ftunit1="ngModel" />
+                                            <input type="text" class="form-control" name="ftunit2" [(ngModel)]="form.ftunit2" #ftunit2="ngModel" />
+                                        </div>
+                                    </div>
+                        
+                                    <div class="col-12 col-sm-12 justify-content-between mt-4">
+                                        <div class="row">
+                                            <label>Critical Values: &nbsp;</label><br>
+                                            <input type="text" class="form-control col-2 col-sm-2" name="critical" [(ngModel)]="form.critical" #critical="ngModel" />&nbsp;
+                                            <input type="text" class="form-control col-2 col-sm-2" name="critical1" [(ngModel)]="form.critical1" #critical1="ngModel" />&nbsp;
+                                            <input type="text" class="form-control col-2 col-sm-2" name="critical2" [(ngModel)]="form.critical2" #critical2="ngModel" />&nbsp;
+                                            <input type="text" class="form-control col-2 col-sm-2" name="critical3" [(ngModel)]="form.critical3" #critical3="ngModel" />
+                                        </div>
+                                    </div>
+                        
+                        
+                                    <div class="row justify-content-between mt-4">
+                                        <div class="row align-items-center">
+                                                <label class="mr-2 mt-2" for="format-name">Paediatric:</label>
+                                                <input class="form-input" style="margin-left: revert;" type="checkbox" name="paediatric" [(ngModel)]="form.paediatric">
+                                        </div>
+                                    </div>
+                    
+                        
+                                </div>
+
+  
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-12 col-sm-12">
+                    <button type="button" class="btn btn-info mt-1" (click)="onNew()">New <i class="fas fa-sync-alt"></i></button>&nbsp;
+                    <button class="btn btn-success mt-1" type="submit">Save <i class="fas fa-save"></i></button>&nbsp;
+                </div>
+            </form>
+            <div class="row">
+                <div class="form-group col-md-12 col-sm-12">
+                    <div class="card card-body overflow-auto">
+                        <div class="form-group row">
+                            <div class="form-group col-md-12 col-sm-12">
+                              
+                                        <table id="customTable" *ngIf="showContent" datatable class="table  table-bordered nowrap" cellspacing="0" width="100%">
+                                            <thead class="thead-dark">
+                                                <tr>
+                                                    <th>EDIT</th>
+  
+                                                    <th>Test Name</th>
+                                                    <th>Group</th>
+                                                    <th>Format Name</th>
+                                                    <th>Formula</th>
+  
+                                                </tr>
+                                            </thead>
+                                            <tbody style="color: black;">
+                                                <tr *ngFor="let item of table_data">
+                                                    <td>
+                                                        <span>
+                                                            <button *ngIf="isedit_action" id="edit" type="button" (click)="onEdit(item)" class="btn btn-warning"><i class="fas fa-edit"></i></button> &nbsp;
+                                                            <button *ngIf="isdelete_action" id="delete" type="button" (click)="onDelete(item.id)" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                                        </span>
+                                                    </td>
+  
+                                                    <td>{{item.testName}}</td>
+                                                    <td>{{item.mGroup}}</td>
+                                                    <td>{{item.formatName}}</td>
+                                                    <td>{{item.formula}}</td>
+  
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  

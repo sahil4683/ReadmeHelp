@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Orange Hospital Management System (By Alligate Systems)</title>
+    <base href="/" />
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1" /> -->
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta http-equiv="cache-control" content="no-cache, must-revalidate, post-check=0, pre-check=0">
+    <meta http-equiv="expires" content="0">
+    <meta http-equiv="pragma" content="no-cache">
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+    <!-- AdminLTE CSS Start -->
+    <link rel="stylesheet" href="assets/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="assets/dist/css/adminlte.min.css">
+    <!-- <link rel="stylesheet" href="assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css"> -->
+    <link rel="stylesheet" href="assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- AdminLTE CSS End -->
+
+    <style>
+        /* For Global Style */
+    </style>
+
+</head>
+
+<!-- <body> -->
+<body class="sidebar-mini sidebar-collapse">
+
+    <app-root></app-root>
+
+    <script src="assets/plugins/jquery/jquery.min.js"></script>
+    <script src="assets/dist/js/adminlte.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery.countdown.min.js"></script>
+    <script src="assets/js/jquery.nice-select.min.js"></script>
+    <script src="assets/js/jquery.zoom.min.js"></script>
+    <script src="assets/js/jquery.dd.min.js"></script>
+    <script src="assets/js/jquery.slicknav.js"></script>
+    <script src="assets/js/owl.carousel.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/layout/scripts/jquery.mobilemenu.js"></script>
+
+    <script>
+        $(function () {
+
+            /* Input Field Text Or Space Trim */
+            window.onload = function () {
+                var inputs = document.getElementsByTagName('input');
+                for (var i = 0; i < inputs.length; i++) {
+                    if (inputs[i].type == 'text') {
+                        inputs[i].onchange = function () {
+                            this.value = this.value.replace(/^\s+/, '').replace(/\s+$/, '');
+                        };
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

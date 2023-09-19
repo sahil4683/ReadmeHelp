@@ -1,0 +1,44 @@
+
+<section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1></h1>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="error-page">
+      <h2 class="headline text-danger">401</h2>
+
+      <div class="error-content">
+        <h3><i class="fas fa-exclamation-triangle text-danger"></i> Oops! Something went wrong.</h3>
+
+        <h4>
+            <!-- <b>Sorry! You don't have permission to access this page</b> -->
+            <h2 style="color: red;"> Sorry! You don't have permission to access this page</h2>
+            
+            <br>
+
+             <a href="#" (click)="exit()" routerLink="/login">return to Home</a>
+        </h4>
+
+        <div class="">
+
+            <div class="progress">
+                <progress class="progress-bar progress-bar-striped bg-danger progress-bar-animated" value="0" max="10" id="progressBar" style="width: 100%; font-size: 40px"></progress>
+            </div>
+            
+
+            <!-- <div class="progress">
+                <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="10"></div>
+              </div> -->
+        </div>
+      </div>
+    </div>
+    <!-- /.error-page -->
+
+  </section>

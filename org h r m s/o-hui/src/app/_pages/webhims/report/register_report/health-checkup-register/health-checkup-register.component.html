@@ -1,0 +1,211 @@
+<div class="">
+    <div class="col-md-12 mt-3">
+        <div class="card card-outline card-danger">
+            <div class="card-header text-center">
+                <b style="font-size: 18px;"> HealthCheckup Register </b>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+                    <div class="row">
+
+                        <div class="form-group col-md-12 col-sm-12">
+                            <div class="row">
+                                
+                                <div class="form-group col-md-3 col-sm-3">
+                                    <label for="name">Form Date </label>
+                                    <input type="date" class="form-control" required name="fromDate" [(ngModel)]="form.fromDate"  #fromDate="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && fromDate.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-3 col-sm-3">
+                                    <label for="name">To Date </label>
+                                    <input type="date" class="form-control" required name="toDate" [(ngModel)]="form.toDate"  #toDate="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && toDate.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label for="name">Credit Against </label>
+                                    <input type="text" class="form-control" name="creditAgainst" [(ngModel)]="form.creditAgainst"  #creditAgainst="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && creditAgainst.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+
+                                
+
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label for="name">User Name </label>
+                                    <ng-select [(ngModel)]="form.userName" name="userName" #userName="ngModel" [ngModelOptions]="{standalone: true}" [dropdownPosition]="'down'" [virtualScroll]="true" placeholder="Type to search">
+                                        <ng-option *ngFor="let u of UserNameList" [value]="u.username">
+                                            {{u.username}}
+                                        </ng-option>
+								    </ng-select>
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && userName.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label for="name">Organization Name </label>
+                                    <ng-select [(ngModel)]="form.organizationName" name="organizationName" #organizationName="ngModel" [ngModelOptions]="{standalone: true}" [dropdownPosition]="'down'" [virtualScroll]="true" placeholder="Type to search">
+                                        <ng-option *ngFor="let o of OrganizationList" [value]="o.id">
+                                            {{o.organization}}
+                                        </ng-option>
+								    </ng-select>
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && organizationName.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label for="name">Ref By </label>
+                                    <ng-select [(ngModel)]="form.refBy" name="refBy" #refBy="ngModel" [ngModelOptions]="{standalone: true}" [dropdownPosition]="'down'" [virtualScroll]="true" placeholder="Type to search">
+                                        <ng-option *ngFor="let o of DoctorReferenceList" [value]="o.id">
+                                            {{o.name}}
+                                        </ng-option>
+                                    </ng-select>
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && refBy.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label for="name">Consultant </label>
+                                    <ng-select  [(ngModel)]="form.consultant" name="consultant" #consultant="ngModel" [ngModelOptions]="{standalone: true}" [dropdownPosition]="'down'" [virtualScroll]="true" placeholder="Type to search">
+                                        <ng-option *ngFor="let o of ConsultantList" [value]="o.id" >
+                                            {{o.name}}
+                                        </ng-option>
+                                    </ng-select>
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && consultant.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label for="name">Bill Type </label>
+                                    <select class="form-control" name="billType" [(ngModel)]="form.billType"  #billType="ngModel">
+                                        <option value="CASH">CASH</option>
+                                        <option value="CREDIT">CREDIT</option>
+                                    </select>
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && billType.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label for="name"> Mode Of Payment </label>
+                                    <select class="form-control" name="modeOfPayment" [(ngModel)]="form.modeOfPayment" #modeOfPayment="ngModel">
+                                        <option value="CASH">CASH</option>
+                                        <option value="PLASTICMONEY">PLASTICMONEY</option>
+                                        <option value="CHEQUE">CHEQUE</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label for="name">Insurance Company </label>
+                                    <ng-select [(ngModel)]="form.insuranceCompany" name="insuranceCompany" #insuranceCompany="ngModel" [ngModelOptions]="{standalone: true}" [dropdownPosition]="'down'" [virtualScroll]="true" placeholder="Type to search">
+                                        <ng-option *ngFor="let u of InsurenceMasterList" [value]="u.insuranceCompany">
+                                            {{u.insuranceCompany}}
+                                        </ng-option>
+								    </ng-select>
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && insuranceCompany.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label for="name">Sub Dept </label>
+                                    <select class="form-control" [(ngModel)]="form.subDept" #subDept="ngModel" name="subDept">
+                                        <option *ngFor="let o of SubDeptList" [ngValue]="o.id" style="color: black;">
+                                            {{o.subDept}}
+                                        </option>
+                                    </select>
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && subDept.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label for="name">Type Of Paitent </label>
+                                    <select class="form-control" name="typeOfPatient" [(ngModel)]="form.typeOfPatient"  #typeOfPatient="ngModel">
+                                        <option value="New">New</option>
+                                        <option value="Old">Old</option>
+                                    </select>
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && typeOfPatient.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+
+        
+                    </div>
+
+                         
+                    
+                    <div class="row">
+                        <div class="card card-body">
+                            <div class="row">
+                                <fieldset class="form-group col-md-3 col-sm-3">
+                                    <legend>HealthCheckup Bill</legend> 
+                                    <button type="button" class="btn btn-primary" (click)="onShow('HealthCheckup')"> Show <i class="fa fa-eye"></i></button> &nbsp;
+                                <button type="button" class="btn btn-danger" (click)="onExport('HealthCheckup','pdf')"> Export PDF <i class="fas fa-file-pdf"></i></button> &nbsp;
+                                <button type="button" class="btn btn-success" (click)="onExport('HealthCheckup','xlsx')"> Export Excel <i class="fas fa-file-excel"></i></button> &nbsp;
+                                </fieldset>
+                                <fieldset class="form-group col-md-4 col-sm-4">
+                                    <legend>HealthCheckup Refund</legend> 
+                                    <button type="button" class="btn btn-primary" (click)="onShow('HealthCheckup_refund')"> Show Refund <i class="fa fa-eye"></i></button> &nbsp;
+                                <button type="button" class="btn btn-danger" (click)="onExport('HealthCheckup_refund','pdf')"> Export Refund PDF <i class="fas fa-file-pdf"></i></button> &nbsp;
+                                <button type="button" class="btn btn-success" (click)="onExport('HealthCheckup_refund','xlsx')"> Export Refund Excel <i class="fas fa-file-excel"></i></button> &nbsp;
+                                </fieldset>
+                                <fieldset class="form-group col-md-3 col-sm-3">
+                                    <legend>&nbsp; </legend> 
+                                    <button type="button" class="btn btn-info" (click)="onNew()"> Clear <i class="fas fa-sync"></i></button> &nbsp;&nbsp;&nbsp;
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+
+                    <div class="row">
+                        <div class="card card-body">
+                            <div class="row mt-2" *ngIf="isPDFLoad">
+                                <ng2-pdfjs-viewer 
+                                    style="width: 100%; height: 800px;"
+                                    #pdfPreview
+                                    [downloadFileName]="'mytestfile.pdf'"
+                                    [openFile]="false"
+                                    [viewBookmark]="false"
+                                    zoom="page-width"
+                                    [download]="false">
+                                </ng2-pdfjs-viewer>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                    
+
+                </form>
+
+
+                
+
+            </div>
+        </div>
+    </div>
+</div>

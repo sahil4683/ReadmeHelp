@@ -1,0 +1,456 @@
+    <div class="col-md-12 mt-3">
+        <div class="card card-outline card-danger">
+            <div class="card-header text-center">
+                <b style="font-size: 18px;"> Consultant Doctor Master  </b>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body overflow-auto">
+                <form name="form" (ngSubmit)="f.form.valid && onSave()" #f="ngForm" novalidate>
+
+                    <input type="hidden" name="id" [(ngModel)]="form.id" #id="ngModel"> 
+                    <h2 *ngIf="isEdit" style="color: orangered;"><b>Edit Mode</b></h2>
+
+     
+                    <div class="row">
+
+                        <div class="col-md-6 col-sm-6">
+                            <div class="card card-body overflow-auto">
+                                <div class="form-group row">
+                                    
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label for="name">Name </label>
+                                    <input type="text" class="form-control" name="name" [(ngModel)]="form.name" required #name="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && name.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                <!-- <div class="form-group col-md-4 col-sm-4">
+                                    <button class="btn btn-success" disabled>Mapping</button>
+                                </div> -->
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label for="name">Degree </label>
+                                    <select class="form-control" [(ngModel)]="form.degree" #degree="ngModel" name="degree">
+                                        <option *ngFor="let o of DegreeList" [ngValue]="o.categoryName" style="color: black;">
+                                            {{o.categoryName}}
+                                        </option>
+                                    </select>
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && degree.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label for="name">Speciality </label>
+                                    <select class="form-control" [(ngModel)]="form.speciality" #speciality="ngModel" name="speciality">
+                                        <option *ngFor="let o of SpecialityList" [ngValue]="o.categoryName" style="color: black;">
+                                            {{o.categoryName}}
+                                        </option>
+                                    </select>
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && speciality.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label for="name">Con.Inc. Y/N </label>
+                                    <select class="form-control" name="referringIncentive" [(ngModel)]="form.referringIncentive"  #referringIncentive="ngModel">
+                                        <option value="Y">Y</option>
+                                        <option value="N">N</option>
+                                    </select>
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && referringIncentive.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label for="name">Expired </label>
+                                    <select class="form-control" name="expired" [(ngModel)]="form.expired"  #expired="ngModel">
+                                        <option value="Y">Y</option>
+                                        <option value="N">N</option>
+                                    </select>
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && expired.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label for="name">DOB </label>
+                                    <input type="date" class="form-control" name="dob" [(ngModel)]="form.dob"  #dob="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && dob.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6">
+                            <div class="card card-body overflow-auto">
+                                <div class="form-group row">
+                                    
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label for="name">Office No </label>
+                                    <input type="text" class="form-control" name="officeNo" [(ngModel)]="form.officeNo"  #officeNo="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && officeNo.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label for="name">Mob. NO </label>
+                                    <input type="text" class="form-control" name="mobile" [(ngModel)]="form.mobile" required #mobile="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && mobile.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label for="name">Res. No </label>
+                                    <input type="text" class="form-control" name="resNo" [(ngModel)]="form.resNo"  #resNo="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && resNo.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label for="name">Fax</label>
+                                    <input type="text" class="form-control" name="fax" [(ngModel)]="form.fax"  #fax="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && fax.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label for="name">Website </label>
+                                    <input type="text" class="form-control" name="website" [(ngModel)]="form.website"  #website="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && website.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label for="name">Email </label>
+                                    <input type="text" class="form-control" name="email" [(ngModel)]="form.email"  #email="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && email.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-6 col-sm-6">
+                            <div class="card card-body overflow-auto">
+                                <div class="form-group row">
+                                    
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label for="name">Address </label>
+                                    <input type="text" class="form-control" name="address" [(ngModel)]="form.address"  #address="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && address.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label for="name">City </label>
+                                    <!-- <input type="text" class="form-control" name="city" [(ngModel)]="form.city"  #city="ngModel" /> -->
+                                    <select class="form-control" [(ngModel)]="form.city" #city="ngModel" name="city">
+                                        <option *ngFor="let o of CityList" [ngValue]="o.categoryName" style="color: black;">
+                                            {{o.categoryName}}
+                                        </option>
+                                    </select>
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && city.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label for="name">State </label>
+                                    <select class="form-control" [(ngModel)]="form.state" #state="ngModel" name="state">
+                                        <option *ngFor="let o of CityList" [ngValue]="o.StateList" style="color: black;">
+                                            {{o.categoryName}}
+                                        </option>
+                                    </select>
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && state.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label for="name">Pin No </label>
+                                    <input type="text" class="form-control" name="pinNo" [(ngModel)]="form.pinNo"  #pinNo="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && pinNo.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label for="name">Location </label>
+                                    <input type="text" class="form-control" name="location" [(ngModel)]="form.location"  #location="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && location.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6">
+                            <div class="card card-body overflow-auto">
+                                <div class="form-group row">
+                                    
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label for="name">MOU No </label>
+                                    <input type="text" class="form-control" name="mouno" [(ngModel)]="form.mouno"  #mouno="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && mouno.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label for="name">MOU Validity </label>
+                                    <input type="text" class="form-control" name="mouValidity" [(ngModel)]="form.mouValidity"  #mouValidity="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && mouValidity.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label for="name">Identity No </label>
+                                    <input type="text" class="form-control" name="identityNo" [(ngModel)]="form.identityNo"  #identityNo="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && identityNo.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label for="name">MOU Expiry</label>
+                                    <input type="date" class="form-control" name="mouexpiry" [(ngModel)]="form.mouexpiry"  #mouexpiry="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && mouexpiry.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label for="name">Reg No </label>
+                                    <input type="text" class="form-control" name="regNo" [(ngModel)]="form.regNo"  #regNo="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && regNo.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label for="name">Blood Group </label>
+                                    <select class="form-control" name="bloodGroup" [(ngModel)]="form.bloodGroup" #bloodGroup="ngModel">
+                                        <option value="A+">A+</option>
+                                        <option value="A-">A-</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B-">B-</option>
+                                        <option value="AB+">AB+</option>
+                                        <option value="AB-">AB-</option>
+                                        <option value="O+">O+</option>
+                                        <option value="O-">O-</option>
+                                    </select>
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && bloodGroup.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label for="name">BOJ </label>
+                                    <input type="date" class="form-control" name="doj" [(ngModel)]="form.doj"  #doj="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && doj.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label for="name">Pan No </label>
+                                    <input type="text" class="form-control" name="panNo" [(ngModel)]="form.panNo"  #panNo="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && panNo.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                            <div class="card card-body overflow-auto">
+                                <div class="form-group row">
+                                    
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label for="name">Sub Dept </label>
+                                    <select class="form-control" [(ngModel)]="form.subDept" #subDept="ngModel" required name="subDept">
+                                        <option *ngFor="let o of SubDepartmentList" [ngValue]="o.subDept" style="color: black;">
+                                            {{o.subDept}}
+                                        </option>
+                                    </select>
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && subDept.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                <!-- <div class="form-group col-md-4 col-sm-4">
+                                    <label for="name">Salary Type </label>
+                                    <select class="form-control" name="salaryType" [(ngModel)]="form.salaryType" required #salaryType="ngModel">
+                                        <option value="Type1">Type1</option>
+                                        <option value="Type2">Type2</option>
+                                        <option value="Type3">Type3</option>
+                                        <option value="Type4">Type4</option>
+                                        <option value="Type5">Type5</option>
+                                        <option value="Type6">Type6</option>
+                                        <option value="Type7">Type7</option>
+                                        <option value="Type8">Type8</option>
+                                        <option value="Type9">Type9</option>
+                                    </select>
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && salaryType.invalid">
+                                        Required Field !
+                                    </div>
+                                </div> -->
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label for="name">Max Inc Limit </label>
+                                    <input type="text" class="form-control" name="maxIncLimit" [(ngModel)]="form.maxIncLimit"  #maxIncLimit="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && maxIncLimit.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label for="name">Fixed Incentive Amount </label>
+                                    <input type="text" class="form-control" name="fixedIncentiveAmount" [(ngModel)]="form.fixedIncentiveAmount"  #fixedIncentiveAmount="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && fixedIncentiveAmount.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label for="name">Fixed Monthly Salary </label>
+                                    <input type="text" class="form-control" name="fixedMonthlySalary" [(ngModel)]="form.fixedMonthlySalary"  #fixedMonthlySalary="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && fixedMonthlySalary.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label for="name">Sustenance Allo </label>
+                                    <input type="text" class="form-control" name="sustenanceAllo" [(ngModel)]="form.sustenanceAllo"  #sustenanceAllo="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && sustenanceAllo.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                    <div class="row">
+
+                        <div class="form-group col-md-6 col-sm-6">
+                            <div class="row">
+
+                              
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label for="name">Remarks </label>
+                                    <input type="text" class="form-control" name="remarks" [(ngModel)]="form.remarks"  #remarks="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && remarks.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label for="name">Signature </label>
+                                    <input type="file" class="form-control" name="signature" [(ngModel)]="form.signature"  #signature="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && signature.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- <div class="form-group col-md-6 col-sm-6">
+                            <div class="row">
+                                <div class="card card-body overflow-auto" style="background-color: antiquewhite">
+                                    <div class="form-group row">
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <p>Type 1(F.S)</p>
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <p>Type 2(F.S + I)</p>
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <p>Type 3(F.S Or I Whichever Is Higher)</p>
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <p>Type 4(Only I)</p>
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <p>Type 5(F.S + I To Max Limit Or Subsentences Allowence Whichever Is Higher)</p>
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <p>Type 6(DAYS + I)</p>
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <p>Type 7(ACCESSLARATDE PAY)</p>
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <p>Type 8(F.S + I Or Fixed Inc Whichever Is High)</p>
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <p>Type 9(F.S Or OPD Incentive Income Which Is Higher + IPD Incentive Income)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+
+                    </div>
+
+
+                    <div class="form-group col-md-12 col-sm-12">
+                        <button type="button" class="btn btn-info mt-1" (click)="onNew()">New <i class="fas fa-sync-alt"></i></button>&nbsp;
+                        <button class="btn btn-success mt-1" type="submit">Save <i class="fas fa-save"></i></button> &nbsp;
+                        
+                    </div>
+
+                </form>
+
+
+
+                <div class="row">
+                    <div class="form-group col-md-12 col-sm-12">
+                        <div class="card card-body overflow-auto">
+                            <div class="form-group row">
+
+                                <div class="form-group col-md-12 col-sm-12">
+                                            <table id="customTable" *ngIf="showContent" datatable class="table  table-bordered" cellspacing="0" width="100%">
+                                                <thead class="thead-dark">
+                                                    <tr>
+                                                        <th>EDIT</th>
+                                                        <th>Name</th>
+                                                        <th>Degree</th>
+                                                        <th>Speciality</th>
+                                                        <th>Ref Incentive</th>
+                                                        <th>Expire</th>
+                                                        <th>DOJ</th>
+                                                        <!-- <th>Blood Group</th> -->
+                                                    </tr>
+                                                </thead>
+                                                <tbody style="color: black;">
+                                                    <tr *ngFor="let item of table_data">
+                                                        <td>
+                                                            <span class="float-right">
+                                                                <button *ngIf="isedit_action" id="edit" type="button" (click)="onEdit(item)" class="btn btn-warning"><i class="fas fa-edit"></i></button> &nbsp;
+                                                                <button *ngIf="isdelete_action" id="delete" type="button" (click)="onDelete(item.id)" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                                            </span>
+                                                        </td>
+                                                        <td>{{item.name}}</td>
+                                                        <td>{{item.degree}}</td>
+                                                        <td>{{item.speciality}}</td>
+                                                        <td>{{item.referringIncentive}}</td>
+                                                        <td>{{item.expired}}</td>
+                                                        <td>{{item.doj}}</td>
+                                                        <!-- <td>{{item.bloodGroup}}</td> -->
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+
+            </div>
+        </div>
+    </div>

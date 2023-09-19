@@ -1,0 +1,480 @@
+<div class="">
+  <div class="col-md-12 mt-3">
+      <div class="card card-outline card-danger">
+          <div class="card-header text-center">
+              <b style="font-size: 20px;"> {{"Lab Reports" | uppercase}} </b>
+              <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                  </button>
+              </div>
+          </div>
+          <div class="card-body ">
+              <form name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
+
+                  <div class="row">
+
+                      <!-- ____________________Patient Details______________________ -->
+                      <!-- _________________________Start______________________ -->
+                      <div class="form-group col-md-5 col-sm-5 border">
+                          <div class="row mt-2">
+
+                              <div class="form-group col-md-3 col-3">
+                                  <label>Date</label>
+                                  <input type="text" class="form-control" name="date" [(ngModel)]="form.date" #date="ngModel" disabled />
+                                  <div class="text-danger" role="alert" *ngIf="f.submitted && date.invalid">
+                                      Required Field !
+                                  </div>
+                              </div>
+                              <div class="form-group col-md-3 col-3">
+                                  <label>Batch No</label>
+                                  <input type="text" class="form-control" name="id" [(ngModel)]="form.id" #id="ngModel" disabled />
+                                  <div class="text-danger" role="alert" *ngIf="f.submitted && id.invalid">
+                                      Required Field !
+                                  </div>
+                              </div>
+                              <div class="form-group col-md-3 col-3">
+                                  <label>UHID No</label>
+                                  <input type="text" class="form-control" name="uhid" [(ngModel)]="form.uhid" #uhid="ngModel" disabled />
+                                  <div class="text-danger" role="alert" *ngIf="f.submitted && uhid.invalid">
+                                      Required Field !
+                                  </div>
+                              </div>
+                              <div class="form-group col-md-3 col-3">
+                                  <label>IPD No</label>
+                                  <input type="text" class="form-control" name="ipdno" [(ngModel)]="form.ipdno" #ipdno="ngModel" disabled />
+                                  <div class="text-danger" role="alert" *ngIf="f.submitted && ipdno.invalid">
+                                      Required Field !
+                                  </div>
+                              </div>
+                              <div class="form-group col-md-8 col-8">
+                                  <label>Patient Name</label>
+                                  <input type="text" class="form-control" name="patientName" [(ngModel)]="form.patientName" #patientName="ngModel" />
+                                  <div class="text-danger" role="alert" *ngIf="f.submitted && patientName.invalid">
+                                      Required Field !
+                                  </div>
+                              </div>
+                              <div class="form-group col-md-4 col-4">
+                                  <label>Patient Type</label>
+                                  <select class="form-control" name="patientType" [(ngModel)]="form.patientType" #patientType="ngModel" >
+                                    <option value="GENERAL" selected="selected">GENERAL</option>
+                                    <option value="STAFF">STAFF</option>
+                                    <option value="PRIVILEDGE MEMBER">PRIVILEDGE MEMBER</option>
+                                    <option value="CAMP PATIENT">CAMP PATIENT</option>
+                                </select>
+                                  <div class="text-danger" role="alert" *ngIf="f.submitted && patientType.invalid">
+                                      Required Field !
+                                  </div>
+                              </div>
+                              <div class="form-group col-md-3 col-3">
+                                  <label>Gender</label>
+                                  <select class="form-control" name="gender" [(ngModel)]="form.gender" #gender="ngModel">
+                                      <option value="MALE">MALE</option>
+                                      <option value="FEMALE">FEMALE</option>
+                                      <option value="HERMAPHRODITIC">HERMAPHRODITIC</option>
+                                      <option value="ENANCH">ENANCH</option>
+                                  </select>
+                                  <div class="text-danger" role="alert" *ngIf="f.submitted && gender.invalid">
+                                      Required Field !
+                                  </div>
+                              </div>
+                              <div class="form-group col-md-4 col-4">
+                                  <label>DOB</label>
+                                  <input type="text" class="form-control" name="dob" [(ngModel)]="form.dob" #dob="ngModel" />
+                                  <div class="text-danger" role="alert" *ngIf="f.submitted && dob.invalid">
+                                      Required Field !
+                                  </div>
+                              </div>
+                              <div class="form-group col-md-5 col-5">
+                                  <label>Age</label>
+                                  <input type="text" class="form-control" name="age" [(ngModel)]="form.age" #age="ngModel" />
+                                  <div class="text-danger" role="alert" *ngIf="f.submitted && age.invalid">
+                                      Required Field !
+                                  </div>
+                              </div>
+                              <div class="form-group col-md-6 col-6">
+                                  <label>Con. Doctor</label>
+                                  <input type="text" class="form-control" name="referredBy" [(ngModel)]="form.referredBy" #referredBy="ngModel" />
+                                  <div class="text-danger" role="alert" *ngIf="f.submitted && referredBy.invalid">
+                                      Required Field !
+                                  </div>
+                              </div>
+                              <div class="form-group col-md-6 col-6">
+                                  <label>Sample</label>
+                                  <select class="form-control" name="sample" [(ngModel)]="form.sample" #sample="ngModel">
+                                      <option value="LAB">LAB</option>
+                                      <option value="HOME">HOME</option>
+                                      <option value="HOSPITAL">HOSPITAL</option>
+                                  </select>
+                                  <div class="text-danger" role="alert" *ngIf="f.submitted && sample.invalid">
+                                      Required Field !
+                                  </div>
+                              </div>
+                              <div class="form-group col-md-6 col-6">
+                                  <label>Time Of Coll.</label>
+                                  <input type="time" class="form-control" name="timeOfCollection" [(ngModel)]="form.timeOfCollection" #timeOfCollection="ngModel" />
+                                  <div class="text-danger" role="alert" *ngIf="f.submitted && timeOfCollection.invalid">
+                                      Required Field !
+                                  </div>
+                              </div>
+                              <div class="form-group col-md-6 col-6">
+                                  <label>Time Of Rec.</label>
+                                  <input type="time" class="form-control" name="timeOFReceived" [(ngModel)]="form.timeOFReceived" #timeOFReceived="ngModel" />
+                                  <div class="text-danger" role="alert" *ngIf="f.submitted && timeOFReceived.invalid">
+                                      Required Field !
+                                  </div>
+                              </div>
+                              <div class="form-group col-md-12 col-12">
+                                  <label>Selected Test</label>
+                                  <!-- <input type="text" class="form-control" /> -->
+                                  <textarea class="form-control" name="testName" [(ngModel)]="form.testName" #testName="ngModel"></textarea>
+                                  <div class="text-danger" role="alert" *ngIf="f.submitted && testName.invalid">
+                                      Required Field !
+                                  </div>
+                              </div>
+
+                              <div class="form-group col-md-12 col-sm-12">
+                                  <div class="row">
+                                      <div class="col-md-4 col-sm-4">
+                                          <button type="button" style="width: 200px;" class="btn btn-info mt-2" (click)="updateTime(this.form.id)">Update Time <i class="fa fa-clock"></i></button>
+                                      </div>
+                                      <div class="col-md-4 col-sm-4">
+                                          <button type="button" style="width: 200px;" class="btn btn-info mt-2" (click)="onReload()">New <i class="fas fa-sync-alt"></i></button>
+                                      </div>
+                                      <div class="col-md-4 col-sm-4">
+                                          <button type="button" style="width: 200px;" class="btn btn-secondary mt-2" (click)="verifyTestAll(this.form.id)">Verify ALL <i class="fas fa-check"></i></button>
+                                      </div>
+                                      <div class="col-md-4 col-sm-4">
+                                          <button type="button" style="width: 200px;" class="btn btn-secondary mt-2" (click)="receivedClick(this.form)" >Test Observation <i class="fas fa-vial"></i></button>
+                                      </div>
+                                      <div class="col-md-4 col-sm-4">
+                                          <button type="button" style="width: 200px;" class="btn btn-warning mt-2" routerLink="/patho/patho_external_lab_test_master">External Lab Entry <i class="fa fa-share-square"></i></button>
+                                      </div>
+                                      <div class="col-md-4 col-sm-4">
+                                          <button type="button" style="width: 200px;" class="btn btn-danger mt-2" (click)="printReport(form.id,'LH')">Print <i class="fa fa-file-pdf"></i></button>
+                                      </div>
+                                  </div>
+                              </div>
+
+
+                          </div>
+                      </div>
+                      <!-- ____________________ Patient Details ______________________ -->
+                      <!-- _________________________ End ______________________ -->
+
+                      <!-- ____________________ Opration Table Detais ______________________ -->
+                      <!-- _________________________ Start ______________________ -->
+                      <div class="form-group col-md-7 col-sm-7">
+                          <div class="card card-body ">
+                              <div class="row">
+
+                                <div class="form-group mb-2 mr-2">
+                                    <!-- <label>Date</label> -->
+                                    <input type="date" class="form-control" name="getByDate" [(ngModel)]="formTemp.getByDate" #getByDate="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && getByDate.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>&nbsp;
+                                <button type="button" class="btn btn-info mb-2 mr-2" (click)="getWaitingByDateTable(formTemp.getByDate)">Show <i class="fa fa-spinner fa-spin" *ngIf="isGetByDateTable"></i></button>&nbsp;
+                                <button type="button" class="btn btn-success mb-2 mr-2" disabled>Pending Investigation</button>&nbsp;
+                                <button type="button" class="btn btn-info mb-2 mr-2" disabled>OPD SOAP NOTES</button>&nbsp;
+                                <button type="button" class="btn btn-info mb-2 mr-2" disabled>Status</button>&nbsp;
+                              </div>
+
+                              <div class="row" style="min-height: 480px; border: 1px solid black;">
+                                  <!-- No data found -->
+                                  <div class="table-responsive">
+                                    <table id="customTable" *ngIf="showContent" datatable data-length-change="false" data-searching="false" data-page-length='7' data-info="false" class="table table-bordered nowrap" cellspacing="0" width="100%">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th>Status</th>
+                                                <th>Date</th>
+                                                <th>Patient Name</th>
+                                                <th>UHID</th>
+                                                <th>IPDNO</th>
+                                                <th>Gender</th>
+                                                <th>Age</th>
+                                                <th>Con.Dr</th>
+                                                <th>Dept</th>
+                                                <th class="text-wrap">Test Name</th>
+                                                <th>Mobile</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody style="color: black;">
+                                            <tr *ngFor="let item of table_data">
+                                                <td>
+                                                    <button style="background-color: #3A56C7;" class="btn btn-sm" *ngIf="isWaitingData" (click)="waitingClick(item)">Waiting</button>
+                                                    <button style="background-color: #FFAD00;" class="btn btn-sm" *ngIf="isCollectedData" (click)="collectedClick(item)">Collected</button>
+                                                    <button style="background-color: #B978ED;" class="btn btn-sm" *ngIf="isReceivedData" (click)="receivedClick(item)">Received</button>
+                                                    <button style="background-color: #3D9400;" class="btn btn-sm" *ngIf="isPrintedData" (click)="printedClick(item)">Printed</button>
+                                                    <button style="background-color: #B978ED;" class="btn btn-sm" *ngIf="isUnverify" (click)="UnverifyReceivedClick(item)">Received</button>
+                                                </td>
+                                                <td>{{item.date}}</td>
+                                                <td>{{item.name}}</td>
+                                                <td>{{item.uhid}}</td>
+                                                <td>{{item.ipdno}}</td>
+                                                <td>{{item.sex}}</td>
+                                                <td>{{item.age}}</td>
+                                                <td>{{item.consultant}}</td>
+                                                <td>{{item.dept}}</td>
+                                                <td class="text-wrap">{{item.testName}}</td>
+                                                <td>{{item.mobile}}</td>
+                                                
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                              </div>
+
+                              <div class="row text-danger mt-2">
+                                  <h5 class="mr-4">Total: {{totalCount}}</h5>
+                                  <h5 class="mr-4">Waiting: {{waitingCount}}</h5>
+                                  <h5 class="mr-4">Sample Collected: {{collectedCount}}</h5>
+                                  <h5 class="mr-4">Sample Received: {{receivedCount}}</h5>
+                                  <h5 class="mr-4">Printed: {{printedCount}}</h5>
+                              </div>
+
+                              <div class="row flexbox-center">
+                                  <button class="btn mt-2 mr-2" style="background-color: #3A56C7;" (click)="getWaitingByDateTable(formTemp.getByDate)">Waiting Patient <i class="fa fa-spinner fa-spin" *ngIf="isGetByDateTable"></i></button>
+                                  <button class="btn mt-2 mr-2" style="background-color: #FFAD00;" (click)="getOtherByDateTableAndType(formTemp.getByDate,'Collected')">Sample Collected <i class="fa fa-spinner fa-spin" *ngIf="isCollectedGetByDateTable"></i></button>
+                                  <button class="btn mt-2 mr-2" style="background-color: #B978ED;" (click)="getOtherByDateTableAndType(formTemp.getByDate,'Received')">Sample Received</button>
+                                  <button class="btn mt-2 mr-2" style="background-color: #3D9400;" (click)="getOtherByDateTableAndType(formTemp.getByDate,'Printed')">Printed</button>
+                                  <button class="btn mt-2 mr-2" style="background-color: #FFFF66;" disabled >Export Print All</button>
+                                  <button class="btn mt-2 mr-2" style="background-color: #FFFF66;" disabled >Barcode</button>
+                                  <button class="btn mt-2 mr-2" style="background-color: #B978ED;" (click)="getOtherByDateTableAndType(formTemp.getByDate,'Unverify')">Unverify</button>
+                              </div>
+
+                          </div>
+                      </div>
+                      <!-- ____________________ Opration Table Detais ______________________ -->
+                      <!-- _________________________ End ______________________ -->
+
+                  </div>
+
+                  <!-- ____________________ History Table ______________________ -->
+                  <!-- _________________________ Start ______________________ -->
+                  <div class="row">
+                      <div class="card card-body">
+                          <div class="row">
+                            <div class="form-group col-md-1 col-sm-1">
+                                <button type="button" class="btn btn-info mt-1" (click)="onTable(0)">Today</button>
+                            </div> 
+                            <div class="form-group col-md-1 col-sm-1">
+                                <button type="button" class="btn btn-info mt-1" (click)="onTable(1)">Show All</button>
+                            </div> 
+                            <div class="form-group col-md-3 col-sm-3">
+                                <div class="input-group mt-1">
+                                    <input type="date" class="form-control"  name="getByDate" [(ngModel)]="formTemp.getByDate" #getByDate="ngModel" >
+                                    <span class="input-group-append">
+                                      <button type="button" class="btn btn-info" (click)="onTable(2)">Get</button>
+                                    </span>
+                                  </div>
+                            </div> 
+                          </div>
+                          <!-- <div class="form-group col-md-12 col-sm-12"> -->
+                            <div class="row">
+                                <div class="table-responsive">     
+                                    <table id="customTable" *ngIf="showMainTableContent" datatable class="table  table-bordered" cellspacing="0" width="100%">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th>Action</th>
+                                                <th>Batch No</th>
+                                                <th>Patient Name</th>
+                                                <th>UHID</th>
+                                                <th>IPDNO</th>
+                                                <th>ConDr</th>
+                                                <th>DOB</th>
+                                                <th>Gender</th>
+                                                <th>Age</th>
+                                                <th>Test Name</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody style="color: black;">
+                                            <tr *ngFor="let item of table_histroy_data">
+                                                <td>
+                                                    <span class="float-right">
+                                                        <button *ngIf="isedit_action" id="edit" type="button" (click)="onEdit(item)" class="btn btn-warning"><i class="fas fa-edit"></i></button> &nbsp;
+                                                        <!-- <button *ngIf="isdelete_action" id="delete" type="button" (click)="onDelete(item.bill.id)" class="btn btn-danger" ><i class="fa fa-trash"></i></button> -->
+                                                    </span>
+                                                </td>
+                                                <td>{{item.srno}}</td>
+                                                <td>{{item.patientName}}</td>
+                                                <td>{{item.uhid}}</td>
+                                                <td>{{item.ipdno}}</td>
+                                                <td>{{item.referredBy}}</td>
+                                                <td>{{item.dob}}</td>
+                                                 <td>{{item.gender}}</td>
+                                                <td>{{item.age}}</td>
+                                                <td>{{item.testName}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    
+                                </div>
+                            </div>
+                          <!-- </div> -->
+                      </div>
+                  </div>
+                  <!-- ____________________ History Table ______________________ -->
+                  <!-- _________________________ End ______________________ -->
+
+              </form>
+          </div>
+      </div>
+  </div>
+
+
+
+<ng-template #testModel let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">SELECT TEST NAME</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+          <!-- <h3>SELECT TEST NAME</h3> -->
+          <p style="color: red;">
+            Below Test Names Getting Map With New Patho Test Names After Save !
+          </p>
+          <div class="table-responsive">
+            <table class="table  table-bordered" cellspacing="0" width="100%">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Tets Name</th>
+                        <th>Color</th>
+                    </tr>
+                </thead>
+                <tbody style="color: black;">
+                    <tr *ngFor="let item of testList"> 
+                        <td style="cursor: pointer;" (click)="addToTextArea(item)">{{item.testName}}</td>
+                        <td> - </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            <button class="btn btn-success btn-sm mb-2 ml-2" (click)="SelectAllTest()">Select ALL</button>
+        </div>
+        <textarea class="" cols="53" rows="5"  class="form-control" name="selectedTests" [(ngModel)]="form.selectedTests"  #selectedTests="ngModel">
+        </textarea>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="saveTestData()">Save <i class="fas fa-save"></i></button>
+    </div>
+  </ng-template>
+
+<!-- Comment For Letter Work -->
+
+<ng-template #observationModel let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Observation Of Test</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <div class="col-12 text-center">
+            <p style="color:blue">
+                Patient Name : {{this.form.patientName}} | 
+                UHID No: {{this.form.uhid}} | 
+                IPD No {{this.form.ipdno}} | 
+                Batch NO {{this.form.batch}} 
+            </p>
+          <hr>
+          </div>
+          <div class="row container">
+            <div class="col-4">
+                <div class="table-responsive">
+                    <table class="table  table-bordered" cellspacing="0" width="100%">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Format Test Name</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody style="color: black;">
+                            <tr *ngFor="let item of FormatTestNameList"> 
+                                <td style="cursor: pointer;" (click)="selectForObservation(item)">{{item.formattest}}</td>
+                                <td *ngIf="item.statusName==='FINAL'" class="color-red"> Verified </td>
+                                <td *ngIf="item.statusName==='PROVISIONAL'">  Not Verified </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+              </div>
+              <div class="col-8">
+                <div class="table-responsive">
+                    <table class="table table-bordered" cellspacing="0" width="100%">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Test Parameter</th>
+                                <th>Result</th>
+                                <th>Unit</th>
+                                <th>Normal Range</th>
+                                <th>Recheck</th>
+                            </tr>
+                        </thead>
+                        <tbody style="color: black;">
+                            <tr *ngFor="let item of selectForObservationList; let i = index;"> 
+                                <ng-container *ngIf="item.lable === '1' ">
+                                    <td class="bg-secondary text-center" colspan="5">{{item.testName}}</td>
+                                </ng-container>
+                                <ng-container *ngIf="item.lable != '1' ">
+                                    <td>{{item.testName}}</td>
+                                    <td>
+                                        <input type="text" 
+                                        [disabled]="isChangeResult"
+                                        [ngClass]="isBetweenRange(item.obvValue,item.low,item.high)? 'form-control':'form-control is-invalid' "
+                                        class="form-control" 
+                                        name="obvValue" 
+                                        [(ngModel)]="item.obvValue"  
+                                        tabindex="{{i+1}}" 
+                                        #obvValue="ngModel" />
+                                    </td>
+                                    <td>{{item.unit}}</td>
+                                    <td>{{item.normalRange}}</td>
+                                    <td>
+                                        <input class="form-control" style="height: 20px;" 
+                                        type="checkbox" 
+                                        name="recheckSample"
+                                        (click)="checkResult($event,item)" 
+                                        [(ngModel)]="item.recheckSample"
+                                        #recheckSample="ngModel" 
+                                        [disabled]="isChangeResult" 
+                                        >
+                                    </td>
+                                </ng-container>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+              </div>
+          </div>
+          <div class="col-12">
+              <button type="button" style="background-color: #CCCBFE;" class="btn mt-1" disabled>Template</button>&nbsp;
+              <button type="button" style="background-color: #9A9768;" class="btn mt-1" disabled>Get Data</button>&nbsp;
+              <button type="button" style="background-color: #03CAFF;" class="btn mt-1" disabled>Next Format</button>&nbsp;
+              <button type="button" style="background-color: #FECD97;" class="btn mt-1" (click)="ChangeResultClick()">Change Result <i class="fas fa-edit"></i></button>&nbsp;
+              <button type="button" style="background-color: #FEFF01;" class="btn mt-1" (click)="saveObservationTest()" >Save Data <i class="fas fa-save"></i></button>&nbsp;
+              <button type="button" style="background-color: #029901;" class="btn mt-1" disabled>Select Test</button>&nbsp;
+              <button type="button" style="background-color: #CC9800;" class="btn mt-1" (click)="verifyTest()">Verify <i class="fas fa-check"></i></button>&nbsp;
+              <button type="button" style="background-color: #97FFCC;" class="btn mt-1" (click)="printReport(form.batch,'print')" >Print <i class="fa fa-file-pdf"></i></button>&nbsp;
+              <button type="button" style="background-color: #97FFCC;" class="btn mt-1" (click)="printReport(form.batch,'LH')" >Print With LH <i class="fa fa-file-pdf"></i></button>&nbsp;
+              <button type="button" style="background-color: #97FFCC;" class="btn mt-1" disabled>Format Print</button>&nbsp;
+              <button type="button" style="background-color: #97FFCC;" class="btn mt-1" disabled>Format Print With LH</button>&nbsp;
+              <button type="button" style="background-color: #FE6500;" class="btn mt-1" (click)="modal.close('Close click')">Exit <i class="fas fa-times"></i></button>&nbsp;
+          </div>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-dark" (click)="modal.close('Close click')">Close</button>
+      </div>
+  </ng-template>
+
+</div>

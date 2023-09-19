@@ -1,0 +1,115 @@
+<div class="">
+    <div class="col-md-12 mt-3">
+        <div class="card card-outline card-danger">
+            <div class="card-header text-center">
+                <b style="font-size: 18px;"> Dischange Clearence </b>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body overflow-auto">
+                <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+                    
+                    
+
+                    <div class="form-group row">
+
+                        <div class="form-group col-md-12 col-sm-12">
+                            <div class="card card-body overflow-auto">
+                                <div class="row">
+                                    <div class="form-group col-md-3 col-sm-3">
+                                        <label for="name">IPD No</label>
+                                        <input type="text" class="form-control" name="ipdNo" [(ngModel)]="form.ipdNo" #ipdNo="ngModel" />
+                                        <div class="text-danger" role="alert" *ngIf="f.submitted && ipdNo.invalid">
+                                            Required Field !
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-3 col-sm-3">
+                                        <label for="name">Patient Name</label>
+                                        <input type="text" class="form-control" name="patientName" [(ngModel)]="form.patientName" #patientName="ngModel" />
+                                        <div class="text-danger" role="alert" *ngIf="f.submitted && patientName.invalid">
+                                            Required Field !
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-3 col-sm-3">
+                                        <label for="name">Discharge Date</label>
+                                        <input type="date" class="form-control" name="dischargeDate" [(ngModel)]="form.dischargeDate" #dischargeDate="ngModel" />
+                                        <div class="text-danger" role="alert" *ngIf="f.submitted && dischargeDate.invalid">
+                                            Required Field !
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-3 col-sm-3">
+                                        <label for="name">Discharge Time</label>
+                                        <input type="time" class="form-control" name="dischargeTime" [(ngModel)]="form.dischargeTime" #dischargeTime="ngModel" />
+                                        <div class="text-danger" role="alert" *ngIf="f.submitted && dischargeTime.invalid">
+                                            Required Field !
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    
+    
+                        <div class="form-group col-md-12 col-sm-12">
+                            <div class="card card-body overflow-auto">
+                                <div class="form-group row">
+                                    <button type="button" class="btn btn-info mt-1">New</button> &nbsp;
+                                    <button type="button" class="btn btn-success mt-1">Save <i class="fas fa-save"></i></button> &nbsp;
+                                    <button class="btn btn-success mt-1">Preview</button> &nbsp;
+                                    <button type="button" class="btn btn-info mt-1">Print:F2</button> &nbsp;
+                                    <button type="button" class="btn btn-info mt-1">Payment Detailed Bill</button> &nbsp;
+                                    <button type="button" class="btn btn-info mt-1">Print Detailed Bill With Date</button> &nbsp;
+                                    <button type="button" class="btn btn-info mt-1">Provisional Bill</button> &nbsp;
+                                    <button type="button" class="btn btn-info mt-1">Bill Detailed Sheet</button> &nbsp;
+                                    <button type="button" class="btn btn-info mt-1">Receipt/Payment</button> &nbsp;
+                                    <button type="button" class="btn btn-info mt-1">Ledger</button> &nbsp;
+                                    <button type="button" class="btn btn-info mt-1">Print Lable</button> &nbsp;
+                                </div>
+                            </div>
+                        </div>
+    
+                        
+                        <div class="form-group col-md-12 col-sm-12">
+                            <div class="card card-body overflow-auto">
+                                <div class="row">
+                                    <div class="form-group col-md-3 col-sm-3">
+                                        <label for="name">IPD No</label>
+                                        <input type="text" class="form-control" name="ipdNo" [(ngModel)]="form.ipdNo" #ipdNo="ngModel" />
+                                        <div class="text-danger" role="alert" *ngIf="f.submitted && ipdNo.invalid">
+                                            Required Field !
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-3 col-sm-3">
+                                        <label for="name">Patient Name</label>
+                                        <input type="text" class="form-control" name="patientName" [(ngModel)]="form.patientName" #patientName="ngModel" />
+                                        <div class="text-danger" role="alert" *ngIf="f.submitted && patientName.invalid">
+                                            Required Field !
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-3 col-sm-3">
+                                       <button class="btn btn-info">Show All</button>
+                                    </div>
+                                    <div class="form-group col-md-3 col-sm-3">
+                                        <button class="btn btn-info">Clear Selection</button>
+                                     </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+    
+    
+                    </div>
+
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,1170 @@
+<div class="">
+    <div class="col-md-12 mt-3">
+        <div class="card card-outline card-danger">
+            <div class="card-header text-center">
+                <b style="font-size: 18px;"> DISCHARGE SUMMARY </b>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body overflow-auto">
+                <form name="form" (ngSubmit)="f.form.valid && onSave()" #f="ngForm" novalidate>
+
+                    <input type="hidden" name="id" [(ngModel)]="form.id" #id="ngModel"> 
+                    <h2 *ngIf="isEdit" style="color: orangered;"><b>Edit Mode</b></h2>
+
+                    <div class="form-group row">
+
+
+                        <div class=" col-md-6 col-sm-6">
+                            <div class="card card-body ">
+                                <div class="row">
+                                    <div class="form-group col-md-12 col-sm-12">
+                                        <label for="name">Patient Name</label>
+                                        <ng-select [(ngModel)]="form.name" name="name" #name="ngModel" (focusout)="getPatientDetails_IPD(this.form.name)" required class="ng-select-focused" [loading]="tokensAreLoading" [addTag]="true" [isOpen]="openSuggestionDropdown" [ngModelOptions]="{standalone: true}"
+                                        ng-model-options="{debounce: 4000}" [virtualScroll]="true" [dropdownPosition]="'down'" notFoundText="No Data Found" loadingText="loading..." [inputAttrs]="{autocomplete: 'off'}" [typeahead]="typeaheadTextInput"
+                                        placeholder="Type to search">
+                                            <ng-option *ngFor="let o of PatientDetails" [value]="o.ipd">
+                                                {{o.name}} | {{o.uhid}} | <b style="color: red;">{{o.ipd}}</b>
+                                            </ng-option>
+                                        </ng-select>
+                                        <div class="text-danger" role="alert" *ngIf="f.submitted && name.invalid">
+                                            Required Field !
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6 col-sm-6">
+                                        <label>UHID</label>
+                                        <input type="text" class="form-control" name="uhid" [(ngModel)]="form.uhid" #uhid="ngModel" required />
+                                        <div class="text-danger" role="alert" *ngIf="f.submitted && uhid.invalid">
+                                            Required Field !
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-6 col-sm-6">
+                                        <label>IPD No</label>
+                                        <input type="text" class="form-control" name="ipdno" [(ngModel)]="form.ipdno" #ipdno="ngModel" required />
+                                        <div class="text-danger" role="alert" *ngIf="f.submitted && ipdno.invalid">
+                                            Required Field !
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6 col-sm-6">
+                                        <label for="name">Date Of Admission</label>
+                                        <input type="date" class="form-control" name="admissionDate" [(ngModel)]="form.admissionDate" #admissionDate="ngModel" required />
+                                        <div class="text-danger" role="alert" *ngIf="f.submitted && admissionDate.invalid">
+                                            Required Field !
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6 col-sm-6">
+                                        <label for="name">Time</label>
+                                        <input type="time" class="form-control" name="admissionTime" [(ngModel)]="form.admissionTime" #admissionTime="ngModel" />
+                                        <div class="text-danger" role="alert" *ngIf="f.submitted && admissionTime.invalid">
+                                            Required Field !
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6 col-sm-6">
+                                        <label for="name">Date Of Procedure</label>
+                                        <input type="date" class="form-control" name="procedureDate" [(ngModel)]="form.procedureDate" #procedureDate="ngModel" required />
+                                        <div class="text-danger" role="alert" *ngIf="f.submitted && procedureDate.invalid">
+                                            Required Field !
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6 col-sm-6">
+                                        <label for="name">Type Of Case</label>
+                                        <select class="form-control" name="caseType" [(ngModel)]="form.caseType" #caseType="ngModel">
+                                            <option value="GENERAL">GENERAL</option>
+                                            <option value="MLC">MLC</option>
+                                        </select>
+                                        <div class="text-danger" role="alert" *ngIf="f.submitted && caseType.invalid">
+                                            Required Field !
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-4 col-sm-4">
+                                        <label for="name">Date Type</label>
+                                        <select class="form-control" [(ngModel)]="form.dischargeType" #dischargeType="ngModel" required name="dischargeType">
+                                            <option value=" Date of Discharge">Date of Discharge</option>
+                                            <option value="Date of Expired">Date of Expired</option>
+                                            <option value="Date of Discharge on Request">Date of Discharge on Request</option>
+                                            <option value="Date of Discharge on Improved">Date of Discharge on Improved</option>
+                                            <option value="Date of Discharge on Transfer">Date of Discharge on Transfer</option>
+                                            <option value="Without Permission">Without Permission</option>
+                                            <option value="Absconding">Absconding</option>
+                                            <option ngValue="Date of Dama">Date of Dama</option>
+                                        </select>
+                                        <div class="text-danger" role="alert" *ngIf="f.submitted && dischargeType.invalid">
+                                            Required Field !
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-4 col-sm-4">
+                                        <label for="name">Date</label>
+                                        <input type="date" class="form-control" name="dischargeDate" [(ngModel)]="form.dischargeDate" required #dischargeDate="ngModel" />
+                                        <div class="text-danger" role="alert" *ngIf="f.submitted && dischargeDate.invalid">
+                                            Required Field !
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-4 col-sm-4">
+                                        <label for="name">Time</label>
+                                        <input type="time" class="form-control" name="dischargeTime" [(ngModel)]="form.dischargeTime" required #dischargeTime="ngModel" />
+                                        <div class="text-danger" role="alert" *ngIf="f.submitted && dischargeTime.invalid">
+                                            Required Field !
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class=" col-md-6 col-sm-6">
+                            <div class="card card-body ">
+                                <div class="row">
+                                    <div class="form-group col-md-12 col-sm-12">
+                                        <label>Address</label>
+                                        <input type="text" class="form-control" name="address" [(ngModel)]="form.address" #address="ngModel" />
+                                        <div class="text-danger" role="alert" *ngIf="f.submitted && address.invalid">
+                                            Required Field !
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6 col-sm-6">
+                                        <label>Age</label>
+                                        <input type="text" class="form-control" name="age" [(ngModel)]="form.age" #age="ngModel" />
+                                        <div class="text-danger" role="alert" *ngIf="f.submitted && age.invalid">
+                                            Required Field !
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6 col-sm-6">
+                                        <label>Gender</label>
+                                        <input type="text" class="form-control" name="sex" [(ngModel)]="form.sex" #sex="ngModel" />
+                                        <div class="text-danger" role="alert" *ngIf="f.submitted && sex.invalid">
+                                            Required Field !
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12">
+                                        <hr>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12">
+                                        <div class="row">
+                                            <div class="form-group col-md-6 col-sm-6">
+                                                <label for="name">Ref.Dr 1</label>
+                                                <ng-select [(ngModel)]="form.refBy1" name="refBy1" #refBy1="ngModel" [addTag]="true" [ngModelOptions]="{standalone: true}" [dropdownPosition]="'down'" [virtualScroll]="true" placeholder="Type to search">
+                                                    <ng-option *ngFor="let o of DoctorReferenceList" [value]="o.id">
+                                                        {{o.name}}
+                                                    </ng-option>
+                                                </ng-select>
+                                                <div class="text-danger" role="alert" *ngIf="f.submitted && refBy1.invalid">
+                                                    Required Field !
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-6 col-sm-6">
+                                                <label for="name">Ref.Dr 2</label>
+                                                <ng-select [(ngModel)]="form.refBy2" name="refBy2" #refBy2="ngModel" [addTag]="true" [ngModelOptions]="{standalone: true}" [dropdownPosition]="'down'" [virtualScroll]="true" placeholder="Type to search">
+                                                    <ng-option *ngFor="let o of DoctorReferenceList" [value]="o.id">
+                                                        {{o.name}}
+                                                    </ng-option>
+                                                </ng-select>
+                                                <div class="text-danger" role="alert" *ngIf="f.submitted && refBy2.invalid">
+                                                    Required Field !
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-6 col-sm-6">
+                                                <label for="name">Ref.Dr 3</label>
+                                                <ng-select [(ngModel)]="form.refBy3" name="refBy3" #refBy3="ngModel" [addTag]="true" [ngModelOptions]="{standalone: true}" [dropdownPosition]="'down'" [virtualScroll]="true" placeholder="Type to search">
+                                                    <ng-option *ngFor="let o of DoctorReferenceList" [value]="o.id">
+                                                        {{o.name}}
+                                                    </ng-option>
+                                                </ng-select>
+                                                <div class="text-danger" role="alert" *ngIf="f.submitted && refBy3.invalid">
+                                                    Required Field !
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-6 col-sm-6">
+                                                <label for="name">Ref.Dr 4</label>
+                                                <ng-select [(ngModel)]="form.refBy4" name="refBy4" #refBy4="ngModel" [addTag]="true" [ngModelOptions]="{standalone: true}" [dropdownPosition]="'down'" [virtualScroll]="true" placeholder="Type to search">
+                                                    <ng-option *ngFor="let o of DoctorReferenceList" [value]="o.id">
+                                                        {{o.name}}
+                                                    </ng-option>
+                                                </ng-select>
+                                                <div class="text-danger" role="alert" *ngIf="f.submitted && refBy4.invalid">
+                                                    Required Field !
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12">
+                                        <hr>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12">
+                                        <div class="row">
+
+                                            <div class="form-group col-md-6 col-sm-6">
+                                                <label for="name">Consultant 1</label>
+                                                <ng-select [(ngModel)]="form.consultant1" name="consultant1" #consultant1="ngModel" [addTag]="true" [ngModelOptions]="{standalone: true}" [dropdownPosition]="'down'" [virtualScroll]="true" placeholder="Type to search">
+                                                    <ng-option *ngFor="let o of ConsultantList" [value]="o.id">
+                                                        {{o.name}}
+                                                    </ng-option>
+                                                </ng-select>
+                                                <div class="text-danger" role="alert" *ngIf="f.submitted && consultant1.invalid">
+                                                    Required Field !
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-6 col-sm-6">
+                                                <label for="name">Consultant 2</label>
+                                                <ng-select [(ngModel)]="form.consultant2" name="consultant2" #consultant2="ngModel" [addTag]="true" [ngModelOptions]="{standalone: true}" [dropdownPosition]="'down'" [virtualScroll]="true" placeholder="Type to search">
+                                                    <ng-option *ngFor="let o of ConsultantList" [value]="o.id">
+                                                        {{o.name}}
+                                                    </ng-option>
+                                                </ng-select>
+                                                <div class="text-danger" role="alert" *ngIf="f.submitted && consultant2.invalid">
+                                                    Required Field !
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-6 col-sm-6">
+                                                <label for="name">Consultant 3</label>
+                                                <ng-select [(ngModel)]="form.consultant3" name="consultant3" #consultant3="ngModel" [addTag]="true" [ngModelOptions]="{standalone: true}" [dropdownPosition]="'down'" [virtualScroll]="true" placeholder="Type to search">
+                                                    <ng-option *ngFor="let o of ConsultantList" [value]="o.id">
+                                                        {{o.name}}
+                                                    </ng-option>
+                                                </ng-select>
+                                                <div class="text-danger" role="alert" *ngIf="f.submitted && consultant3.invalid">
+                                                    Required Field !
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-6 col-sm-6">
+                                                <label for="name">Consultant 4</label>
+                                                <ng-select [(ngModel)]="form.consultant4" name="consultant4" #consultant4="ngModel" [addTag]="true" [ngModelOptions]="{standalone: true}" [dropdownPosition]="'down'" [virtualScroll]="true" placeholder="Type to search">
+                                                    <ng-option *ngFor="let o of ConsultantList" [value]="o.id">
+                                                        {{o.name}}
+                                                    </ng-option>
+                                                </ng-select>
+                                                <div class="text-danger" role="alert" *ngIf="f.submitted && consultant4.invalid">
+                                                    Required Field !
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class=" col-md-12 col-sm-12">
+                            <div class="card card-body ">
+                                <div class="row">
+                                    <div class="form-group col-md-4 col-sm-4"></div>
+                                    <div class="form-group col-md-4 col-sm-4">
+                                        <label for="name">Select Title For Print</label>
+                                        <select class="form-control" name="printTitle" [(ngModel)]="form.printTitle" #printTitle="ngModel" required>
+                                            <option value="DEATH SUMMARY">DEATH SUMMARY</option>
+                                            <option value="DISCHARGE SUMMARY">DISCHARGE SUMMARY</option>
+                                        </select>
+                                        <div class="text-danger" role="alert" *ngIf="f.submitted && printTitle.invalid">
+                                            Required Field !
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-4 col-sm-4"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class=" col-md-12 col-sm-12">
+                            <div class="card card-body ">
+                                <div class="row">
+                                    <div class="card card-body col-md-6 col-sm-6 ">
+                                        <div class="row">
+                                            <label class="col-md-12 col-sm-12">Diagnosis</label>
+                                            <textarea rows="5" type="text" class="form-control col-sm-7 col-md-7" name="summary1" [(ngModel)]="form.summary1"  #summary1="ngModel"></textarea>
+                                            <a (click)="openModel_Diagnosis(Model_Diagnosis)" class="col-md-4 col-sm-4">Select Diagnosis >></a> 
+                                            <br>
+                                        </div>
+                                    </div>
+                                    <div class="card card-body col-md-6 col-sm-6 ">
+                                        <div class="row">
+                                            <label class="col-md-12 col-sm-12">Clinical Summary</label>
+                                            <textarea rows="5" type="text" class="form-control col-sm-7 col-md-7" name="summary2" [(ngModel)]="form.summary2"  #summary2="ngModel"></textarea>
+                                            <a (click)="openModel_Clinical(Model_Clinical)" class="col-md-4 col-sm-4">Select Clinical Summary >></a>
+                                            <br>
+                                        </div>
+                                    </div>
+                                    <div class="card card-body col-md-6 col-sm-6 ">
+                                        <div class="row">
+                                            <label class="col-md-12 col-sm-12">Past History</label>
+                                            <textarea rows="5" type="text" class="form-control col-sm-7 col-md-7" name="summary3" [(ngModel)]="form.summary3"  #summary3="ngModel"></textarea>
+                                            <a (click)="openModel_PastHistory(Model_PastHistory)" class="col-md-4 col-sm-4">Select Past History >></a>
+                                            <br>
+                                        </div>
+                                    </div>
+                                    <div class="card card-body col-md-6 col-sm-6 ">
+                                        <div class="row">
+                                            <label class="col-md-12 col-sm-12">Family History</label>
+                                            <textarea rows="5" type="text" class="form-control col-sm-7 col-md-7" name="summary4" [(ngModel)]="form.summary4"  #summary4="ngModel"></textarea>
+                                            <a (click)="openModel_FamilyHistory(Model_FamilyHistory)" class="col-md-4 col-sm-4">Select Family History >></a>
+                                            <br>
+                                        </div>
+                                    </div>
+                                    <div class="card card-body col-md-6 col-sm-6 ">
+                                        <div class="row">
+                                            <label class="col-md-12 col-sm-12">Radiological Finding</label>
+                                            <textarea rows="5" type="text" class="form-control col-sm-7 col-md-7" name="summary5" [(ngModel)]="form.summary5"  #summary5="ngModel"></textarea>
+                                            <a (click)="openModel_RadiologicalFinding(Model_RadiologicalFinding)" class="col-md-4 col-sm-4">Select Radiological Finding >></a>
+                                            <br>
+                                        </div>
+                                    </div>
+                                    <div class="card card-body col-md-6 col-sm-6 ">
+                                        <div class="row">
+                                            <label class="col-md-12 col-sm-12">ECHO</label>
+                                            <textarea rows="5" type="text" class="form-control col-sm-7 col-md-7" name="summary6" [(ngModel)]="form.summary6"  #summary6="ngModel"></textarea>
+                                            <a (click)="openModel_ECHO(Model_ECHO)" class="col-md-4 col-sm-4">Select ECHO >></a>
+                                            <br>
+                                        </div>
+                                    </div>
+                                    <div class="card card-body col-md-6 col-sm-6 ">
+                                        <div class="row">
+                                            <label class="col-md-12 col-sm-12">Cath Lab</label>
+                                            <textarea rows="5" type="text" class="form-control col-sm-7 col-md-7" name="summary7" [(ngModel)]="form.summary7"  #summary7="ngModel"></textarea>
+                                            <a (click)="openModel_CathLab(Model_CathLab)" class="col-md-4 col-sm-4">Select Cath Lab >></a>
+                                            <br>
+                                        </div>
+                                    </div>
+                                    <div class="card card-body col-md-6 col-sm-6 ">
+                                        <div class="row">
+                                            <label class="col-md-12 col-sm-12">Surgical Procedure</label>
+                                            <textarea rows="5" type="text" class="form-control col-sm-7 col-md-7" name="summary8" [(ngModel)]="form.summary8"  #summary8="ngModel"></textarea>
+                                            <a (click)="openModel_SurgicalProcedure(Model_SurgicalProcedure)" class="col-md-4 col-sm-4">Select Surgical Procedure >></a>
+                                            <br>
+                                        </div>
+                                    </div>
+                                    <div class="card card-body col-md-6 col-sm-6 ">
+                                        <div class="row">
+                                            <label class="col-md-12 col-sm-12">Treatment Given</label>
+                                            <textarea rows="5" type="text" class="form-control col-sm-7 col-md-7" name="summary9" [(ngModel)]="form.summary9"  #summary9="ngModel"></textarea>
+                                            <a (click)="openModel_TreatmentGiven(Model_TreatmentGiven)" class="col-md-4 col-sm-4">Select Treatment Given >></a>
+                                            <br>
+                                        </div>
+                                    </div>
+                                    <div class="card card-body col-md-6 col-sm-6 ">
+                                        <div class="row">
+                                            <label class="col-md-12 col-sm-12">Treatment Advised</label>
+                                            <textarea rows="5" type="text" class="form-control col-sm-7 col-md-7" name="summary10" [(ngModel)]="form.summary10"  #summary10="ngModel"></textarea>
+                                            <a (click)="openModel_TreatmentAdvised(Model_TreatmentAdvised)" class="col-md-4 col-sm-4">Select TreaTreatment Advised >></a>
+                                            <br>
+                                        </div>
+                                    </div>
+                                    <div class="card card-body col-md-6 col-sm-6 ">
+                                        <div class="row">
+                                            <label class="col-md-12 col-sm-12">Advice On Discharge</label>
+                                            <textarea rows="5" type="text" class="form-control col-sm-7 col-md-7" name="summary11" [(ngModel)]="form.summary11"  #summary11="ngModel"></textarea>
+                                            <a (click)="openModel_AdviceOnDischarge(Model_AdviceOnDischarge)" class="col-md-4 col-sm-4">Select Advice On Discharge >></a>
+                                            <br>
+                                        </div>
+                                    </div>
+                                    <div class="card card-body col-md-6 col-sm-6 ">
+                                        <div class="row">
+                                            <label class="col-md-12 col-sm-12">Follow Up</label>
+                                            <textarea rows="5" type="text" class="form-control col-sm-7 col-md-7" name="summary12" [(ngModel)]="form.summary12"  #summary12="ngModel"></textarea>
+                                            <a (click)="openModel_FollowUp(Model_FollowUp)" class="col-md-4 col-sm-4">Select Follow Up >></a>
+                                            <br>
+                                        </div>
+                                    </div>
+                                    <div class="card card-body col-md-6 col-sm-6 ">
+                                        <div class="row">
+                                            <label class="col-md-12 col-sm-12">Lab Investigation</label>
+                                            <textarea rows="5" type="text" class="form-control col-sm-7 col-md-7" name="summary13" [(ngModel)]="form.summary13"  #summary13="ngModel"></textarea>
+                                            <a (click)="openModel_LabInvestigation(Model_LabInvestigation)" class="col-md-4 col-sm-4">Select Lab Investigation >></a>
+                                            <br>
+                                        </div>
+                                    </div>
+                                    <div class="card card-body col-md-6 col-sm-6 ">
+                                        <div class="row">
+                                            <label class="col-md-12 col-sm-12">Other Details</label>
+                                            <textarea rows="5" type="text" class="form-control col-sm-7 col-md-7" name="summary14" [(ngModel)]="form.summary14"  #summary14="ngModel"></textarea>
+                                            <a (click)="openModel_OtherDetails(Model_OtherDetails)" class="col-md-4 col-sm-4">Select Other Details >></a>
+                                            <br>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class=" col-md-6 col-sm-6"></div>
+
+                        <div class=" col-md-6 col-sm-6">
+                            <div class="card card-body ">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 ">
+                                        <div class="row">
+                                            <label class="col-md-12 col-sm-12">Footer</label>
+                                            <textarea rows="2" type="text" class="form-control col-sm-12 col-md-12" name="footer" [(ngModel)]="form.footer" #footer="ngModel"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group col-md-12 col-sm-12 text-center">
+                            <button type="button" class="btn btn-info mt-1" (click)="onNew()">New <i class="fas fa-sync-alt"></i></button>&nbsp;
+                            <button type="button" class="btn btn-danger mt-1" (click)="getPdf(this.form.id)">Print <i class="fa fa-download"></i></button> &nbsp;
+                            <button type="submit" class="btn btn-success mt-1">&nbsp; Save &nbsp;</button>&nbsp;
+                        </div>
+
+
+                    </div>
+                </form>
+
+
+
+
+
+                <div class="form-group col-md-12 col-sm-12">
+                    <div class="row">
+                        <div class="form-group col-md-1 col-sm-1"> <button type="button" class="btn btn-info mt-1" (click)="onTable(0)">Today</button> </div> 
+                        <div class="form-group col-md-1 col-sm-1"> <button type="button" class="btn btn-info mt-1" (click)="onTable(1)">Show All</button> </div> 
+                        <div class="form-group col-md-3 col-sm-3">
+                            <div class="input-group mt-1">
+                                <input type="date" class="form-control"  name="getByDate" [(ngModel)]="form.getByDate" #getByDate="ngModel" >
+                                <span class="input-group-append">
+                                  <button type="button" class="btn btn-info" (click)="onTable(2)">Get</button>
+                                </span>
+                              </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table id="customTable" *ngIf="showContent" datatable class="table  table-bordered" cellspacing="0" width="100%">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Edit</th>
+                                        <th>Print</th>
+                                        <th>Name</th>
+                                        <th>UHID</th>
+                                        <th>IPD No</th>
+                                        <th>Age</th>
+                                        <th>Sex</th>
+                                        <th>Admission Date</th>
+                                        <th>Admission Time</th>
+                                        <th>Procedure Date</th>
+                                        <th>Case Type</th>
+                                        <th>Discharge Type</th>
+                                        <th>Discharge Date</th>
+                                        <th>Discharge Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody style="color: black;">
+                                    <tr *ngFor="let item of table_data">
+                                        <td>
+                                            <span class="float-right">
+                                                <button *ngIf="isedit_action" id="edit" type="button" (click)="onEdit(item)" class="btn btn-warning"><i class="fas fa-edit"></i></button> &nbsp;
+                                                <button *ngIf="isdelete_action" id="delete" type="button" (click)="onDelete(item.id)" class="btn btn-danger" ><i class="fa fa-trash"></i></button>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <button id="" type="button" (click)="getPdf(item.id)" class="btn btn-danger"><i class="fas fa-print"></i>
+                                            </button>&nbsp;
+                                        </td>
+                                        <td>{{item.name}}</td>
+                                        <td>{{item.uhid}}</td>
+                                        <td>{{item.ipdno}}</td>
+                                        <td>{{item.age}}</td>
+                                        <td>{{item.sex}}</td>
+                                        <td>{{item.admissionDate}}</td>
+                                        <td>{{item.admissionTime}}</td>
+                                        <td>{{item.procedureDate}}</td>
+                                        <td>{{item.caseType}}</td>
+                                        <td>{{item.dischargeType}}</td>
+                                        <td>{{item.dischargeDate}}</td>
+                                        <td>{{item.dischargeTime}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+<!-- ******************************************************************** -->
+<!-- Model_Diagnosis Start -->
+<!-- ******************************************************************** -->
+<ng-template #Model_Diagnosis let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title">Select Details</h5>
+        <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+        <!-- List 1 -->
+            <div class=" col-md-6 col-sm-6">
+                <div class="row" style="height: 400px;">
+                    <!-- Search Input -->
+                    <div class="col-md-12" >
+                        <input type="text" class="form-control" id="Diagnosis1_Input" (keyup)="filterDiagnosis1()" placeholder="Search for names..">
+                    </div>
+                    <!-- Select List -->
+                    <div class="col-md-12 direct-chat-messages" >
+                            <ul id="Diagnosis1_UL">
+                                <li *ngFor="let item of Diagnosis1">
+                                    <input type="checkbox" name="testItem" [value]="item.chapter"  class="form-check-input" (change)="addToDiagnosis2($event,item)" [ngModelOptions]="{standalone: true}">
+                                    <label class="form-check-label">{{item.groupName}}</label>
+                                </li>
+                            </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- List 2 -->
+            <div class=" col-md-6 col-sm-6">
+                <div class="row" style="height: 400px;">
+                    <!-- Search Input -->
+                    <div class="col-md-12" >
+                        <input type="text" class="form-control" id="Diagnosis2_Input" (keyup)="filterDiagnosis2()" placeholder="Search for names..">
+                    </div>
+                    <!-- Select List -->
+                    <div class="col-md-12 direct-chat-messages" >
+                            <ul id="Diagnosis2_UL">
+                                <li *ngFor="let item of Diagnosis2">
+                                    <input type="checkbox" name="testItem" [value]="item.id"  class="form-check-input" (change)="addToDiagnosisSummary($event,item)" [ngModelOptions]="{standalone: true}">
+                                    <label class="form-check-label">{{item.diagnosis}}</label>
+                                </li>
+                            </ul>
+                    </div>
+                </div>
+            </div>
+        <div class=" col-md-12 col-sm-12">
+            <textarea rows="4" type="text" class="form-control" name="diagnosisSummary" [(ngModel)]="form.diagnosisSummary"  #diagnosisSummary="ngModel"></textarea>
+        </div>
+        <div class=" col-md-12 col-sm-12">
+            <button type="button" class="btn btn-secondary mt-1" (click)="modal.dismiss()"><b>&nbsp; Close &nbsp;</b></button>&nbsp;
+            <button type="button" class="btn btn-success mt-1" (click)="addToSummary1(Model_Diagnosis)"><b>&nbsp; Add Details &nbsp;</b></button>
+        </div>
+        </div>
+    </div>
+</ng-template>
+<!-- ******************************************************************** -->
+<!-- Model_Diagnosis End -->
+<!-- ******************************************************************** -->
+
+
+<!-- ******************************************************************** -->
+<!-- Model_Clinical Start -->
+<!-- ******************************************************************** -->
+<ng-template #Model_Clinical let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title">Select Details</h5>
+        <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class=" col-md-6 col-sm-6">
+                <div class="row" style="height: 400px;">
+                    <div class="col-md-12" >
+                        <input type="text" class="form-control" id="Clinical_Input" (keyup)="filterClinical()" placeholder="Search for names..">
+                    </div>
+                    <div class="col-md-12 direct-chat-messages" >
+                            <ul id="Clinical_UL">
+                                <li *ngFor="let item of Clinical">
+                                    <input type="checkbox" name="testItem" [value]="item.template"  class="form-check-input" (change)="addToClinicalSummary($event,item)" [ngModelOptions]="{standalone: true}">
+                                    <label class="form-check-label">{{item.template}}</label>
+                                </li>
+                            </ul>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-md-6 col-sm-6">
+                <div class="row" style="height: 400px;">
+                    <div class="col-md-12">
+                        <textarea rows="10" type="text" class="form-control" name="clinicalSummary" [(ngModel)]="form.clinicalSummary"  #clinicalSummary="ngModel"></textarea>
+                    </div>
+                </div>
+            </div>
+        <div class=" col-md-12 col-sm-12">
+            <button type="button" class="btn btn-secondary mt-1" (click)="modal.dismiss()"><b>&nbsp; Close &nbsp;</b></button>&nbsp;
+            <button type="button" class="btn btn-success mt-1" (click)="addToSummary2(Model_Clinical)"><b>&nbsp; Add Details &nbsp;</b></button>
+        </div>
+        </div>
+    </div>
+</ng-template>
+<!-- ******************************************************************** -->
+<!-- Model_Clinical End -->
+<!-- ******************************************************************** -->
+
+
+<!-- ******************************************************************** -->
+<!-- Model_PastHistory Start -->
+<!-- ******************************************************************** -->
+<ng-template #Model_PastHistory let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title">Select Details</h5>
+        <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class=" col-md-6 col-sm-6">
+                <div class="row" style="height: 400px;">
+                    <div class="col-md-12" >
+                        <input type="text" class="form-control" id="PastHistory_Input" (keyup)="filterPastHistory()" placeholder="Search for names..">
+                    </div>
+                    <div class="col-md-12 direct-chat-messages" >
+                            <ul id="PastHistory_UL">
+                                <li *ngFor="let item of PastHistory">
+                                    <input type="checkbox" name="testItem" [value]="item.template"  class="form-check-input" (change)="addToPastHistorySummary($event,item)" [ngModelOptions]="{standalone: true}">
+                                    <label class="form-check-label">{{item.template}}</label>
+                                </li>
+                            </ul>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-md-6 col-sm-6">
+                <div class="row" style="height: 400px;">
+                    <div class="col-md-12">
+                        <textarea rows="10" type="text" class="form-control" name="PastHistorySummary" [(ngModel)]="form.PastHistorySummary"  #PastHistorySummary="ngModel"></textarea>
+                    </div>
+                </div>
+            </div>
+        <div class=" col-md-12 col-sm-12">
+            <button type="button" class="btn btn-secondary mt-1" (click)="modal.dismiss()"><b>&nbsp; Close &nbsp;</b></button>&nbsp;
+            <button type="button" class="btn btn-success mt-1" (click)="addTosummary3(Model_PastHistory)"><b>&nbsp; Add Details &nbsp;</b></button>
+        </div>
+        </div>
+    </div>
+</ng-template>
+<!-- ******************************************************************** -->
+<!-- Model_PastHistory End -->
+<!-- ******************************************************************** -->
+
+
+<!-- ******************************************************************** -->
+<!-- Model_FamilyHistory Start -->
+<!-- ******************************************************************** -->
+<ng-template #Model_FamilyHistory let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title">Select Details</h5>
+        <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class=" col-md-6 col-sm-6">
+                <div class="row" style="height: 400px;">
+                    <div class="col-md-12" >
+                        <input type="text" class="form-control" id="FamilyHistory_Input" (keyup)="filterFamilyHistory()" placeholder="Search for names..">
+                    </div>
+                    <div class="col-md-12 direct-chat-messages" >
+                            <ul id="FamilyHistory_UL">
+                                <li *ngFor="let item of FamilyHistory">
+                                    <input type="checkbox" name="testItem" [value]="item.template"  class="form-check-input" (change)="addToFamilyHistorySummary($event,item)" [ngModelOptions]="{standalone: true}">
+                                    <label class="form-check-label">{{item.template}}</label>
+                                </li>
+                            </ul>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-md-6 col-sm-6">
+                <div class="row" style="height: 400px;">
+                    <div class="col-md-12">
+                        <textarea rows="10" type="text" class="form-control" name="FamilyHistorySummary" [(ngModel)]="form.FamilyHistorySummary"  #FamilyHistorySummary="ngModel"></textarea>
+                    </div>
+                </div>
+            </div>
+        <div class=" col-md-12 col-sm-12">
+            <button type="button" class="btn btn-secondary mt-1" (click)="modal.dismiss()"><b>&nbsp; Close &nbsp;</b></button>&nbsp;
+            <button type="button" class="btn btn-success mt-1" (click)="addTosummary4(Model_FamilyHistory)"><b>&nbsp; Add Details &nbsp;</b></button>
+        </div>
+        </div>
+    </div>
+</ng-template>
+<!-- ******************************************************************** -->
+<!-- Model_FamilyHistory End -->
+<!-- ******************************************************************** -->
+
+
+<!-- ******************************************************************** -->
+<!-- Model_RadiologicalFinding Start -->
+<!-- ******************************************************************** -->
+<ng-template #Model_RadiologicalFinding let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title">Select Details</h5>
+        <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class=" col-md-6 col-sm-6">
+                <div class="row" style="height: 400px;">
+                    <div class="col-md-12" >
+                        <input type="text" class="form-control" id="RadiologicalFinding_Input" (keyup)="filterRadiologicalFinding()" placeholder="Search for names..">
+                    </div>
+                    <div class="col-md-12 direct-chat-messages" >
+                            <ul id="RadiologicalFinding_UL">
+                                <li *ngFor="let item of RadiologicalFinding">
+                                    <input type="checkbox" name="testItem" [value]="item.template"  class="form-check-input" (change)="addToRadiologicalFindingSummary($event,item)" [ngModelOptions]="{standalone: true}">
+                                    <label class="form-check-label">{{item.template}}</label>
+                                </li>
+                            </ul>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-md-6 col-sm-6">
+                <div class="row" style="height: 400px;">
+                    <div class="col-md-12">
+                        <textarea rows="10" type="text" class="form-control" name="RadiologicalFindingSummary" [(ngModel)]="form.RadiologicalFindingSummary"  #RadiologicalFindingSummary="ngModel"></textarea>
+                    </div>
+                </div>
+            </div>
+        <div class=" col-md-12 col-sm-12">
+            <button type="button" class="btn btn-secondary mt-1" (click)="modal.dismiss()"><b>&nbsp; Close &nbsp;</b></button>&nbsp;
+            <button type="button" class="btn btn-success mt-1" (click)="addTosummary5(Model_RadiologicalFinding)"><b>&nbsp; Add Details &nbsp;</b></button>
+        </div>
+        </div>
+    </div>
+</ng-template>
+<!-- ******************************************************************** -->
+<!-- Model_RadiologicalFinding End -->
+<!-- ******************************************************************** -->
+
+
+<!-- ******************************************************************** -->
+<!-- Model_ECHO Start -->
+<!-- ******************************************************************** -->
+<ng-template #Model_ECHO let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title">Select Details</h5>
+        <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class=" col-md-6 col-sm-6">
+                <div class="row" style="height: 400px;">
+                    <div class="col-md-12" >
+                        <input type="text" class="form-control" id="ECHO_Input" (keyup)="filterECHO()" placeholder="Search for names..">
+                    </div>
+                    <div class="col-md-12 direct-chat-messages" >
+                            <ul id="ECHO_UL">
+                                <li *ngFor="let item of ECHO">
+                                    <input type="checkbox" name="testItem" [value]="item.template"  class="form-check-input" (change)="addToECHOSummary($event,item)" [ngModelOptions]="{standalone: true}">
+                                    <label class="form-check-label">{{item.template}}</label>
+                                </li>
+                            </ul>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-md-6 col-sm-6">
+                <div class="row" style="height: 400px;">
+                    <div class="col-md-12">
+                        <textarea rows="10" type="text" class="form-control" name="ECHOSummary" [(ngModel)]="form.ECHOSummary"  #ECHOSummary="ngModel"></textarea>
+                    </div>
+                </div>
+            </div>
+        <div class=" col-md-12 col-sm-12">
+            <button type="button" class="btn btn-secondary mt-1" (click)="modal.dismiss()"><b>&nbsp; Close &nbsp;</b></button>&nbsp;
+            <button type="button" class="btn btn-success mt-1" (click)="addTosummary6(Model_ECHO)"><b>&nbsp; Add Details &nbsp;</b></button>
+        </div>
+        </div>
+    </div>
+</ng-template>
+<!-- ******************************************************************** -->
+<!-- Model_ECHO End -->
+<!-- ******************************************************************** -->
+
+
+
+<!-- ******************************************************************** -->
+<!-- Model_CathLab Start -->
+<!-- ******************************************************************** -->
+<ng-template #Model_CathLab let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title">Select Details</h5>
+        <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class=" col-md-6 col-sm-6">
+                <div class="row" style="height: 400px;">
+                    <div class="col-md-12" >
+                        <input type="text" class="form-control" id="CathLab_Input" (keyup)="filterCathLab()" placeholder="Search for names..">
+                    </div>
+                    <div class="col-md-12 direct-chat-messages" >
+                            <ul id="CathLab_UL">
+                                <li *ngFor="let item of CathLab">
+                                    <input type="checkbox" name="testItem" [value]="item.template"  class="form-check-input" (change)="addToCathLabSummary($event,item)" [ngModelOptions]="{standalone: true}">
+                                    <label class="form-check-label">{{item.template}}</label>
+                                </li>
+                            </ul>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-md-6 col-sm-6">
+                <div class="row" style="height: 400px;">
+                    <div class="col-md-12">
+                        <textarea rows="10" type="text" class="form-control" name="CathLabSummary" [(ngModel)]="form.CathLabSummary"  #CathLabSummary="ngModel"></textarea>
+                    </div>
+                </div>
+            </div>
+        <div class=" col-md-12 col-sm-12">
+            <button type="button" class="btn btn-secondary mt-1" (click)="modal.dismiss()"><b>&nbsp; Close &nbsp;</b></button>&nbsp;
+            <button type="button" class="btn btn-success mt-1" (click)="addTosummary7(Model_CathLab)"><b>&nbsp; Add Details &nbsp;</b></button>
+        </div>
+        </div>
+    </div>
+</ng-template>
+<!-- ******************************************************************** -->
+<!-- Model_CathLab End -->
+<!-- ******************************************************************** -->
+
+
+
+<!-- ******************************************************************** -->
+<!-- Model_SurgicalProcedure Start -->
+<!-- ******************************************************************** -->
+<ng-template #Model_SurgicalProcedure let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title">Select Details</h5>
+        <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class=" col-md-6 col-sm-6">
+                <div class="row" style="height: 400px;">
+                    <div class="col-md-12" >
+                        <input type="text" class="form-control" id="SurgicalProcedure_Input" (keyup)="filterSurgicalProcedure()" placeholder="Search for names..">
+                    </div>
+                    <div class="col-md-12 direct-chat-messages" >
+                            <ul id="SurgicalProcedure_UL">
+                                <li *ngFor="let item of SurgicalProcedure">
+                                    <input type="checkbox" name="testItem" [value]="item.template"  class="form-check-input" (change)="addToSurgicalProcedureSummary($event,item)" [ngModelOptions]="{standalone: true}">
+                                    <label class="form-check-label">{{item.template}}</label>
+                                </li>
+                            </ul>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-md-6 col-sm-6">
+                <div class="row" style="height: 400px;">
+                    <div class="col-md-12">
+                        <textarea rows="10" type="text" class="form-control" name="SurgicalProcedureSummary" [(ngModel)]="form.SurgicalProcedureSummary"  #SurgicalProcedureSummary="ngModel"></textarea>
+                    </div>
+                </div>
+            </div>
+        <div class=" col-md-12 col-sm-12">
+            <button type="button" class="btn btn-secondary mt-1" (click)="modal.dismiss()"><b>&nbsp; Close &nbsp;</b></button>&nbsp;
+            <button type="button" class="btn btn-success mt-1" (click)="addTosummary8(Model_SurgicalProcedure)"><b>&nbsp; Add Details &nbsp;</b></button>
+        </div>
+        </div>
+    </div>
+</ng-template>
+<!-- ******************************************************************** -->
+<!-- Model_SurgicalProcedure End -->
+<!-- ******************************************************************** -->
+
+
+<!-- ******************************************************************** -->
+<!-- Model_TreatmentGiven Start -->
+<!-- ******************************************************************** -->
+<ng-template #Model_TreatmentGiven let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title">Select Details</h5>
+        <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class=" col-md-6 col-sm-6">
+                <div class="row" style="height: 400px;">
+                    <div class="col-md-12" >
+                        <input type="text" class="form-control" id="TreatmentGiven_Input" (keyup)="filterTreatmentGiven()" placeholder="Search for names..">
+                    </div>
+                    <div class="col-md-12 direct-chat-messages" >
+                            <ul id="TreatmentGiven_UL">
+                                <li *ngFor="let item of TreatmentGiven">
+                                    <input type="checkbox" name="testItem" [value]="item.template"  class="form-check-input" (change)="addToTreatmentGivenSummary($event,item)" [ngModelOptions]="{standalone: true}">
+                                    <label class="form-check-label">{{item.template}}</label>
+                                </li>
+                            </ul>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-md-6 col-sm-6">
+                <div class="row" style="height: 400px;">
+                    <div class="col-md-12">
+                        <textarea rows="10" type="text" class="form-control" name="TreatmentGivenSummary" [(ngModel)]="form.TreatmentGivenSummary"  #TreatmentGivenSummary="ngModel"></textarea>
+                    </div>
+                </div>
+            </div>
+        <div class=" col-md-12 col-sm-12">
+            <button type="button" class="btn btn-secondary mt-1" (click)="modal.dismiss()"><b>&nbsp; Close &nbsp;</b></button>&nbsp;
+            <button type="button" class="btn btn-success mt-1" (click)="addTosummary9(Model_TreatmentGiven)"><b>&nbsp; Add Details &nbsp;</b></button>
+        </div>
+        </div>
+    </div>
+</ng-template>
+<!-- ******************************************************************** -->
+<!-- Model_TreatmentGiven End -->
+<!-- ******************************************************************** -->
+
+
+<!-- ******************************************************************** -->
+<!-- Model_TreatmentAdvised Start -->
+<!-- ******************************************************************** -->
+<ng-template #Model_TreatmentAdvised let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title">Select Details</h5>
+        <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class=" col-md-6 col-sm-6">
+                <div class="row" style="height: 400px;">
+                    <div class="col-md-12" >
+                        <input type="text" class="form-control" id="TreatmentAdvised_Input" (keyup)="filterTreatmentAdvised()" placeholder="Search for names..">
+                    </div>
+                    <div class="col-md-12 direct-chat-messages" >
+                            <ul id="TreatmentAdvised_UL">
+                                <li *ngFor="let item of TreatmentAdvised">
+                                    <input type="checkbox" name="testItem" [value]="item.template"  class="form-check-input" (change)="addToTreatmentAdvisedSummary($event,item)" [ngModelOptions]="{standalone: true}">
+                                    <label class="form-check-label">{{item.template}}</label>
+                                </li>
+                            </ul>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-md-6 col-sm-6">
+                <div class="row" style="height: 400px;">
+                    <div class="col-md-12">
+                        <textarea rows="10" type="text" class="form-control" name="TreatmentAdvisedSummary" [(ngModel)]="form.TreatmentAdvisedSummary"  #TreatmentAdvisedSummary="ngModel"></textarea>
+                    </div>
+                </div>
+            </div>
+        <div class=" col-md-12 col-sm-12">
+            <button type="button" class="btn btn-secondary mt-1" (click)="modal.dismiss()"><b>&nbsp; Close &nbsp;</b></button>&nbsp;
+            <button type="button" class="btn btn-success mt-1" (click)="addTosummary10(Model_TreatmentAdvised)"><b>&nbsp; Add Details &nbsp;</b></button>
+        </div>
+        </div>
+    </div>
+</ng-template>
+<!-- ******************************************************************** -->
+<!-- Model_TreatmentAdvised End -->
+<!-- ******************************************************************** -->
+
+<!-- ******************************************************************** -->
+<!-- Model_AdviceOnDischarge Start -->
+<!-- ******************************************************************** -->
+<ng-template #Model_AdviceOnDischarge let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title">Select Details</h5>
+        <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class=" col-md-6 col-sm-6">
+                <div class="row" style="height: 400px;">
+                    <div class="col-md-12" >
+                        <input type="text" class="form-control" id="AdviceOnDischarge_Input" (keyup)="filterAdviceOnDischarge()" placeholder="Search for names..">
+                    </div>
+                    <div class="col-md-12 direct-chat-messages" >
+                            <ul id="AdviceOnDischarge_UL">
+                                <li *ngFor="let item of AdviceOnDischarge">
+                                    <input type="checkbox" name="testItem" [value]="item.template"  class="form-check-input" (change)="addToAdviceOnDischargeSummary($event,item)" [ngModelOptions]="{standalone: true}">
+                                    <label class="form-check-label">{{item.template}}</label>
+                                </li>
+                            </ul>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-md-6 col-sm-6">
+                <div class="row" style="height: 400px;">
+                    <div class="col-md-12">
+                        <textarea rows="10" type="text" class="form-control" name="AdviceOnDischargeSummary" [(ngModel)]="form.AdviceOnDischargeSummary"  #AdviceOnDischargeSummary="ngModel"></textarea>
+                    </div>
+                </div>
+            </div>
+        <div class=" col-md-12 col-sm-12">
+            <button type="button" class="btn btn-secondary mt-1" (click)="modal.dismiss()"><b>&nbsp; Close &nbsp;</b></button>&nbsp;
+            <button type="button" class="btn btn-success mt-1" (click)="addTosummary11(Model_AdviceOnDischarge)"><b>&nbsp; Add Details &nbsp;</b></button>
+        </div>
+        </div>
+    </div>
+</ng-template>
+<!-- ******************************************************************** -->
+<!-- Model_AdviceOnDischarge End -->
+<!-- ******************************************************************** -->
+
+
+<!-- ******************************************************************** -->
+<!-- Model_FollowUp Start -->
+<!-- ******************************************************************** -->
+<ng-template #Model_FollowUp let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title">Select Details</h5>
+        <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class=" col-md-6 col-sm-6">
+                <div class="row" style="height: 400px;">
+                    <div class="col-md-12" >
+                        <input type="text" class="form-control" id="FollowUp_Input" (keyup)="filterFollowUp()" placeholder="Search for names..">
+                    </div>
+                    <div class="col-md-12 direct-chat-messages" >
+                            <ul id="FollowUp_UL">
+                                <li *ngFor="let item of FollowUp">
+                                    <input type="checkbox" name="testItem" [value]="item.template"  class="form-check-input" (change)="addToFollowUpSummary($event,item)" [ngModelOptions]="{standalone: true}">
+                                    <label class="form-check-label">{{item.template}}</label>
+                                </li>
+                            </ul>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-md-6 col-sm-6">
+                <div class="row" style="height: 400px;">
+                    <div class="col-md-12">
+                        <textarea rows="10" type="text" class="form-control" name="FollowUpSummary" [(ngModel)]="form.FollowUpSummary"  #FollowUpSummary="ngModel"></textarea>
+                    </div>
+                </div>
+            </div>
+        <div class=" col-md-12 col-sm-12">
+            <button type="button" class="btn btn-secondary mt-1" (click)="modal.dismiss()"><b>&nbsp; Close &nbsp;</b></button>&nbsp;
+            <button type="button" class="btn btn-success mt-1" (click)="addTosummary12(Model_FollowUp)"><b>&nbsp; Add Details &nbsp;</b></button>
+        </div>
+        </div>
+    </div>
+</ng-template>
+<!-- ******************************************************************** -->
+<!-- Model_FollowUp End -->
+<!-- ******************************************************************** -->
+
+
+<!-- ******************************************************************** -->
+<!-- Model_LabInvestigation Start -->
+<!-- ******************************************************************** -->
+<ng-template #Model_LabInvestigation let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title">Select Details</h5>
+        <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class=" col-md-6 col-sm-6">
+                <div class="row" style="height: 400px;">
+                    <div class="col-md-12" >
+                        <input type="text" class="form-control" id="LabInvestigation_Input" (keyup)="filterLabInvestigation()" placeholder="Search for names..">
+                    </div>
+                    <div class="col-md-12 direct-chat-messages" >
+                            <ul id="LabInvestigation_UL">
+                                <li *ngFor="let item of LabInvestigation">
+                                    <input type="checkbox" name="testItem" [value]="item.template"  class="form-check-input" (change)="addToLabInvestigationSummary($event,item)" [ngModelOptions]="{standalone: true}">
+                                    <label class="form-check-label">{{item.template}}</label>
+                                </li>
+                            </ul>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-md-6 col-sm-6">
+                <div class="row" style="height: 400px;">
+                    <div class="col-md-12">
+                        <textarea rows="10" type="text" class="form-control" name="LabInvestigationSummary" [(ngModel)]="form.LabInvestigationSummary"  #LabInvestigationSummary="ngModel"></textarea>
+                    </div>
+                </div>
+            </div>
+        <div class=" col-md-12 col-sm-12">
+            <button type="button" class="btn btn-secondary mt-1" (click)="modal.dismiss()"><b>&nbsp; Close &nbsp;</b></button>&nbsp;
+            <button type="button" class="btn btn-success mt-1" (click)="addTosummary13(Model_LabInvestigation)"><b>&nbsp; Add Details &nbsp;</b></button>
+        </div>
+        </div>
+    </div>
+</ng-template>
+<!-- ******************************************************************** -->
+<!-- Model_LabInvestigation End -->
+<!-- ******************************************************************** -->
+
+<!-- ******************************************************************** -->
+<!-- Model_OtherDetails Start -->
+<!-- ******************************************************************** -->
+<ng-template #Model_OtherDetails let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title">Select Details</h5>
+        <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class=" col-md-6 col-sm-6">
+                <div class="row" style="height: 400px;">
+                    <div class="col-md-12" >
+                        <input type="text" class="form-control" id="OtherDetails_Input" (keyup)="filterOtherDetails()" placeholder="Search for names..">
+                    </div>
+                    <div class="col-md-12 direct-chat-messages" >
+                            <ul id="OtherDetails_UL">
+                                <li *ngFor="let item of OtherDetails">
+                                    <input type="checkbox" name="testItem" [value]="item.template"  class="form-check-input" (change)="addToOtherDetailsSummary($event,item)" [ngModelOptions]="{standalone: true}">
+                                    <label class="form-check-label">{{item.template}}</label>
+                                </li>
+                            </ul>
+                    </div>
+                </div>
+            </div>
+            <div class=" col-md-6 col-sm-6">
+                <div class="row" style="height: 400px;">
+                    <div class="col-md-12">
+                        <textarea rows="10" type="text" class="form-control" name="OtherDetailsSummary" [(ngModel)]="form.OtherDetailsSummary"  #OtherDetailsSummary="ngModel"></textarea>
+                    </div>
+                </div>
+            </div>
+        <div class=" col-md-12 col-sm-12">
+            <button type="button" class="btn btn-secondary mt-1" (click)="modal.dismiss()"><b>&nbsp; Close &nbsp;</b></button>&nbsp;
+            <button type="button" class="btn btn-success mt-1" (click)="addTosummary14(Model_OtherDetails)"><b>&nbsp; Add Details &nbsp;</b></button>
+        </div>
+        </div>
+    </div>
+</ng-template>
+<!-- ******************************************************************** -->
+<!-- Model_OtherDetails End -->
+<!-- ******************************************************************** -->
+
+
+
+
+
+
+
+
+</div>

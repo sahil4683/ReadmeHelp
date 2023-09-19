@@ -1,0 +1,127 @@
+<div class="row justify-content-center mt-4">
+  <div style="width: 50%;" class="card card-outline card-danger">
+      <div class="card-header text-center">
+          <b style="font-size: 18px;"> External Lab Test Master </b>
+      </div>
+      <div class="card-body ">
+          <form name="form" (ngSubmit)="f.form.valid && onSave()" #f="ngForm" novalidate>
+              <input type="hidden" name="id" [(ngModel)]="form.id" #id="ngModel">
+              <h2 *ngIf="isEdit" style="color: orangered;"><b>Edit Mode</b></h2>
+              <div class="row">
+                  <div class="col-md-12 col-sm-12">
+                      <div class="card card-body ">
+                          <div class="form-group row">
+
+                              <div class="form-group col-md-6 col-6 col-sm-6">
+                                <label>Group Name</label>
+                                <ng-select [(ngModel)]="form.groupName" name="groupName" #groupName="ngModel" required [ngModelOptions]="{standalone: true}" [dropdownPosition]="'down'" [virtualScroll]="true" placeholder="Type to search">
+                                    <ng-option *ngFor="let o of groupNameList" value="{{o.id}}">
+                                        {{o.groupName}}
+                                    </ng-option>
+                                </ng-select>
+                                <div class="text-danger" role="alert" *ngIf="f.submitted && groupName.invalid">
+                                    Required Field !
+                                </div>
+                              </div>
+                              <div class="form-group col-md-6 col-6 col-sm-6">
+                                <label for="name">Test Name</label>
+                                <!-- <input required type="text" class="form-control" name="" [(ngModel)]="form.testName" #testName="ngModel" /> -->
+                                <ng-select [(ngModel)]="form.testName" name="testName" #testName="ngModel" required [ngModelOptions]="{standalone: true}" [dropdownPosition]="'down'" [virtualScroll]="true" placeholder="Type to search">
+                                    <ng-option *ngFor="let o of testNameList" value="{{o.id}}">
+                                        {{o.testName}}
+                                    </ng-option>
+                                </ng-select>
+                                <div class="text-danger" role="alert" *ngIf="f.submitted && testName.invalid">
+                                    Required Field !
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6 col-6 col-sm-6">
+                              <label for="name">Lab Name</label>
+                              <!-- <input required type="text" class="form-control" name="" [(ngModel)]="form.labName" #labName="ngModel" /> -->
+                              <ng-select [(ngModel)]="form.labName" name="labName" #labName="ngModel" required [ngModelOptions]="{standalone: true}" [dropdownPosition]="'down'" [virtualScroll]="true" placeholder="Type to search">
+                                <ng-option *ngFor="let o of labNameList" value="{{o.id}}">
+                                    {{o.labName}}
+                                </ng-option>
+                            </ng-select>
+                              <div class="text-danger" role="alert" *ngIf="f.submitted && labName.invalid">
+                                  Required Field !
+                              </div>
+                          </div>
+                          <div class="form-group col-md-6 col-6 col-sm-6">
+                            <label for="name">Organization Name</label>
+                            <!-- <select type="text" class="form-control" name="organizationName" [(ngModel)]="form.organizationName" #organizationName="ngModel">
+                                <option *ngFor = "let item of organization_data" value = "{{item.id}}">{{item.organization}}</option>
+                            </select> -->
+                            <ng-select [(ngModel)]="form.organizationName" name="organizationName" #organizationName="ngModel" required [ngModelOptions]="{standalone: true}" [dropdownPosition]="'down'" [virtualScroll]="true" placeholder="Type to search">
+                                <ng-option *ngFor="let o of organization_data" value="{{o.id}}">
+                                    {{o.organization}}
+                                </ng-option>
+                            </ng-select>
+                            <div class="text-danger" role="alert" *ngIf="f.submitted && organizationName.invalid">
+                                Required Field !
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6 col-6 col-sm-6">
+                          <label for="name">Rate</label>
+                          <input type="text" class="form-control" name="rate" [(ngModel)]="form.rate" #rate="ngModel" />
+                          <div class="text-danger" role="alert" *ngIf="f.submitted && rate.invalid">
+                              Required Field !
+                          </div>
+                      </div>
+
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="form-group col-md-12 col-sm-12">
+                  <button type="button" class="btn btn-info mt-1" (click)="onNew()">New <i class="fas fa-sync-alt"></i></button>&nbsp;
+                  <button class="btn btn-success mt-1" type="submit">Save <i class="fas fa-save"></i></button>&nbsp;
+              </div>
+          </form>
+          <div class="row">
+              <div class="form-group col-md-12 col-sm-12">
+                  <div class="card card-body overflow-auto">
+                      <div class="form-group row">
+                          <div class="form-group col-md-12 col-sm-12">
+
+                                      <table id="customTable" *ngIf="showContent" datatable class="table  table-bordered" cellspacing="0" width="100%">
+                                          <thead class="thead-dark">
+                                              <tr>
+                                                  <th>EDIT</th>
+
+                                                  <th>Group Name</th>
+                                                  <th>Test Name</th>
+                                                  <th>Lab Name</th>
+                                                  <th>Organization Name</th>
+                                                  <th>Rate</th>
+
+
+                                              </tr>
+                                          </thead>
+                                          <tbody style="color: black;">
+                                              <tr *ngFor="let item of table_data">
+                                                  <td>
+                                                      <span>
+                                                          <button *ngIf="isedit_action" id="edit" type="button" (click)="onEdit(item)" class="btn btn-warning"><i class="fas fa-edit"></i></button> &nbsp;
+                                                          <button *ngIf="isdelete_action" id="delete" type="button" (click)="onDelete(item.id)" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                                      </span>
+                                                  </td>
+
+                                                  <td>{{item.groupName}}</td>
+                                                  <td>{{item.testName}}</td>
+                                                  <td>{{item.labName}}</td>
+                                                  <td>{{item.organizationName}}</td>
+                                                  <td>{{item.rate}}</td>
+
+                                              </tr>
+                                          </tbody>
+                                      </table>
+    
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,140 @@
+    <div class="col-md-12 mt-3">
+        <div class="card card-outline card-danger">
+            <div class="card-header text-center">
+                <b style="font-size: 18px;"> Appointment Schedule  </b>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body overflow-auto">
+                <form name="form" (ngSubmit)="f.form.valid && onSave()" #f="ngForm" novalidate>
+
+                    <input type="hidden" name="id" [(ngModel)]="form.id" #id="ngModel"> 
+                    <h2 *ngIf="isEdit" style="color: orangered;"><b>Edit Mode</b></h2>
+
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="card card-body overflow-auto">
+                                <div class="form-group row">
+                                    
+                                <div class="form-group col-md-6 col-sm-6">
+                                    <label for="name">Doctor Name</label>
+
+                                    <select  class="form-control" [(ngModel)]="form.doctorName" [ngModelOptions]="{standalone: true}" #doctorName="ngModel" name="doctorName">
+                                        <option *ngFor="let r of ConsultantList" [ngValue]="r.id" style="color: black;">
+                                            {{r.name}}
+                                        </option>
+                                    </select>
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && doctorName.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6 col-sm-6">
+                                    <label for="name">Slot</label>
+                                    <input type="text" class="form-control" name="slotTime" [(ngModel)]="form.slotTime" required #slotTime="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && slotTime.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-6 col-sm-6">
+                                    <label for="name">Start Time</label>
+                                    <input type="time" class="form-control" name="startTime" [(ngModel)]="form.startTime"  #startTime="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && startTime.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6 col-sm-6">
+                                    <label for="name">End Time</label>
+                                    <input type="time" class="form-control" name="endTime" [(ngModel)]="form.endTime"  #endTime="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && endTime.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+
+                                  <div class="form-group col-md-12 col-sm-12">
+                                    <div class="row">
+                                        <div class="form-group col-md-3 col-sm-3 form-check">
+                                            <input class="form-check-input" type="checkbox" name="monday" [(ngModel)]="form.monday">
+                                            <label class="form-check-label">Monday</label>
+                                        </div>
+                                        <div class="form-group col-md-3 col-sm-3 form-check">
+                                            <input class="form-check-input" type="checkbox" name="tuesday" [(ngModel)]="form.tuesday">
+                                            <label class="form-check-label">Tuesday</label>
+                                        </div>
+                                        <div class="form-group col-md-3 col-sm-3 form-check">
+                                            <input class="form-check-input" type="checkbox" name="wednesday" [(ngModel)]="form.wednesday">
+                                            <label class="form-check-label">Wednesday</label>
+                                        </div>
+                                        <div class="form-group col-md-3 col-sm-3 form-check">
+                                            <input class="form-check-input" type="checkbox" name="thursday" [(ngModel)]="form.thursday">
+                                            <label class="form-check-label">Thursday</label>
+                                        </div>
+                                        <div class="form-group col-md-3 col-sm-3 form-check">
+                                            <input class="form-check-input" type="checkbox" name="friday" [(ngModel)]="form.friday">
+                                            <label class="form-check-label">Friday</label>
+                                        </div>
+                                        <div class="form-group col-md-3 col-sm-3 form-check">
+                                            <input class="form-check-input" type="checkbox" name="saturday" [(ngModel)]="form.saturday">
+                                            <label class="form-check-label">Saturday</label>
+                                        </div>
+                                        <div class="form-group col-md-3 col-sm-3 form-check">
+                                            <input class="form-check-input" type="checkbox" name="sunday" [(ngModel)]="form.sunday">
+                                            <label class="form-check-label">Sunday</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-12 col-sm-12">
+                        <button type="button" class="btn btn-info mt-1" (click)="onNew()">New <i class="fas fa-sync-alt"></i></button>&nbsp;
+                        <button class="btn btn-success mt-1" type="submit">Save <i class="fas fa-save"></i></button> &nbsp;
+                    </div>
+                </form>
+
+                <div class="row">
+
+                    <div class="form-group col-md-12 col-sm-12">
+                        <div class="card card-body overflow-auto">
+                            <div class="form-group row">
+
+                                <div class="form-group col-md-12 col-sm-12">
+                                            <table id="customTable" *ngIf="showContent" datatable class="table  table-bordered" cellspacing="0" width="100%">
+                                                <thead class="thead-dark">
+                                                    <tr>
+                                                        <th>EDIT</th>
+                                                        <th>doctorName</th>
+                                                        <th>slotTime</th>
+                                                        <th>startTime</th>
+                                                        <th>endTime</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody style="color: black;">
+                                                    <tr *ngFor="let item of table_data">
+                                                        <td>
+                                                            <span class="float-right">
+                                                                <button *ngIf="isedit_action" id="edit" type="button" (click)="onEdit(item)" class="btn btn-warning"><i class="fas fa-edit"></i></button> &nbsp;
+                                                                <button *ngIf="isdelete_action" id="delete" type="button" (click)="onDelete(item.id)" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                                            </span>
+                                                        </td>
+                                                        <td>{{item.doctorName}}</td>
+                                                        <td>{{item.slotTime}}</td>
+                                                        <td>{{item.startTime}}</td>
+                                                        <td>{{item.endTime}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

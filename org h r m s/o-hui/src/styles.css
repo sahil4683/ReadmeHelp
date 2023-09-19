@@ -1,0 +1,50 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~ngx-toastr/toastr.css';
+body {
+    font-family: 'open_sansregular';
+    background-color: #f8f9fa;
+    /* font-size: smaller; */
+    margin: 0; 
+    zoom: 74%;
+    /* -ms-zoom: 0.7; */
+    height: 100%; 
+    padding-right: 0 !important;
+
+  }
+
+  .modal-backdrop{
+    opacity: 0.5 !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+
+/* Validation CSS */
+.ng-valid[required], .ng-valid.required  {
+  border-left: 5px solid #42A948; /* green */
+}
+.ng-invalid:not(form)  {
+  border-left: 5px solid #a94442; /* red */
+}
+
+label{
+  /* font-size: 13px; */
+}
+
+/* IF Datatable Is Empty */
+/* td.dataTables_empty {
+  display: none!important;
+} */
+
+.search_table_name{
+  color: black !important
+}
+.search_table_uhid{
+  color: red !important
+}
+.search_table_bill{
+  color: blue !important
+}
+.search_table_ipdno{
+  color: green !important
+}

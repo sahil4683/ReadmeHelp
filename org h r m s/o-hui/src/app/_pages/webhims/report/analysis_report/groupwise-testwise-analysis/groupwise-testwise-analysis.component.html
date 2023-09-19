@@ -1,0 +1,354 @@
+<div class="">
+    <div class="col-md-12 mt-3">
+        <div class="card card-outline card-danger">
+            <div class="card-header text-center">
+                <b style="font-size: 18px;"> GroupWise Test Analysis </b>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                
+
+                <div class="row">
+
+                   
+                    <div class="col-md-6 col-sm-6 card card-body">
+                        <div class="card-header text-center" style="background-color: #E1E1E1;">
+                            <b style="font-size: 18px;"> OPD Report </b>
+                        </div>  
+                        <form name="opdform" (ngSubmit)="opdSubmit()" #o="ngForm" novalidate>
+                           <div class="row">
+                            <div class="form-group col-md-6 col-sm-6">
+                                <label for="name">Form Date </label>
+                                <input type="date" class="form-control" name="fromDate" [(ngModel)]="opdform.fromDate"  #fromDate="ngModel" />
+                                <div class="text-danger" role="alert" *ngIf="o.submitted && fromDate.invalid">
+                                    Required Field !
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6 col-sm-6">
+                                <label for="name">To Date </label>
+                                <input type="date" class="form-control" name="toDate" [(ngModel)]="opdform.toDate"  #toDate="ngModel" />
+                                <div class="text-danger" role="alert" *ngIf="o.submitted && toDate.invalid">
+                                    Required Field !
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6 col-sm-6">
+                                <label for="name">Group </label>
+                                <ng-select [(ngModel)]="opdform.groupName" name="groupName" #groupName="ngModel" [ngModelOptions]="{standalone: true}" [dropdownPosition]="'down'" [virtualScroll]="true" placeholder="Type to search">
+                                    <ng-option *ngFor="let o of GroupList" [value]="o.groupName">
+                                        {{o.groupName}}
+                                    </ng-option>
+                                </ng-select>
+                                <div class="text-danger" role="alert" *ngIf="o.submitted && groupName.invalid">
+                                    Required Field !
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6 col-sm-6">
+                                <label for="name">Test Name </label>
+                                <ng-select [(ngModel)]="opdform.testName" name="testName" #testName="ngModel" [ngModelOptions]="{standalone: true}" [dropdownPosition]="'down'" [virtualScroll]="true" placeholder="Type to search">
+                                    <ng-option *ngFor="let o of ParticularsList" [value]="o.testName">
+                                        {{o.testName}}
+                                    </ng-option>
+                                </ng-select>
+                                <div class="text-danger" role="alert" *ngIf="o.submitted && testName.invalid">
+                                    Required Field !
+                                </div>
+                            </div>
+                            
+                            <div class="form-group col-md-6 col-sm-6">
+                                <label for="name">Consultant </label>
+                                <ng-select [(ngModel)]="opdform.consultant" name="consultant" #consultant="ngModel" [ngModelOptions]="{standalone: true}" [dropdownPosition]="'down'" [virtualScroll]="true" placeholder="Type to search">
+                                    <ng-option *ngFor="let o of ConsultantList" [value]="o.id">
+                                        {{o.name}}
+                                    </ng-option>
+                                </ng-select>
+                                <div class="text-danger" role="alert" *ngIf="o.submitted && consultant.invalid">
+                                    Required Field !
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12 col-sm-12">
+                                <button type="submit" class="btn btn-info mt-1">Show Report</button>&nbsp;
+                                <button type="reset" class="btn btn-info mt-1">Clear Selection</button>&nbsp;
+                            </div>
+                           </div>
+                        </form>
+                    </div>
+                    
+
+                    <div class="col-md-6 col-sm-6 card card-body">
+                        <div class="card-header text-center" style="background-color: #E1E1E1;">
+                            <b style="font-size: 18px;"> IPD Report </b>
+                        </div>  
+                        <form name="ipdform" (ngSubmit)="ipdSubmit()" #o="ngForm" novalidate>
+                            <div class="row">
+                             <div class="form-group col-md-6 col-sm-6">
+                                 <label for="name">Form Date </label>
+                                 <input type="date" class="form-control" name="fromDate" [(ngModel)]="ipdform.fromDate"  #fromDate="ngModel" />
+                                 <div class="text-danger" role="alert" *ngIf="o.submitted && fromDate.invalid">
+                                     Required Field !
+                                 </div>
+                             </div>
+                             <div class="form-group col-md-6 col-sm-6">
+                                 <label for="name">To Date </label>
+                                 <input type="date" class="form-control" name="toDate" [(ngModel)]="ipdform.toDate"  #toDate="ngModel" />
+                                 <div class="text-danger" role="alert" *ngIf="o.submitted && toDate.invalid">
+                                     Required Field !
+                                 </div>
+                             </div>
+                             <div class="form-group col-md-6 col-sm-6">
+                                <label for="name">Group </label>
+                                <ng-select [(ngModel)]="ipdform.groupName" name="groupName" #groupName="ngModel" [ngModelOptions]="{standalone: true}" [dropdownPosition]="'down'" [virtualScroll]="true" placeholder="Type to search">
+                                    <ng-option *ngFor="let o of GroupList" [value]="o.groupName">
+                                        {{o.groupName}}
+                                    </ng-option>
+                                </ng-select>
+                                <div class="text-danger" role="alert" *ngIf="o.submitted && groupName.invalid">
+                                    Required Field !
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6 col-sm-6">
+                                <label for="name">Test Name </label>
+                                <ng-select [(ngModel)]="ipdform.testName" name="testName" #testName="ngModel" [ngModelOptions]="{standalone: true}" [dropdownPosition]="'down'" [virtualScroll]="true" placeholder="Type to search">
+                                    <ng-option *ngFor="let o of ParticularsList" [value]="o.testName">
+                                        {{o.testName}}
+                                    </ng-option>
+                                </ng-select>
+                                <div class="text-danger" role="alert" *ngIf="o.submitted && testName.invalid">
+                                    Required Field !
+                                </div>
+                            </div>
+                            
+                            <div class="form-group col-md-6 col-sm-6">
+                                <label for="name">Consultant </label>
+                                <ng-select [(ngModel)]="ipdform.consultant" name="consultant" #consultant="ngModel" [ngModelOptions]="{standalone: true}" [dropdownPosition]="'down'" [virtualScroll]="true" placeholder="Type to search">
+                                    <ng-option *ngFor="let o of ConsultantList" [value]="o.id">
+                                        {{o.name}}
+                                    </ng-option>
+                                </ng-select>
+                                <div class="text-danger" role="alert" *ngIf="o.submitted && consultant.invalid">
+                                    Required Field !
+                                </div>
+                            </div>
+                             <div class="form-group col-md-6 col-sm-6">
+                                 <label for="name">Package Free </label>
+                                 <select class="form-control" name="packageFree" [(ngModel)]="ipdform.packageFree" #packageFree="ngModel">
+                                    <option value=""></option>
+                                </select>
+                                 <div class="text-danger" role="alert" *ngIf="o.submitted && packageFree.invalid">
+                                     Required Field !
+                                 </div>
+                             </div>
+                             <div class="form-group col-md-12 col-sm-12">
+                                 <button type="submit" class="btn btn-info mt-1">Show Report</button>&nbsp;
+                                 <button type="reset" class="btn btn-info mt-1">Clear Selection</button>&nbsp;
+                             </div>
+                            </div>
+                         </form>
+                    </div>
+
+
+                    <div class="col-md-6 col-sm-6 card card-body">
+                        <div class="card-header text-center" style="background-color: #E1E1E1;">
+                            <b style="font-size: 18px;"> LAB Report </b>
+                        </div>  
+                        <form name="labform" (ngSubmit)="labSubmit()" #o="ngForm" novalidate>
+                           <div class="row">
+                            <div class="form-group col-md-6 col-sm-6">
+                                <label for="name">Form Date </label>
+                                <input type="date" class="form-control" name="fromDate" [(ngModel)]="labform.fromDate"  #fromDate="ngModel" />
+                                <div class="text-danger" role="alert" *ngIf="o.submitted && fromDate.invalid">
+                                    Required Field !
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6 col-sm-6">
+                                <label for="name">To Date </label>
+                                <input type="date" class="form-control" name="toDate" [(ngModel)]="labform.toDate"  #toDate="ngModel" />
+                                <div class="text-danger" role="alert" *ngIf="o.submitted && toDate.invalid">
+                                    Required Field !
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6 col-sm-6">
+                                <label for="name">Group </label>
+                                <ng-select [(ngModel)]="labform.groupName" name="groupName" #groupName="ngModel" [ngModelOptions]="{standalone: true}" [dropdownPosition]="'down'" [virtualScroll]="true" placeholder="Type to search">
+                                    <ng-option *ngFor="let o of GroupList" [value]="o.groupName">
+                                        {{o.groupName}}
+                                    </ng-option>
+                                </ng-select>
+                                <div class="text-danger" role="alert" *ngIf="o.submitted && groupName.invalid">
+                                    Required Field !
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6 col-sm-6">
+                                <label for="name">Test Name </label>
+                                <ng-select [(ngModel)]="labform.testName" name="testName" #testName="ngModel" [ngModelOptions]="{standalone: true}" [dropdownPosition]="'down'" [virtualScroll]="true" placeholder="Type to search">
+                                    <ng-option *ngFor="let o of ParticularsList" [value]="o.testName">
+                                        {{o.testName}}
+                                    </ng-option>
+                                </ng-select>
+                                <div class="text-danger" role="alert" *ngIf="o.submitted && testName.invalid">
+                                    Required Field !
+                                </div>
+                            </div>
+                            
+                            <div class="form-group col-md-6 col-sm-6">
+                                <label for="name">Consultant </label>
+                                <ng-select [(ngModel)]="labform.consultant" name="consultant" #consultant="ngModel" [ngModelOptions]="{standalone: true}" [dropdownPosition]="'down'" [virtualScroll]="true" placeholder="Type to search">
+                                    <ng-option *ngFor="let o of ConsultantList" [value]="o.id">
+                                        {{o.name}}
+                                    </ng-option>
+                                </ng-select>
+                                <div class="text-danger" role="alert" *ngIf="o.submitted && consultant.invalid">
+                                    Required Field !
+                                </div>
+                            </div>
+                            <div class="form-group col-md-12 col-sm-12">
+                                <button type="submit" class="btn btn-info mt-1">Show Report</button>&nbsp;
+                                <button type="reset" class="btn btn-info mt-1">Clear Selection</button>&nbsp;
+                            </div>
+                           </div>
+                        </form>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 card card-body">
+                        <div class="card-header text-center" style="background-color: #E1E1E1;">
+                            <b style="font-size: 18px;"> RADIO Report </b>
+                        </div>  
+                        <form name="radioform" (ngSubmit)="radioSubmit()" #o="ngForm" novalidate>
+                            <div class="row">
+                             <div class="form-group col-md-6 col-sm-6">
+                                 <label for="name">Form Date </label>
+                                 <input type="date" class="form-control" name="fromDate" [(ngModel)]="radioform.fromDate"  #fromDate="ngModel" />
+                                 <div class="text-danger" role="alert" *ngIf="o.submitted && fromDate.invalid">
+                                     Required Field !
+                                 </div>
+                             </div>
+                             <div class="form-group col-md-6 col-sm-6">
+                                 <label for="name">To Date </label>
+                                 <input type="date" class="form-control" name="toDate" [(ngModel)]="radioform.toDate"  #toDate="ngModel" />
+                                 <div class="text-danger" role="alert" *ngIf="o.submitted && toDate.invalid">
+                                     Required Field !
+                                 </div>
+                             </div>
+                             <div class="form-group col-md-6 col-sm-6">
+                                <label for="name">Group </label>
+                                <ng-select [(ngModel)]="radioform.groupName" name="groupName" #groupName="ngModel" [ngModelOptions]="{standalone: true}" [dropdownPosition]="'down'" [virtualScroll]="true" placeholder="Type to search">
+                                    <ng-option *ngFor="let o of GroupList" [value]="o.groupName">
+                                        {{o.groupName}}
+                                    </ng-option>
+                                </ng-select>
+                                <div class="text-danger" role="alert" *ngIf="o.submitted && groupName.invalid">
+                                    Required Field !
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6 col-sm-6">
+                                <label for="name">Test Name </label>
+                                <ng-select [(ngModel)]="radioform.testName" name="testName" #testName="ngModel" [ngModelOptions]="{standalone: true}" [dropdownPosition]="'down'" [virtualScroll]="true" placeholder="Type to search">
+                                    <ng-option *ngFor="let o of ParticularsList" [value]="o.testName">
+                                        {{o.testName}}
+                                    </ng-option>
+                                </ng-select>
+                                <div class="text-danger" role="alert" *ngIf="o.submitted && testName.invalid">
+                                    Required Field !
+                                </div>
+                            </div>
+                            
+                            <div class="form-group col-md-6 col-sm-6">
+                                <label for="name">Consultant </label>
+                                <ng-select [(ngModel)]="radioform.consultant" name="consultant" #consultant="ngModel" [ngModelOptions]="{standalone: true}" [dropdownPosition]="'down'" [virtualScroll]="true" placeholder="Type to search">
+                                    <ng-option *ngFor="let o of ConsultantList" [value]="o.id">
+                                        {{o.name}}
+                                    </ng-option>
+                                </ng-select>
+                                <div class="text-danger" role="alert" *ngIf="o.submitted && consultant.invalid">
+                                    Required Field !
+                                </div>
+                            </div>
+                             <div class="form-group col-md-12 col-sm-12">
+                                 <button type="submit" class="btn btn-info mt-1">Show Report</button>&nbsp;
+                                 <button type="reset" class="btn btn-info mt-1">Clear Selection</button>&nbsp;
+                             </div>
+                            </div>
+                         </form>
+                    </div>
+
+                    
+
+
+
+                    <div class="col-md-6 col-sm-6 card card-body">
+                        <div class="card-header text-center" style="background-color: #E1E1E1;">
+                            <b style="font-size: 18px;"> HEALTHCHECKUP Report </b>
+                        </div>  
+                        <form name="hcform" (ngSubmit)="hcSubmit()" #o="ngForm" novalidate>
+                            <div class="row">
+                             <div class="form-group col-md-6 col-sm-6">
+                                 <label for="name">Form Date </label>
+                                 <input type="date" class="form-control" name="fromDate" [(ngModel)]="hcform.fromDate"  #fromDate="ngModel" />
+                                 <div class="text-danger" role="alert" *ngIf="o.submitted && fromDate.invalid">
+                                     Required Field !
+                                 </div>
+                             </div>
+                             <div class="form-group col-md-6 col-sm-6">
+                                 <label for="name">To Date </label>
+                                 <input type="date" class="form-control" name="toDate" [(ngModel)]="hcform.toDate"  #toDate="ngModel" />
+                                 <div class="text-danger" role="alert" *ngIf="o.submitted && toDate.invalid">
+                                     Required Field !
+                                 </div>
+                             </div>
+                             <div class="form-group col-md-6 col-sm-6">
+                                <label for="name">Group </label>
+                                <ng-select [(ngModel)]="hcform.groupName" name="groupName" #groupName="ngModel" [ngModelOptions]="{standalone: true}" [dropdownPosition]="'down'" [virtualScroll]="true" placeholder="Type to search">
+                                    <ng-option *ngFor="let o of GroupList" [value]="o.groupName">
+                                        {{o.groupName}}
+                                    </ng-option>
+                                </ng-select>
+                                <div class="text-danger" role="alert" *ngIf="o.submitted && groupName.invalid">
+                                    Required Field !
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6 col-sm-6">
+                                <label for="name">Test Name </label>
+                                <ng-select [(ngModel)]="hcform.testName" name="testName" #testName="ngModel" [ngModelOptions]="{standalone: true}" [dropdownPosition]="'down'" [virtualScroll]="true" placeholder="Type to search">
+                                    <ng-option *ngFor="let o of ParticularsList" [value]="o.testName">
+                                        {{o.testName}}
+                                    </ng-option>
+                                </ng-select>
+                                <div class="text-danger" role="alert" *ngIf="o.submitted && testName.invalid">
+                                    Required Field !
+                                </div>
+                            </div>
+                            
+                            <div class="form-group col-md-6 col-sm-6">
+                                <label for="name">Consultant </label>
+                                <ng-select [(ngModel)]="hcform.consultant" name="consultant" #consultant="ngModel" [ngModelOptions]="{standalone: true}" [dropdownPosition]="'down'" [virtualScroll]="true" placeholder="Type to search">
+                                    <ng-option *ngFor="let o of ConsultantList" [value]="o.id">
+                                        {{o.name}}
+                                    </ng-option>
+                                </ng-select>
+                                <div class="text-danger" role="alert" *ngIf="o.submitted && consultant.invalid">
+                                    Required Field !
+                                </div>
+                            </div>
+                             <div class="form-group col-md-12 col-sm-12">
+                                 <button type="submit" class="btn btn-info mt-1">Show Report</button>&nbsp;
+                                 <button type="reset" class="btn btn-info mt-1">Clear Selection</button>&nbsp;
+                             </div>
+                            </div>
+                         </form>
+                    </div>
+
+
+
+                </div>
+
+                
+
+            </div>
+        </div>
+    </div>
+</div>

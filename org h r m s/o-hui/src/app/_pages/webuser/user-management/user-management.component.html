@@ -1,0 +1,164 @@
+<div class="container">
+    <div class="col-md-12 mt-3">
+        <div class="card card-outline card-primary">
+            <div class="card-header">
+                <b style="font-size: 18px;"> Create User </b>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <!-- <div class="col-md-1"></div> -->
+                    <div class="col-md-12">
+                        <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+                            <div class="row">
+
+                                <div class="form-group col-md-4 col-sm-12">
+                                    <label for="username">User Name </label>
+                                    <input type="text" class="form-control" name="username" [(ngModel)]="form.username" required minlength="3" maxlength="20" #username="ngModel" />
+                                    <div class="text-danger" *ngIf="f.submitted && username.invalid">
+                                        <div *ngIf="username.errors.required">Username is required</div>
+                                        <div *ngIf="username.errors.minlength">
+                                            Username must be at least 3 characters
+                                        </div>
+                                        <div *ngIf="username.errors.maxlength">
+                                            Username must be at most 20 characters
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group col-md-4 col-sm-12">
+                                    <label for="loginType">Login Group</label>
+                                    <ng-select [(ngModel)]="form.loginType" name="loginType" #loginType="ngModel" required [ngModelOptions]="{standalone: true}" [dropdownPosition]="'down'" placeholder="Type to search">
+                                        <ng-option *ngFor="let type of loginTypeList" [value]="type">
+                                            {{type}}
+                                        </ng-option>
+                                    </ng-select>
+                                </div>
+
+                                <div class="form-group col-md-4 col-sm-12">
+                                    <!-- <label for="role">Role</label> -->
+                                    <!-- <input type="role" class="form-control" name="role" [(ngModel)]="form.role"  #role="ngModel" /> -->
+                                </div>
+
+                                <div class="form-group col-md-4 col-sm-12">
+                                    <label for="password">Password</label>
+                                    <!-- pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" -->
+                                    <input type="password" [(ngModel)]="form.password" name="password" class="form-control" required #password="ngModel" />
+                                    <div *ngIf="f.submitted && password.invalid" class="alert alert-danger">
+                                        <div *ngIf="password.errors.required">Password is required.</div>
+                                        <div *ngIf="password.errors.pattern">Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters.</div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4 col-sm-12">
+                                    <label for="confirmpassword">Confirm Password</label>
+                                    <input type="password" [(ngModel)]="form.confirmpassword" name="confirmpassword" class="form-control" required #confirmpassword="ngModel" pattern="{{ password.value }}" />
+                                    <div *ngIf="f.submitted && confirmpassword.invalid" class="alert alert-danger">
+                                        <div *ngIf="confirmpassword.errors.required">Confirm password is required.</div>
+                                        <div *ngIf="confirmpassword.errors.pattern">Password & Confirm Password does not match.</div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12 col-sm-12">
+                                    <button type="submit" class="btn btn-primary"><b>Submit &nbsp;<i class="fa fa-spinner fa-spin" *ngIf="isSubmit"></i></b></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-md-12 mt-3">
+        <div class="card card-outline card-primary">
+            <div class="card-header">
+                <p class="card-title">Data Table</p>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body overflow-auto">
+                <div class="row">
+                    <div class="table-responsive" *ngIf="showContent">
+                        <table id="customTable" datatable class="table table-bordered" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Username</th>
+                                    <th>Login Group</th>   
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody style="color: black;">
+                                <tr *ngFor="let item of table_data">
+                                    <td>{{item.username}}</td>
+                                    <td>{{item.type}}_type </td>
+                                    <td>
+                                        <span class="float-right">
+                                            <!-- <button id="edit" type="button" (click)="openModal(editModal, item)" class="btn btn-warning"><i class="fas fa-edit"></i></button> &nbsp; -->
+                                            <button id="edit" type="button" (click)="openPasswardModal(passModal, item)" class="btn btn-success"><i class="fas fa-lock"></i></button> &nbsp;
+                                            <button *ngIf="item.type != 'USER'" id="delete" type="button" (click)="onDelete(item.id)" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <ng-template #passModal let-modal>
+        <div class="modal-header">
+            <h5 class="modal-title">Update Password</h5>
+            <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form name="editModal" (ngSubmit)="m.form.valid && onUpdatePass()" #m="ngForm" novalidate>
+               
+                <div class="row">
+                    <input type="hidden" name="id" [(ngModel)]="editMaster.id" #id="ngModel">
+                    
+					<div class="form-group col-md-6 col-sm-12">
+                        <label for="password">Password</label>
+                        <!-- pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" -->
+                        <input type="password" [(ngModel)]="editMaster.password" name="password" class="form-control" required #password="ngModel" />
+                        <div *ngIf="m.submitted && password.invalid" class="alert alert-danger">
+                            <div *ngIf="password.errors.required">Password is required.</div>
+                            <div *ngIf="password.errors.pattern">Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters.</div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6 col-sm-12">
+                        <label for="confirmpassword">Confirm Password</label>
+                        <input type="password" [(ngModel)]="editMaster.confirmpassword" name="confirmpassword" class="form-control" required #confirmpassword="ngModel" pattern="{{ password.value }}" />
+                        <div *ngIf="m.submitted && confirmpassword.invalid" class="alert alert-danger">
+                            <div *ngIf="confirmpassword.errors.required">Confirm password is required.</div>
+                            <div *ngIf="confirmpassword.errors.pattern">Password & Confirm Password does not match.</div>
+                        </div>
+                    </div>
+									
+					
+                </div>
+   
+            <div class=" col-md-12 col-sm-12">
+                <button type="submit" class="btn btn-primary"><b>Update &nbsp;<i class="fa fa-spinner fa-spin" *ngIf="isSubmit"></i></b></button>&nbsp;
+                <button type="submit" class="btn btn-secondary" (click)="modal.dismiss()"><b>&nbsp; Close &nbsp;</b></button> 
+            </div>
+            </form>
+        </div>
+    </ng-template>
+
+
+
+</div>

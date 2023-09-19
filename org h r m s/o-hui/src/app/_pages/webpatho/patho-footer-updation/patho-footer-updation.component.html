@@ -1,0 +1,100 @@
+<div class="container">
+    <div class="col-md-12 mt-3">
+        <div class="card card-outline card-danger">
+            <div class="card-header text-center">
+                <b style="font-size: 18px;"> Footer Updation  </b>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body overflow-auto">
+                <form name="form" (ngSubmit)="f.form.valid && onSave()" #f="ngForm" novalidate>
+
+
+                    
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="card card-body overflow-auto">
+                                <div class="form-group row">
+                                    
+                                <div class="form-group col-md-12 col-12">
+                                    <label>Footer 1</label>
+                                    <input type="text" class="form-control" name="footer1" [(ngModel)]="form.footer1"  #footer1="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && footer1.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12 col-12">
+                                    <label>Footer 2</label>
+                                    <input type="text" class="form-control" name="footer2" [(ngModel)]="form.footer2"  #footer2="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && footer2.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12 col-12">
+                                    <label>Hematology Machine Name</label>
+                                    <input type="text" class="form-control" name="haematologyMachineName" [(ngModel)]="form.haematologyMachineName"  #haematologyMachineName="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && haematologyMachineName.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12 col-12">
+                                    <label>Biochemistry Machine Name</label>
+                                    <input type="text" class="form-control" name="biochemistryMachineName" [(ngModel)]="form.biochemistryMachineName"  #biochemistryMachineName="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && biochemistryMachineName.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12 col-12">
+                                    <label>Serology Quantitative Machine Name</label>
+                                    <input type="text" class="form-control" name="serologyMachineName" [(ngModel)]="form.serologyMachineName"  #serologyMachineName="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && serologyMachineName.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12 col-12">
+                                    <label>Thyroid Machine Name</label>
+                                    <input type="text" class="form-control" name="thyroidMachineName" [(ngModel)]="form.thyroidMachineName"  #thyroidMachineName="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && thyroidMachineName.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12 col-12">
+                                    <label>Electrolytes Machine Name</label>
+                                    <input type="text" class="form-control" name="electrolytesMachineName" [(ngModel)]="form.electrolytesMachineName"  #electrolytesMachineName="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && electrolytesMachineName.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12 col-12">
+                                    <label>Coagulation Machine Name</label>
+                                    <input type="text" class="form-control" name="coagulationMachineName" [(ngModel)]="form.coagulationMachineName"  #coagulationMachineName="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && coagulationMachineName.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                
+                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+
+                    <div class="form-group col-md-12 col-sm-12">
+                        <button class="btn btn-info mt-1" type="submit">Update</button> &nbsp;
+                        <button class="btn btn-info mt-1" type="button" disabled>Change Password</button> &nbsp;
+                        <button class="btn btn-info mt-1" type="button" disabled>Set Report Footer</button> &nbsp;
+                        <button class="btn btn-info mt-1" type="button" disabled>Clear Report Footer</button> &nbsp;
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

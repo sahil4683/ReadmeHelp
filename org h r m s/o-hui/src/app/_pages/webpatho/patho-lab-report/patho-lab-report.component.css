@@ -1,0 +1,30 @@
+.flexbox-between {
+    display: flex;
+    justify-content: space-between;
+}
+
+.flexbox-center {
+    display: flex;
+    justify-content: center;
+}
+
+.flexbox-around {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+
+.danger:nth-child(n) {
+    color: red;
+}
+
+.bottom-header:nth-child(n) {
+    margin-right: 10px;
+}
+.color-blue{
+    color: blue;
+}
+.color-red{
+    color: red;
+}

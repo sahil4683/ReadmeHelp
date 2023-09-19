@@ -1,0 +1,44 @@
+<img class="wave" src="assets/wave.png" />
+    <div class="container">
+      <div class="img"></div>
+      <div class="login-content">
+        <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+          <img src="assets/oh_logo.png" />
+          <h3 class="title text-center nowrap">HIMS Login<br> <b>Orange Hospital <br>Heart & Superspeciality Institute</b></h3><br>
+          <div class="input-div one">
+            <div class="i">
+              <i class="fas fa-user"></i>
+            </div>
+            <div class="div">
+              <input type="text" class="input" name="username" [(ngModel)]="form.username" required #username="ngModel" disabled>
+            <div class="text-danger" role="alert" *ngIf="f.submitted && username.invalid">
+                Username is required!
+            </div>
+            </div>
+          </div>
+          <div class="input-div pass">
+            <div class="i">
+              <i class="fas fa-lock"></i>
+            </div>
+            <div class="div">
+              <h5>Password</h5>
+              <input type="password" class="input" name="password" [(ngModel)]="form.password" required minlength="6" #password="ngModel">
+            <div class="text-danger" role="alert" *ngIf="f.submitted && password.invalid">
+                <div *ngIf="password.errors.required">Password is required</div>
+                <div *ngIf="password.errors.minlength">
+                    Password must be at least 6 characters
+                </div>
+            </div>
+            </div>
+          </div>
+          <input type="submit" class="btn" value="Login" />
+
+          <div class="form-group">
+            <h4 class="alert alert-danger" role="alert" *ngIf="f.submitted && isLoginFailed">
+                Login failed: {{ errorMessage }}
+            </h4>
+          </div>
+
+        </form>
+      </div>
+    </div>

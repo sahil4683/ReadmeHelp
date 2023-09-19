@@ -1,0 +1,23 @@
+label,input,button{
+  font-size: 22px;
+}
+
+
+.img {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.img img {
+  width: 500px;
+}
+@media screen and (max-width: 1000px) {
+  .img img {
+    width: 400px;
+  }
+}
+@media screen and (max-width: 900px) {
+  .img {
+    display: none;
+  }
+}

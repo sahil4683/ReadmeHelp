@@ -1,0 +1,83 @@
+<div class="row justify-content-center mt-4">
+    <div style="width: 50%;" class="card card-outline card-danger">
+        <div class="card-header text-center">
+            <b style="font-size: 18px;"> Doctor Incentive Report </b>
+        </div>
+        <div class="card-body ">
+            <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+              
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="card card-body ">
+                            <div class="form-group row">
+
+                                <!-- <div class="form-group col-md-6 col-6 col-sm-6">
+                                </div> -->
+
+                                <div class="form-group col-md-3 col-sm-3">
+                                    <label for="name">Form Date </label>
+                                    <input type="date" class="form-control" name="fromDate" [(ngModel)]="form.fromDate"  #fromDate="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && fromDate.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-3 col-sm-3">
+                                    <label for="name">To Date </label>
+                                    <input type="date" class="form-control" name="toDate" [(ngModel)]="form.toDate"  #toDate="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && toDate.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-12 col-sm-12">
+                    <button type="button" class="btn btn-info mt-1" (click)="getTransactedDoctorList()"> Show Transacted Dr List </button>&nbsp;
+                    <button type="button" class="btn btn-info mt-1" (click)="onReload()"> Clear </button>&nbsp;
+                </div>
+            </form>
+            <div class="row">
+                <div class="form-group col-md-12 col-sm-12">
+                    <div class="card card-body overflow-auto">
+                        <div class="form-group row">
+                            <div class="form-group col-md-12 col-sm-12">
+
+                                <ngb-alert [dismissible]="true" *ngIf="isAlert">
+                                    <strong>Please Wait!</strong> Downloading Report Of <strong>{{doctorName}}</strong>
+                                  </ngb-alert>
+
+                                <div class="row">
+                                    <div class="table-responsive">
+                                        <table id="customTable" *ngIf="isDoctorList" datatable [dtOptions]="dtOptions" class="table  table-bordered" cellspacing="0" width="100%">
+                                            <thead class="thead-dark">
+                                                <tr>
+                                                    <th>Doctor Name</th>
+                                                    <th>Print</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody style="color: black;">
+                                                <tr *ngFor="let item of doctorList">
+                                                    <td><b>{{item.doctorName}}</b></td>
+                                                    <td>
+                                                        <span class="">
+                                                            <button type="button" (click)="printReportByDoctor(item,'pdf')" class="btn btn-danger">PDF <i class="fas fa-print"></i></button>&nbsp;
+                                                            <button type="button" (click)="printReportByDoctor(item,'xlsx')" class="btn btn-success">EXCEL <i class="fas fa fa-file-excel"></i></button>
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,178 @@
+<div class="">
+    <div class="col-md-12 mt-3">
+        <div class="card card-outline card-danger">
+            <div class="card-header text-center">
+                <b style="font-size: 18px;"> IPD Receipt Report </b>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body overflow-auto">
+                <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+                    <div class="row">
+
+                        <div class="form-group col-md-12 col-sm-12">
+                            <div class="row">
+                                <div class="form-group col-md-6 col-sm-6">
+                                    <label for="name">UHID </label>
+                                    <input type="text" class="form-control" name="uhid" [(ngModel)]="form.uhid"  #uhid="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && uhid.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6 col-sm-6">
+                                    <label for="name">IPD No </label>
+                                    <input type="text" class="form-control" name="ipdNo" [(ngModel)]="form.ipdNo"  #ipdNo="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && ipdNo.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-12 col-sm-12">
+                            <hr>
+                        </div>
+
+                        <div class="form-group col-md-12 col-sm-12">
+                            <div class="row">
+                                
+                                <div class="form-group col-md-3 col-sm-3">
+                                    <label for="name">Form Date </label>
+                                    <input type="date" class="form-control" required name="fromDate" [(ngModel)]="form.fromDate"  #fromDate="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && fromDate.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-3 col-sm-3">
+                                    <label for="name">To Date </label>
+                                    <input type="date" class="form-control" required name="toDate" [(ngModel)]="form.toDate"  #toDate="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && toDate.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-6 col-sm-6">
+                                    <label for="name">Received From </label>
+                                    <input type="text" class="form-control" name="receivedFrom" [(ngModel)]="form.receivedFrom"  #receivedFrom="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && receivedFrom.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-6 col-sm-6">
+                                    <label for="name">Mode Of Payment </label>
+                                    <select class="form-control" name="modeOfPayment" [(ngModel)]="form.modeOfPayment" #modeOfPayment="ngModel">
+                                        <option value="CASH">CASH</option>
+                                        <option value="PLASTICMONEY">PLASTICMONEY</option>
+                                        <option value="CHEQUE">CHEQUE</option>
+                                    </select>
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && modeOfPayment.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-6 col-sm-6">
+                                    <label for="name">To Account </label>
+                                    <select class="form-control" name="toAccount" [(ngModel)]="form.toAccount" #toAccount="ngModel">
+                                        <option value="CASH ON HAND">CASH ON HAND</option>
+                                        <option value="CANARA BANK">CANARA BANK</option>
+                                        <option value="FEDERAL BANK">FEDERAL BANK</option>
+                                        <option value="TDS RECEIVABLE">TDS RECEIVABLE</option>
+                                        <option value="BOB C/A 05870200000593">BOB C/A 05870200000593</option>
+                                        <option value="BOB-05870500000714">BOB-05870500000714</option>
+                                    </select>
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && toAccount.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-6 col-sm-6">
+                                    <label for="name">Part/Full/Advanced </label>
+                                    <!-- <input type="text" class="form-control" name="part" [(ngModel)]="form.part"  #part="ngModel" /> -->
+                                    <select class="form-control" name="part" [(ngModel)]="form.part"  #part="ngModel">
+                                        <option value="Part">Part</option>
+                                        <option value="Full">Full</option>
+                                        <option value="Advance">Advance</option>
+                                    </select>
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && part.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-6 col-sm-6">
+                                    <label for="name">Department </label>
+                                    <!-- <input type="text" class="form-control" name="department" [(ngModel)]="form.department"  #department="ngModel" /> -->
+                                    <select class="form-control" [(ngModel)]="form.department" #department="ngModel" name="department">
+                                        <option *ngFor="let o of DeptList" [ngValue]="o.id" style="color: black;">
+                                            {{o.dept}}
+                                        </option>
+                                    </select>
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && department.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+<!-- 
+                                <div class="form-group col-md-6 col-sm-6">
+                                    <label for="name">Instrument Name </label>
+                                    <input type="text" class="form-control" name="instrumentName" [(ngModel)]="form.instrumentName"  #instrumentName="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && instrumentName.invalid">
+                                        Required Field !
+                                    </div>
+                                </div> -->
+
+
+                            </div>
+                        </div>
+
+        
+                    </div>
+
+                         
+                    
+                    <div class="row">
+                        <div class="card card-body">
+                            <div class="form-group col-md-12 col-sm-12">
+                                <button type="button" class="btn btn-primary" (click)="onShow()"> Show <i class="fa fa-eye"></i></button> &nbsp;
+                                <button type="button" class="btn btn-danger" (click)="onExport('pdf')"> Export PDF <i class="fas fa-file-pdf"></i></button> &nbsp;
+                                <button type="button" class="btn btn-success" (click)="onExport('xlsx')"> Export Excel <i class="fas fa-file-excel"></i></button> &nbsp;
+                                <button type="button" class="btn btn-info" (click)="onNew()"> Clear <i class="fas fa-sync"></i></button> &nbsp;
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+
+
+                    <div class="row">
+                        <div class="card card-body">
+                            <div class="row mt-2" *ngIf="isPDFLoad">
+                                <ng2-pdfjs-viewer 
+                                    style="width: 100%; height: 800px;"
+                                    #pdfPreview
+                                    [downloadFileName]="'mytestfile.pdf'"
+                                    [openFile]="false"
+                                    [viewBookmark]="false"
+                                    zoom="page-width"
+                                    [download]="false">
+                                </ng2-pdfjs-viewer>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                    
+
+                </form>
+
+
+                
+
+            </div>
+        </div>
+    </div>
+</div>

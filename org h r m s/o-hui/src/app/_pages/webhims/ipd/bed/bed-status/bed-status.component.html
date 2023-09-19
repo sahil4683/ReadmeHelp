@@ -1,0 +1,62 @@
+<div class="">
+    <div class="col-md-12 mt-3">
+        <div class="card card-outline card-danger">
+            <div class="card-body">
+                <div class="row">
+
+                    <div class="col-md-10 col-sm-10 border-right">
+                        <div class="row pl-3 pr-3">
+                            <ng-container *ngFor="let item of bedStatus">
+                                <div class="col-md-3 p-2">
+                                    <div class="card" style="background-color: antiquewhite;">
+
+                                        <div class="card-header" [ngClass]="!item.occupied? 'bg-success':'bg-danger' ">
+                                            <h6>{{item.bedNumber}}</h6>
+                                        </div>
+                                        <div class="card-body text-center" style="height: 160px;" *ngIf="item.occupied">
+                                            <ng-template #popTitle><b>{{item.patientName | uppercase}}</b></ng-template>
+                                            <ng-template #popContent><p>UHID: {{item.uhid}}<p> <p>IPD No: {{item.ipdno}}<p></p></ng-template>
+                                            <h6 style="color: black; "><a routerLink="/hims/ipd-bed-bed_shifting" [queryParams]="{query: item.ipdno}" triggers="mouseenter:mouseleave" [ngbPopover]="popContent" [popoverTitle]="popTitle" >{{item.patientName | uppercase}}</a></h6>
+                                            <h6 style="color: black; ">{{item.consultantName}}</h6>
+                                            <p class="h4"><span class="badge bg-info" *ngIf="item.patientType === 'Direct' ">Direct</span></p>
+                                            <p class="h4"><span class="badge"  style="background-color: #FFF042;" *ngIf="item.patientType === 'Company' ">Company</span></p>
+                                            <p class="h4"><span class="badge"  style="background-color: #FFF042;" *ngIf="item.patientType === 'ABPMJAY' ">ABPMJAY</span></p>
+                                            <p class="h4"><span class="badge" style="background-color: #FFAD00;" *ngIf="item.patientType === 'Insurance' ">Insurance</span></p>
+                                            <p class="h4"><span class="badge bg-secondary">Occupied</span></p>
+                                        </div>
+
+                                        <div class="card-body text-center" style="height: 170px;" *ngIf="!item.occupied">
+                                            <p class="h3"><span class="badge bg-success">Available</span></p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2 col-sm-2">
+                            <ul class="nav flex-column pt-2">
+                                <li class="nav-item mt-2"><h4>Direct <span class="float-right badge bg-info">{{directCount}}</span></h4></li>
+                                <li class="nav-item mt-2"><h4>Company <span class="float-right badge" style="background-color: #FFF042;">{{companyCount}}</span></h4></li>
+                                <li class="nav-item mt-2"><h4>Insurance <span class="float-right badge" style="background-color: #FFAD00;">{{insuranceCount}}</span></h4></li>
+                            </ul>
+                            <hr>
+                            <ul class="nav flex-column pt-5">
+                                <li style="cursor: pointer;" class="nav-item mt-2" (click)="filterRemove()"><h4>Total Beds <span class="float-right badge bg-secondary">{{totalBed}}</span></h4></li>
+                                <li style="cursor: pointer;" class="nav-item mt-2" (click)="filterAvailableBed()"><h4>Available Beds <span class="float-right badge bg-success">{{availableBed}}</span></h4></li>
+                                <li style="cursor: pointer;" class="nav-item mt-2" (click)="filterOccupiedBed()"><h4>Occupied Beds <span class="float-right badge bg-danger">{{occupideBed}}</span></h4></li>
+                            </ul>
+                            <ul class="nav flex-column pt-5">
+                                <div class="form-group">
+                                    <label for="name"><h4>Search:</h4></label>
+                                    <input type="text" (keyup)="filterBed(this.form.bedSearch)" class="form-control" name="bedSearch" [(ngModel)]="form.bedSearch" #bedSearch="ngModel" />
+                                </div>
+                            </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

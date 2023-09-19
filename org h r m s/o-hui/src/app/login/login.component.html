@@ -1,0 +1,363 @@
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #040a56;">
+    <a class="navbar-brand" href="#">
+        <div class="logo-text ml-1">
+            <img src="assets/oh_logo.png" style="height: 100px;" />
+            <a class="navbar-brand" style="color: #df591a; word-wrap: break-word;">
+                <h1><b>{{app_name}}</b></h1> 
+            </a>
+        </div>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav ml-auto nav-flex-icons">
+            <li class="nav-item">
+                <a class="nav-link waves-effect waves-light btn btn-danger" (click)="goToBack()">
+                    <h5 class="mt-2" style="color: white;cursor: pointer;"> <i class="fa fa-arrow-circle-left" aria-hidden="true" ></i>&nbsp;<b>Logout</b></h5>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+
+<div class="" *ngIf="!isLoggedIn">
+    <div class="row mt-5">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-5 border border-6">
+            <div class="card card-danger mt-2">
+                <div class="card-header text-center pb-1">
+                  <h4 class="">Please login with your Username and Password.</h4>
+                </div>
+            <!-- </div> -->
+            <div class="card-body">
+                <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+                    <div class="form-group" style="padding-left:100px;padding-right:100px;">
+                        <label for="username">Username</label>
+                        <select class="form-control" style="font-size: 20px;" required [(ngModel)]="form.username" name="username" #username="ngModel" [ngModelOptions]="{standalone: true}">
+                            <option *ngFor="let user of UserList" [ngValue]="user.username">
+                                {{user.username}}
+                            </option>
+                        </select>
+                        <!-- <ng-select  [(ngModel)]="form.username" name="username" #username="ngModel" [ngModelOptions]="{standalone: true}" [dropdownPosition]="'down'" placeholder="Type to search">
+                            <ng-option *ngFor="let user of UserList" [value]="user.username">
+                                {{user.username}}
+                            </ng-option>
+                        </ng-select> -->
+                    </div>
+                    <div class="form-group" style="padding-left:100px;padding-right:100px;">
+                        <label for="password">Password</label>
+                        <input [type]="show_button ? 'text' : 'password'" class="form-control" id="passwordInput" name="password" [(ngModel)]="form.password" required minlength="6" #password="ngModel" />
+                        <div class="text-danger" role="alert" *ngIf="f.submitted && password.invalid">
+                            <div *ngIf="password.errors.required">Password is required</div>
+                            <div *ngIf="password.errors.minlength">
+                                Password must be at least 6 characters
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" style="padding-left:100px;padding-right:100px;">
+                        <input  (click)="showPassword()" type="checkbox"> <label>&nbsp;Show Password</label> 
+                        
+                        <select class="form-control col-sm-3 col-md-3 col-3" style="float:right;" name="year" [(ngModel)]="form.year" required #year="ngModel">
+                            <option *ngFor="let r of accountYearList" [ngValue]="r">
+                                {{r}}
+                            </option>
+                        </select>
+                        <label style="float:right;">Account Year: &nbsp;</label>
+                    </div>
+                    
+
+                    <div class="form-group text-center">
+                        <button type="submit" class="btn bg-gradient-danger" style="width: 130px;"> Login </button>
+                    </div>
+                    <div class="form-group">
+                        <div class="alert alert-danger" role="alert" *ngIf="isLoginFailed">
+                            <Label>Login failed: {{ errorMessage }}</Label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        </div>
+        <div class="col-md-3">
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div class="mt-4 pl-4 pr-4" *ngIf="isLoggedIn">
+    <div class="row">
+
+        <!-- <a class="col-lg-4 col-6" data-toggle="modal" data-target="#HIMSModal" (click)="addLoginType('HIMS')" style="cursor: pointer;">
+            <div class="small-box bg-info">
+                <div class="inner">
+                    <h3 class="mt-5 mb-5 pl-1">HIMS</h3>
+                </div>
+                <div class="icon">
+                    <i><img class="ml-3" style="width: 100px; height: 100px;" src="../../assets/Stethoscope.png"></i> 
+                </div>
+            </div>
+        </a> -->
+        <div class="col-lg-4 col-6" (click)="addLoginType('HIMS')" style="cursor: pointer;">
+            <div class="small-box bg-info">
+                <div class="inner">
+                    <h3 class="mt-5 mb-5 pl-1">HIMS</h3>
+                </div>
+                <div class="icon">
+                    <i><img class="ml-3" style="width: 100px; height: 100px;" src="assets/Stethoscope.png"></i> 
+                </div>
+            </div>
+        </div>
+
+        <!-- <a class="col-lg-4 col-6" data-toggle="modal" data-target="#IPDModal" (click)="addLoginType('IPD')" style="cursor: pointer;"></a> -->
+        <div class="col-lg-4 col-6" (click)="addLoginType('IPD')" style="cursor: pointer;">
+            <div class="small-box bg-success">
+                <div class="inner">
+                    <h3 class="mt-5 mb-5 pl-1">IPD</h3>
+                </div>
+                <div class="icon">
+                    <i><img class="ml-3" style="width: 100px; height: 100px;" src="assets/bed.png"></i> 
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-6" (click)="addLoginType('PATHO')" style="cursor: pointer;">
+            <div class="small-box bg-warning">
+                <div class="inner">
+                    <h3 class="mt-5 mb-5 pl-1 text-white">PATHO</h3>
+                </div>
+                <div class="icon">
+                    <i><img class="ml-3" style="width: 100px; height: 100px;" src="assets/microscope.png"></i> 
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="col-lg-4 col-6" (click)="addLoginType('USER')" *ngIf="isUserManagement" style="cursor: pointer;">
+            <div class="small-box bg-danger">
+                <div class="inner">
+                    <h3 class="mt-5 mb-5 pl-1 text-white">User Management</h3>
+                </div>
+                <div class="icon">
+                    <i><img class="ml-3" style="width: 100px; height: 100px;" src="../../assets/user.png"></i> 
+                </div>
+            </div>
+        </div> -->
+        <a class="col-lg-4 col-6" data-toggle="modal" *ngIf="isUserManagement" data-target="#USERModal" style="cursor: pointer;">
+            <div class="small-box bg-danger">
+                <div class="inner">
+                    <h3 class="mt-5 mb-5 pl-1 text-white">User Management</h3>
+                </div>
+                <div class="icon">
+                    <i><img class="ml-3" style="width: 100px; height: 100px;" src="assets/user.png"></i> 
+                </div>
+            </div>
+        </a>
+
+    </div>
+</div>
+
+
+
+
+<!-- <div class="modal fade" data-backdrop="static" id="HIMSModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                  <h1><i><img class="ml-3" style="width: 50px; height: 50px;" src="../../assets/Stethoscope.png"></i>&nbsp;HIMS Login</h1>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+                    <input type="hidden" name="loginType" [(ngModel)]="form.loginType" #loginType="ngModel" />
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" name="username" [(ngModel)]="form.username" required #username="ngModel" />
+                        <div class="text-danger" role="alert" *ngIf="f.submitted && username.invalid">
+                            Username is required!
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" name="password" [(ngModel)]="form.password" required minlength="6" #password="ngModel" />
+                        <div class="text-danger" role="alert" *ngIf="f.submitted && password.invalid">
+                            <div *ngIf="password.errors.required">Password is required</div>
+                            <div *ngIf="password.errors.minlength">
+                                Password must be at least 6 characters
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-block bg-gradient-primary">
+                            Login
+                        </button>
+                    </div>
+                    <div class="form-group">
+                        <div class="alert alert-danger" role="alert" *ngIf="isLoginFailed">
+                            <Label>Login failed: {{ errorMessage }}</Label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
+
+
+<!-- <div class="modal fade" data-backdrop="static" id="IPDModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                  <h1><i><img class="ml-3" style="width: 50px; height: 50px;" src="../../assets/bed.png"></i>&nbsp;IPD Login</h1>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+                    <input type="hidden" name="loginType" [(ngModel)]="form.loginType" />
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" name="username" [(ngModel)]="form.username" required #username="ngModel" />
+                        <div class="text-danger" role="alert" *ngIf="f.submitted && username.invalid">
+                            Username is required!
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" name="password" [(ngModel)]="form.password" required minlength="6" #password="ngModel" />
+                        <div class="text-danger" role="alert" *ngIf="f.submitted && password.invalid">
+                            <div *ngIf="password.errors.required">Password is required</div>
+                            <div *ngIf="password.errors.minlength">
+                                Password must be at least 6 characters
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-block bg-gradient-primary">
+                            Login
+                        </button>
+                    </div>
+                    <div class="form-group">
+                        <div class="alert alert-danger" role="alert" *ngIf="isLoginFailed">
+                            <Label>Login failed: {{ errorMessage }}</Label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
+
+
+<!-- <div class="modal fade" data-backdrop="static" id="PATHOModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                  <h1><i><img class="ml-3" style="width: 100px; height: 100px;" src="../../assets/microscope.png"></i>&nbsp;PATHO Login</h1>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+                    <input type="hidden" name="loginType" [(ngModel)]="form.loginType" />
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" name="username" [(ngModel)]="form.username" required #username="ngModel" />
+                        <div class="text-danger" role="alert" *ngIf="f.submitted && username.invalid">
+                            Username is required!
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" name="password" [(ngModel)]="form.password" required minlength="6" #password="ngModel" />
+                        <div class="text-danger" role="alert" *ngIf="f.submitted && password.invalid">
+                            <div *ngIf="password.errors.required">Password is required</div>
+                            <div *ngIf="password.errors.minlength">
+                                Password must be at least 6 characters
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-block bg-gradient-primary">
+                            Login
+                        </button>
+                    </div>
+                    <div class="form-group">
+                        <div class="alert alert-danger" role="alert" *ngIf="isLoginFailed">
+                            <Label>Login failed: {{ errorMessage }}</Label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
+
+
+<div class="modal fade" data-backdrop="static" id="USERModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                  <h2><i><img class="ml-3" style="width: 60px; height: 60px;" src="assets/user.png"></i>&nbsp;User Management Login</h2>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: red; opacity: 1;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+                    <input type="hidden" name="loginType" [(ngModel)]="form.loginType" />
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" name="username" [(ngModel)]="form.username" required #username="ngModel" />
+                        <div class="text-danger" role="alert" *ngIf="f.submitted && username.invalid">
+                            Username is required!
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" name="password" [(ngModel)]="form.password" required minlength="6" #password="ngModel" />
+                        <div class="text-danger" role="alert" *ngIf="f.submitted && password.invalid">
+                            <div *ngIf="password.errors.required">Password is required</div>
+                            <div *ngIf="password.errors.minlength">
+                                Password must be at least 6 characters
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-block bg-gradient-primary">
+                            Login
+                        </button>
+                    </div>
+                    <div class="form-group">
+                        <div class="alert alert-danger" role="alert" *ngIf="isLoginFailed">
+                            <Label>Login failed: {{ errorMessage }}</Label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

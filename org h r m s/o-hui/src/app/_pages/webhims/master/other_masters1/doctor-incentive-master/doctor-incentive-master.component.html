@@ -1,0 +1,260 @@
+  <div class="col-md-12 mt-3">
+      <div class="card card-outline card-danger">
+          <div class="card-header text-center">
+              <b style="font-size: 18px;"> Doctor Incentive Master  </b>
+              <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                  </button>
+              </div>
+          </div>
+          <div class="card-body overflow-auto">
+              <form name="form" (ngSubmit)="f.form.valid && onSave()" #f="ngForm" novalidate>
+                  <input type="hidden" name="id" [(ngModel)]="form.id" #id="ngModel">
+                  <h2 *ngIf="isEdit" style="color: orangered;"><b>Edit Mode</b></h2>
+                  <div class="row">
+                      <div class="col-md-12 col-sm-12">
+                          <div class="card card-body">
+                              <div class="form-group row">
+                                  <div class="form-group col-md-4 col-sm-4">
+                                      <label for="name">Doctor Name</label>
+                                      <ng-select [(ngModel)]="form.doctorName" name="doctorName" #doctorName="ngModel" required [ngModelOptions]="{standalone: true}" [dropdownPosition]="'down'" [virtualScroll]="true" placeholder="Type to search">
+                                          <ng-option *ngFor="let o of doctorNameList" [value]="o.id">
+                                              {{o.name}}
+                                          </ng-option>
+                                      </ng-select>
+                                      <div class="text-danger" role="alert" *ngIf="f.submitted && doctorName.invalid">
+                                          Required Field !
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="form-group row">
+                                  <div class="form-group col-md-4 col-sm-4">
+                                      <ngb-accordion #acc="ngbAccordion" [activeIds]="activeIds">
+
+                                        <ngb-panel id="panel-1">
+                                          <ng-template ngbPanelHeader>
+                                            <div class="d-flex align-items-center justify-content-between">
+                                              <button ngbPanelToggle class="btn btn-block btn-outline-secondary">STAY</button>
+                                            </div>
+                                          </ng-template>
+                                          <ng-template ngbPanelContent>
+                                            <div class="row">
+                                              <div class="col-md-6">
+                                                  <label>Hospital %</label> 
+                                                  <input type="text" class="form-control" name="stayHospital" [(ngModel)]="form.stayHospital" />
+                                              </div>
+                                              <div class="col-md-6">
+                                                  <label>Doctor %</label> 
+                                                  <input type="text" class="form-control" name="stayDoctor" [(ngModel)]="form.stayDoctor" />
+                                              </div>
+                                          </div>
+                                          </ng-template>
+                                        </ngb-panel>
+
+                                        <ngb-panel id="panel-2">
+                                          <ng-template ngbPanelHeader>
+                                            <div class="d-flex align-items-center justify-content-between">
+                                              <button ngbPanelToggle class="btn btn-block btn-outline-secondary">VISIT</button>
+                                            </div>
+                                          </ng-template>
+                                          <ng-template ngbPanelContent>
+                                            <div class="row">
+                                              <div class="col-md-6">
+                                                  <label>Hospital %</label> 
+                                                  <input type="text" class="form-control" name="visitHospital" [(ngModel)]="form.visitHospital" />
+                                              </div>
+                                              <div class="col-md-6">
+                                                  <label>Doctor %</label> 
+                                                  <input type="text" class="form-control" name="visitDoctor" [(ngModel)]="form.visitDoctor" />
+                                              </div>
+                                          </div>
+                                          </ng-template>
+                                        </ngb-panel>
+
+                                        <ngb-panel id="panel-3">
+                                          <ng-template ngbPanelHeader>
+                                            <div class="d-flex align-items-center justify-content-between">
+                                              <button ngbPanelToggle class="btn btn-block btn-outline-secondary">VISIT REFFERED</button>
+                                            </div>
+                                          </ng-template>
+                                          <ng-template ngbPanelContent>
+                                            <div class="row">
+                                              <div class="col-md-6">
+                                                  <label>Hospital %</label> 
+                                                  <input type="text" class="form-control" name="visitRefferedHospital" [(ngModel)]="form.visitRefferedHospital" />
+                                              </div>
+                                              <div class="col-md-6">
+                                                  <label>Doctor %</label> 
+                                                  <input type="text" class="form-control" name="visitRefferedDoctor" [(ngModel)]="form.visitRefferedDoctor" />
+                                              </div>
+                                          </div>
+                                          </ng-template>
+                                        </ngb-panel>
+
+                                        <ngb-panel id="panel-4">
+                                          <ng-template ngbPanelHeader>
+                                            <div class="d-flex align-items-center justify-content-between">
+                                              <button ngbPanelToggle class="btn btn-block btn-outline-secondary">S.C</button>
+                                            </div>
+                                          </ng-template>
+                                          <ng-template ngbPanelContent>
+                                            <div class="row">
+                                              <div class="col-md-6">
+                                                  <label>Hospital %</label> 
+                                                  <input type="text" class="form-control" name="scHospital" [(ngModel)]="form.scHospital" />
+                                              </div>
+                                              <div class="col-md-6">
+                                                  <label>Doctor %</label> 
+                                                  <input type="text" class="form-control" name="scDoctor" [(ngModel)]="form.scDoctor" />
+                                              </div>
+                                          </div>
+                                          </ng-template>
+                                        </ngb-panel>
+                                       
+                                      </ngb-accordion>
+
+                                  </div>
+                                  <!-- Second Row -->
+                                  <div class="form-group col-md-4 col-sm-4">
+                                    <ngb-accordion #acc="ngbAccordion" [activeIds]="activeIds">
+
+                                      <ngb-panel id="panel-5">
+                                        <ng-template ngbPanelHeader>
+                                          <div class="d-flex align-items-center justify-content-between">
+                                            <button ngbPanelToggle class="btn btn-block btn-outline-secondary">CONSULTATION</button>
+                                          </div>
+                                        </ng-template>
+                                        <ng-template ngbPanelContent>
+                                          <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Hospital %</label> 
+                                                <input type="text" class="form-control" name="consultationHospital" [(ngModel)]="form.consultationHospital" />
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>Doctor %</label> 
+                                                <input type="text" class="form-control" name="consultationDoctor" [(ngModel)]="form.consultationDoctor" />
+                                            </div>
+                                        </div>
+                                        </ng-template>
+                                      </ngb-panel>
+
+                                      <ngb-panel id="panel-6">
+                                        <ng-template ngbPanelHeader>
+                                          <div class="d-flex align-items-center justify-content-between">
+                                            <button ngbPanelToggle class="btn btn-block btn-outline-secondary">ECG</button>
+                                          </div>
+                                        </ng-template>
+                                        <ng-template ngbPanelContent>
+                                          <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Hospital %</label> 
+                                                <input type="text" class="form-control" name="ecgHospital" [(ngModel)]="form.ecgHospital" />
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>Doctor %</label> 
+                                                <input type="text" class="form-control" name="ecgDoctor" [(ngModel)]="form.ecgDoctor" />
+                                            </div>
+                                        </div>
+                                        </ng-template>
+                                      </ngb-panel>
+
+                                      <ngb-panel id="panel-7">
+                                        <ng-template ngbPanelHeader>
+                                          <div class="d-flex align-items-center justify-content-between">
+                                            <button ngbPanelToggle class="btn btn-block btn-outline-secondary">ECHO/TMT</button>
+                                          </div>
+                                        </ng-template>
+                                        <ng-template ngbPanelContent>
+                                          <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Hospital %</label> 
+                                                <input type="text" class="form-control" name="echoHospital" [(ngModel)]="form.echoHospital" />
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>Doctor %</label> 
+                                                <input type="text" class="form-control" name="echoDoctor" [(ngModel)]="form.echoDoctor" />
+                                            </div>
+                                        </div>
+                                        </ng-template>
+                                      </ngb-panel>
+
+                                      <ngb-panel id="panel-8">
+                                        <ng-template ngbPanelHeader>
+                                          <div class="d-flex align-items-center justify-content-between">
+                                            <button ngbPanelToggle class="btn btn-block btn-outline-secondary">OTHER CHARGES</button>
+                                          </div>
+                                        </ng-template>
+                                        <ng-template ngbPanelContent>
+                                          <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Hospital %</label> 
+                                                <input type="text" class="form-control" name="otherHospital" [(ngModel)]="form.otherHospital" />
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>Doctor %</label> 
+                                                <input type="text" class="form-control" name="otherDoctor" [(ngModel)]="form.otherDoctor" />
+                                            </div>
+                                        </div>
+                                        </ng-template>
+                                      </ngb-panel>
+                                     
+                                    </ngb-accordion>
+                                  </div>
+
+
+                              </div>
+
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="form-group col-md-12 col-sm-12">
+                    <button type="button" class="btn btn-info mt-1" (click)="onReload()">New <i class="fas fa-sync-alt"></i></button>&nbsp;
+                      <button class="btn btn-success mt-1" type="submit">Save <i class="fas fa-save"></i></button>&nbsp;
+                  </div>
+
+              </form>
+
+
+              <div class="row">
+
+                  <div class="form-group col-md-12 col-sm-12">
+                      <div class="card card-body overflow-auto">
+                          <div class="form-group row">
+
+                              <div class="form-group col-md-12 col-sm-12">
+                                          <table id="customTable" *ngIf="showContent" datatable class="table  table-bordered" cellspacing="0" width="100%">
+                                              <thead class="thead-dark">
+                                                  <tr>
+                                                      <th>EDIT</th>
+                                                      <th>Doctor Name</th>
+                                                      <!-- <th>Department</th> -->
+                                                      <!-- <th>Group</th> -->
+                                                  </tr>
+                                              </thead>
+                                              <tbody style="color: black;">
+                                                  <tr *ngFor="let item of table_data">
+                                                      <td>
+                                                          <span class="float-right">
+                                                            <button *ngIf="isedit_action" id="edit" type="button" (click)="onEdit(item)" class="btn btn-warning"><i class="fas fa-edit"></i></button> &nbsp;
+                                                            <button *ngIf="isdelete_action" id="delete" type="button" (click)="onDelete(item.id)" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                                        </span>
+                                                      </td>
+                                                      <td>{{item.doctorNameView}}</td>
+                                                      <!-- <td>{{item.departmentView}}</td> -->
+                                                      <!-- <td>{{item.groupNameView}}</td> -->
+                                                  </tr>
+                                              </tbody>
+                                          </table>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              
+          </div>
+      </div>
+  </div>

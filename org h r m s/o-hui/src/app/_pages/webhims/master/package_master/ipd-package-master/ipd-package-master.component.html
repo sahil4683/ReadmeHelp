@@ -1,0 +1,177 @@
+    <div class="col-md-12 mt-3">
+        <div class="card card-outline card-danger">
+            <div class="card-header text-center">
+                <b style="font-size: 18px;"> IPD Package Master  </b>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body overflow-auto">
+                <form name="form" (ngSubmit)="f.form.valid && onSave()" #f="ngForm" novalidate>
+
+                    <input type="hidden" name="id" [(ngModel)]="form.id" #id="ngModel"> 
+                    <h2 *ngIf="isEdit" style="color: orangered;"><b>Edit Mode</b></h2>
+
+                    <div class="row">
+                        
+                        <div class="col-md-12 col-sm-12">
+                            <div class="card card-body overflow-auto">
+                                <div class="form-group row">
+                                    
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label for="name">Package Name</label>
+                                    <input type="text" class="form-control" name="packageName" [(ngModel)]="form.packageName" required #packageName="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && packageName.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label for="name">Package Amount</label>
+                                    <input type="text" class="form-control" name="total" [(ngModel)]="form.total"  #total="ngModel" />
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && total.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label for="name">Organization Name</label>
+                                    <select class="form-control" [(ngModel)]="form.organizationCode" [ngModelOptions]="{standalone: true}" (change)="getParticularsList()" required  #organizationCode="ngModel" name="organizationCode">
+                                        <option *ngFor="let o of OrganizationList" [ngValue]="o.id" style="color: black;">
+                                            {{o.organization}}
+                                        </option>
+                                    </select>
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && organizationCode.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label for="name">Active Yes/No</label>
+                                    <select class="form-control" name="activeYn" [(ngModel)]="form.activeYn" required #activeYn="ngModel">
+                                        <option value="YES">YES</option>
+                                        <option value="NO">NO</option>
+                                    </select>
+                                    <div class="text-danger" role="alert" *ngIf="f.submitted && activeYn.invalid">
+                                        Required Field !
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12">
+                            <div class="card card-body overflow-auto">
+                                <div class="form-group row">
+
+                                    <div class="col-md-12 col-sm-12">
+                                        <section class="card-body border bg-light" *ngFor="let dataItem of DetailsList; let i = index;">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <h4>List : {{i + 1}}</h4>
+                                                </div>
+                                                <div class="col-6 text-right">
+                                                    <button type="button" class="btn btn-danger btn-sm" (click)="removeAddress(i,dataItem.id)">&nbsp;-&nbsp;</button>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-1">
+                                                    <label for="itemNo">SR NO</label>
+                                                    <input type="number" class="form-control" name="sno" [ngModelOptions]="{standalone: true}" [(ngModel)]="dataItem.sno" />
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label>Particulars</label>
+                                                    <select class="form-control" [(ngModel)]="dataItem.testName" (change)="fillParticularsData(i)" [ngModelOptions]="{standalone: true}" name="testName">
+                                                        <option *ngFor="let r of ParticularsList" [ngValue]="r.testName" style="color: black;">
+                                                            {{r.testName}}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label>Procedure Doctor</label>
+                                                    <select class="form-control" [(ngModel)]="dataItem.procedureDoctor" [ngModelOptions]="{standalone: true}" #procedureDoctor="ngModel" name="procedureDoctor">
+                                                        <option *ngFor="let c of ConsultantList" [ngValue]="c.id" style="color: black;">
+                                                            {{c.name}}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <label for="propertyTax">Qty</label>
+                                                    <input (keyup)="calculateTotal(i)" type="number" [ngModelOptions]="{standalone: true}" class="form-control" name="qty" [(ngModel)]="dataItem.qty" />
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <label for="cleaningTax">Rate</label>
+                                                    <input (keyup)="calculateTotal(i)" type="number" [ngModelOptions]="{standalone: true}" name="rate" [(ngModel)]="dataItem.rate" class="form-control">
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <label for="amount">Amount </label>
+                                                    <input (keyup)="calculateTotal(i)" type="number" [ngModelOptions]="{standalone: true}" name="amount" [(ngModel)]="dataItem.amount" class="form-control">
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <section>
+                                            <button type="button" class="btn btn-success mb-2 mt-2" (click)="addAddress()">+</button>
+                                        </section>
+                                    </div>
+                                    <div class="form-group col-md-12 col-sm-12">
+                                        <div class="col-md-4 float-right">
+                                            <label for="total">Total</label>
+                                            <input type="number" readonly class="form-control" name="total" [(ngModel)]="form.total" required #total="ngModel" />
+                                        </div>
+                                    </div>
+                        
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group col-md-12 col-sm-12">
+                        <button type="button" class="btn btn-info mt-1" (click)="onNew()">New <i class="fas fa-sync-alt"></i></button>&nbsp;
+                        <button class="btn btn-success mt-1" type="submit">Save <i class="fas fa-save"></i></button> &nbsp;
+                        
+                    </div>
+
+                </form>
+
+                <div class="row">
+
+                    <div class="form-group col-md-12 col-sm-12">
+                        <div class="card card-body overflow-auto">
+                            <div class="form-group row">
+
+                                <div class="form-group col-md-12 col-sm-12">
+                                            <table id="customTable" *ngIf="showContent" datatable class="table  table-bordered" cellspacing="0" width="100%">
+                                                <thead class="thead-dark">
+                                                    <tr>
+                                                        <th>EDIT</th>
+                                                        <th>packageName</th>
+                                                        <th>organizationName</th>
+                                                        <th>total</th>
+                                                        <th>activeYn</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody style="color: black;">
+                                                    <tr *ngFor="let item of table_data">
+                                                        <td>
+                                                            <span class="float-right">
+                                                                <button *ngIf="isedit_action" id="edit" type="button" (click)="onEdit(item)" class="btn btn-warning"><i class="fas fa-edit"></i></button> &nbsp;
+                                                                <button *ngIf="isdelete_action" id="delete" type="button" (click)="onDelete(item.id)" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                                            </span>
+                                                        </td>
+                                                        <td>{{item.packageName}}</td>
+                                                        <td>{{item.organizationName}}</td>
+                                                        <td>{{item.total}}</td>
+                                                        <td>{{item.activeYn}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>

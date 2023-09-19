@@ -1,0 +1,508 @@
+    <div class="col-md-12 mt-3">
+        <div class="card card-outline card-danger">
+            <div class="card-header text-center">
+                <b style="font-size: 18px;"> Financial Credit Note Opd </b>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body overflow-auto">
+                <form name="form" (ngSubmit)="f.form.valid && onSave()" #f="ngForm" novalidate>
+
+                    <input type="hidden" name="id" [(ngModel)]="form.id" #id="ngModel">
+                    <h2 *ngIf="isEdit" style="color: orangered;"><b>Edit Mode</b></h2>
+
+                    <div class="row">
+                        <div class="form-group col-md-3 col-sm-3">
+                            <label for="name">Bill Type</label>
+                            <div class="form-group row">
+                                <div class="form-check col-md-4">
+                                    <input class="form-check-input" type="radio" value="CASH" checked name="billType" (change)="billTypeChange()" [(ngModel)]="form.billType" #billType="ngModel">
+                                    <label class="form-check-label">CASH</label>
+                                </div>
+                                <div class="form-check col-md-4">
+                                    <input class="form-check-input" type="radio" value="CREDIT" name="billType" (change)="billTypeChange()" [(ngModel)]="form.billType" #billType="ngModel">
+                                    <label class="form-check-label">CREDIT</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3 col-sm-3">
+                            <label for="name">Date</label>
+                            <input type="date" class="form-control" name="date" [(ngModel)]="form.date" #date="ngModel" />
+                            <div class="text-danger" role="alert" *ngIf="f.submitted && date.invalid">
+                                Required Field !
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3 col-sm-3">
+                            <label for="name">Sub Dept</label>
+                            <select class="form-control" [(ngModel)]="form.subDept" required #subDept="ngModel" name="subDept">
+                                <option *ngFor="let o of SubDeptList" [ngValue]="o.id" style="color: black;">
+                                    {{o.subDept}}
+                                </option>
+                            </select>
+                            <div class="text-danger" role="alert" *ngIf="f.submitted && subDept.invalid">
+                                Required Field !
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3 col-sm-3">
+                            <label for="name">Patient Type OLD/NEW</label>
+                            <select class="form-control" name="patientTypeOldNew" [(ngModel)]="form.patientTypeOldNew" required #patientTypeOldNew="ngModel">
+                                <option value="New">New</option>
+                                <option value="Old">Old</option>
+                            </select>
+                            <div class="text-danger" role="alert" *ngIf="f.submitted && patientTypeOldNew.invalid">
+                                Required Field !
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3 col-sm-3">
+                            <label for="name">Bill No</label>
+                            <input type="text" class="form-control" name="billNo" [(ngModel)]="form.billNo" style="background-color: #e9ecef;" #billNo="ngModel" required  disabled/>
+                            <div class="text-danger" role="alert" *ngIf="f.submitted && billNo.invalid">
+                                Required Field !
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3 col-sm-3">
+                            <label for="name">UHID</label>
+                            <input type="text" class="form-control" name="uhid" [(ngModel)]="form.uhid" required #uhid="ngModel" />
+                            <div class="text-danger" role="alert" *ngIf="f.submitted && uhid.invalid">
+                                Required Field !
+                            </div>
+                        </div>
+                        <div class="form-group col-md-2 col-sm-2">
+                            <label for="name">PID No</label>
+                            <input type="text" class="form-control" name="ipdno" [(ngModel)]="form.ipdno" #ipdno="ngModel" />
+                            <div class="text-danger" role="alert" *ngIf="f.submitted && ipdno.invalid">
+                                Required Field !
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3 col-sm-3">
+                            <label for="name">Organization</label>
+                            <select class="form-control" [(ngModel)]="form.organization" [ngModelOptions]="{standalone: true}" disabled required #organization="ngModel" name="organization">
+                                <option *ngFor="let o of OrganizationList" [ngValue]="o.id" style="color: black;">
+                                    {{o.organization}}
+                                </option>
+                            </select>
+                            <div class="text-danger" role="alert" *ngIf="f.submitted && organization.invalid">
+                                Required Field !
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3 col-sm-3">
+                            <label for="name">Patient Type</label>
+                            <select class="form-control" name="ptype" [(ngModel)]="form.ptype" #ptype="ngModel">
+                                <option value="GENERAL" selected="selected">GENERAL</option>
+                                <option value="STAFF">STAFF</option>
+                                <option value="PRIVILEDGE MEMBER">PRIVILEDGE MEMBER</option>
+                                <option value="CAMP PATIENT">CAMP PATIENT</option>
+                            </select>
+                            <div class="text-danger" role="alert" *ngIf="f.submitted && ptype.invalid">
+                                Required Field !
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3 col-sm-3">
+                            <label for="name">Patient Name</label>
+                            <ng-select [(ngModel)]="form.name" name="name" #name="ngModel" (focusout)="getDetailBy_BillNo(this.form.name)" class="ng-select-focused"
+                                        [loading]="tokensAreLoading" [isOpen]="openSuggestionDropdown" [ngModelOptions]="{standalone: true}" ng-model-options="{debounce: 4000}" [virtualScroll]="true" 
+                                        [dropdownPosition]="'down'" notFoundText="No Data Found" loadingText="loading..." [inputAttrs]="{autocomplete: 'off'}" [typeahead]="typeaheadTextInput" placeholder="Type to search">
+                                <ng-option *ngFor="let o of PatientDetails" [value]="o.billNo">
+                                    {{o.name}} | {{o.uhid}} | <b style="color: red;">{{o.billNo}}</b>
+                                </ng-option>
+                            </ng-select>
+                            <div class="text-danger" role="alert" *ngIf="f.submitted && name.invalid">
+                                Required Field !
+                            </div>
+                        </div>
+                        <div class="form-group col-md-2 col-sm-2">
+                            <label for="name">Sex</label>
+                            <select class="form-control" name="sex" [(ngModel)]="form.sex" disabled #sex="ngModel">
+                                <option value="MALE">MALE</option>
+                                <option value="FEMALE">FEMALE</option>
+                                <option value="HERMAPHRODITIC">HERMAPHRODITIC</option>
+                                <option value="ENANCH">ENANCH</option>
+                            </select>
+                            <div class="text-danger" role="alert" *ngIf="f.submitted && sex.invalid">
+                                Required Field !
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3 col-sm-3">
+                            <label for="name">Age</label>
+                            <input type="text" class="form-control" name="age" [(ngModel)]="form.age" disabled #age="ngModel" />
+                            <div class="text-danger" role="alert" *ngIf="f.submitted && age.invalid">
+                                Required Field !
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-3 col-sm-3">
+                            <label for="name">Ref By</label>
+                            <select class="form-control" [(ngModel)]="form.refBy1" [ngModelOptions]="{standalone: true}" #refBy1="ngModel" name="refBy1">
+                                <option *ngFor="let r of DoctorReferenceList" [ngValue]="r.id" style="color: black;">
+                                    {{r.name}}
+                                </option>
+                            </select>
+                            <div class="text-danger" role="alert" *ngIf="f.submitted && refBy1.invalid">
+                                Required Field !
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3 col-sm-3">
+                            <label for="name">Ref By</label>
+                            <select class="form-control" [(ngModel)]="form.refBy2" [ngModelOptions]="{standalone: true}" #refBy2="ngModel" name="refBy2">
+                                <option *ngFor="let r of DoctorReferenceList" [ngValue]="r.id" style="color: black;">
+                                    {{r.name}}
+                                </option>
+                            </select>
+                            <div class="text-danger" role="alert" *ngIf="f.submitted && refBy2.invalid">
+                                Required Field !
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3 col-sm-3">
+                            <label for="name">Consultant 1</label>
+                            <select class="form-control" [(ngModel)]="form.consultant1" [ngModelOptions]="{standalone: true}" required #consultant1="ngModel" name="consultant1">
+                                <option *ngFor="let c of ConsultantList" [ngValue]="c.id" style="color: black;">
+                                    {{c.name}}
+                                </option>
+                            </select>
+                            <div class="text-danger" role="alert" *ngIf="f.submitted && consultant1.invalid">
+                                Required Field !
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3 col-sm-3">
+                            <label for="name">Consultant 2</label>
+                            <select class="form-control" [(ngModel)]="form.consultant2" [ngModelOptions]="{standalone: true}" #consultant2="ngModel" name="consultant2">
+                                <option *ngFor="let c of ConsultantList" [ngValue]="c.id" style="color: black;">
+                                    {{c.name}}
+                                </option>
+                            </select>
+                            <div class="text-danger" role="alert" *ngIf="f.submitted && consultant2.invalid">
+                                Required Field !
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3 col-sm-3">
+                            <label for="name">Opd Bill No</label>
+                            <input type="text" class="form-control" (focusout)="getDetailBy_BillNo(this.form.opdBillNo)" placeholder="Enter For Search" name="opdBillNo" [(ngModel)]="form.opdBillNo" style="background-color: #e9ecef;" #opdBillNo="ngModel" />
+                            <div class="text-danger" role="alert" *ngIf="f.submitted && opdBillNo.invalid">
+                                Required Field !
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="card card-body overflow-auto">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12">
+                                    <div class="row">
+                                        <div class="col-md-4 col-sm-4">
+                                            <select class="form-control" [(ngModel)]="form.organization" [ngModelOptions]="{standalone: true}" #organization="ngModel" name="organization">
+                                                <option *ngFor="let o of OrganizationList" [ngValue]="o.id" style="color: black;">
+                                                    {{o.organization}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <section class="card-body border bg-light" *ngFor="let dataItem of DetailsList; let i = index;">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <h4>List : {{i + 1}}</h4>
+                                            </div>
+                                            <div class="col-6 text-right">
+                                                <button type="button" class="btn btn-danger btn-sm" (click)="removeAddress(i,dataItem.id)">&nbsp;-&nbsp;</button>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label>Groups</label>
+                                                <!-- (change)="getParticularsList(i)" -->
+                                                <select class="form-control" [(ngModel)]="dataItem.groupName" (change)="getParticularsList(i)" required [ngModelOptions]="{standalone: true}" name="groupName">
+                                                    <option *ngFor="let r of GruopList" [ngValue]="r.id" style="color: black;">
+                                                        {{r.groupName}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label>Particulars</label>
+                                                <select class="form-control" [(ngModel)]="dataItem.particulars" (change)="fillParticularsData(i)" required [ngModelOptions]="{standalone: true}" name="particulars">
+                                                    <option *ngFor="let r of ParticularsList[i]" [ngValue]="r.id" style="color: black;">
+                                                        {{r.testName}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label>Procedure Doctor1</label>
+                                                <select class="form-control" [(ngModel)]="dataItem.procedureDoctor1" [ngModelOptions]="{standalone: true}" #procedureDoctor1="ngModel" name="procedureDoctor1">
+                                                    <option *ngFor="let c of ConsultantList" [ngValue]="c.id" style="color: black;">
+                                                        {{c.name}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label>Procedure Doctor2</label>
+                                                <select class="form-control" [(ngModel)]="dataItem.procedureDoctor2" [ngModelOptions]="{standalone: true}" #procedureDoctor2="ngModel" name="procedureDoctor2">
+                                                    <option *ngFor="let c of ConsultantList" [ngValue]="c.id" style="color: black;">
+                                                        {{c.name}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label for="propertyTax">Qty</label>
+                                                <input (keyup)="calculateTotal(i)" name="qty" [(ngModel)]="dataItem.qty" type="number" [ngModelOptions]="{standalone: true}" class="form-control" />
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label for="cleaningTax">Rate</label>
+                                                <input (keyup)="calculateTotal(i)" type="number" [ngModelOptions]="{standalone: true}" name="rate" [(ngModel)]="dataItem.rate" class="form-control">
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label for="amount">Amount</label>
+                                                <input type="number" [ngModelOptions]="{standalone: true}" name="amount" [(ngModel)]="dataItem.amount" disabled class="form-control">
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <section>
+                                        <button type="button" class="btn btn-success mb-2 mt-2" (click)="addAddress()">+</button>
+                                    </section>
+                                </div>
+
+
+                                <div class="col-md-6 col-sm-6 border-right">
+                                    <div class="row">
+
+                                        <div *ngIf="isCASH" class="form-group col-md-4 col-sm-4">
+                                            <label for="name">Method Of Payment</label>
+                                            <select class="form-control" name="methodOfPayment" [(ngModel)]="form.methodOfPayment" (change)="typeChange()" required #methodOfPayment="ngModel">
+                                                <option value="CASH" selected="selected">CASH</option>
+                                                <option value="PLASTICMONEY">PLASTICMONEY</option>
+                                                <option value="CHEQUE">CHEQUE</option>
+                                            </select>
+                                            <div class="text-danger" role="alert" *ngIf="f.submitted && methodOfPayment.invalid">
+                                                Required Field !
+                                            </div>
+                                        </div>
+                                        <div *ngIf="isCHEQUE" class="form-group col-md-4 col-sm-4">
+                                            <label for="name">Cheque No</label>
+                                            <input type="text" class="form-control" name="chequeNo" [(ngModel)]="form.chequeNo" #chequeNo="ngModel" />
+                                            <div class="text-danger" role="alert" *ngIf="f.submitted && chequeNo.invalid">
+                                                Required Field !
+                                            </div>
+                                        </div>
+                                        <div *ngIf="isPLASTICMONEY" class="form-group col-md-4 col-sm-4">
+                                            <label for="name">Instrument Name</label>
+                                            <select class="form-control" [(ngModel)]="form.plasticInstrumentName" #plasticInstrumentName="ngModel" name="plasticInstrumentName">
+                                                <option *ngFor="let o of PlasticInstrumentNameList" [ngValue]="o.plasticInstrumentName" style="color: black;">
+                                                    {{o.plasticInstrumentName}}
+                                                </option>
+                                            </select>
+                                            <div class="text-danger" role="alert" *ngIf="f.submitted && plasticInstrumentName.invalid">
+                                                Required Field !
+                                            </div>
+                                        </div>
+                                        <div *ngIf="isPLASTICMONEY" class="form-group col-md-4 col-sm-4">
+                                            <label for="name">Transaction No</label>
+                                            <input type="text" class="form-control" name="transactionNo" [(ngModel)]="form.transactionNo" #transactionNo="ngModel" />
+                                            <div class="text-danger" role="alert" *ngIf="f.submitted && transactionNo.invalid">
+                                                Required Field !
+                                            </div>
+                                        </div>
+                                        <div *ngIf="isPLASTICMONEY" class="form-group col-md-4 col-sm-4">
+                                            <label for="name">Dated</label>
+                                            <input type="date" class="form-control" name="dated" [(ngModel)]="form.dated" required #dated="ngModel" />
+                                            <div class="text-danger" role="alert" *ngIf="f.submitted && dated.invalid">
+                                                Required Field !
+                                            </div>
+                                        </div>
+                                        <div *ngIf="isPLASTICMONEY" class="form-group col-md-4 col-sm-4">
+                                            <label for="name">To Account</label>
+                                            <select class="form-control" name="drawnOn" [(ngModel)]="form.drawnOn" #drawnOn="ngModel">
+                                                <option value="CASH ON HAND">CASH ON HAND</option>
+                                                <option value="CANARA BANK">CANARA BANK</option>
+                                                <option value="FEDERAL BANK">FEDERAL BANK</option>
+                                                <option value="TDS RECEIVABLE">TDS RECEIVABLE</option>
+                                                <option value="BOB C/A 05870200000593">BOB C/A 05870200000593</option>
+                                                <option value="BOB-05870500000714">BOB-05870500000714</option>
+                                            </select>
+                                            <div class="text-danger" role="alert" *ngIf="f.submitted && drawnOn.invalid">
+                                                Required Field !
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="row">
+                                                <div class="form-group col-md-6 col-sm-6">
+                                                    <label for="name">Remarks</label>
+                                                    <textarea rows="3" cols="20" type="text" class="form-control" name="remarks" [(ngModel)]="form.remarks" #remarks="ngModel"></textarea>
+                                                    <div class="text-danger" role="alert" *ngIf="f.submitted && remarks.invalid">
+                                                        Required Field !
+                                                    </div>
+                                                </div>
+                                                <div *ngIf="isCASH" class="form-group col-md-6 col-sm-6">
+                                                    <label for="name">Details</label>
+                                                    <textarea rows="3" cols="20" type="text" class="form-control" name="details" [(ngModel)]="form.details" #details="ngModel"></textarea>
+                                                    <div class="text-danger" role="alert" *ngIf="f.submitted && details.invalid">
+                                                        Required Field !
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 border-left">
+                                    <div class="row">
+                                        <div class="form-group col-md-12 col-sm-12">
+                                            <div class="row">
+                                                <label for="name" class="col-md-6 col-sm-6">Total</label>
+                                                <input type="text" class="form-control col-md-6 col-sm-6" name="total" [(ngModel)]="form.total" disabled #total="ngModel" />
+                                                <div class="text-danger" role="alert" *ngIf="f.submitted && total.invalid">
+                                                    Required Field !
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-12 col-sm-12">
+                                            <div class="row">
+                                                <label for="name" class="col-md-3 col-sm-3">Concession</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <select class="form-control col-md-3 col-sm-3" [(ngModel)]="form.concessionType" (change)="fillConcessionData(null)" [ngModelOptions]="{standalone: true}" name="concessionType">
+                                                    <option *ngFor="let r of ConcessionList" [ngValue]="r.id" style="color: black;">
+                                                        {{r.concessionName}}
+                                                    </option>
+                                                </select> &nbsp;&nbsp;&nbsp;&nbsp;
+                                                <input type="text" class="form-control col-md-2 col-sm-2" (focusout)="fillConcessionData(form.concessionPer)" name="concessionPer" [(ngModel)]="form.concessionPer" #concessionPer="ngModel" />
+                                                &nbsp;&nbsp;%&nbsp;&nbsp;
+                                                <input type="text" class="form-control col-md-3 col-sm-3" (focusout)="fillConcessionValue(form.concession)" name="concession" [(ngModel)]="form.concession" #concession="ngModel" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-12 col-sm-12">
+                                            <div class="row">
+                                                <label for="name" class="col-md-8 col-sm-8">Other Concession</label>
+                                               <!-- <input type="text" class="form-control col-md-3 col-sm-3" name="trustAmount" [(ngModel)]="form.trustAmount" #trustAmount="ngModel" /> -->
+                                               <!-- <input type="text" class="form-control col-md-2 col-sm-2" name="trustPer" [(ngModel)]="form.trustPer" #trustPer="ngModel" />&nbsp;%&nbsp; -->
+                                               <input type="text" class="form-control col-md-4 col-sm-4" (focusout)="fillOtherConcessionValue(form.trustDiscount)" name="trustDiscount" [(ngModel)]="form.trustDiscount" #trustDiscount="ngModel" />
+                                           </div>
+                                        </div>
+                                        <div class="form-group col-md-4 col-sm-4">
+                                            <label for="name">NetTotal</label>
+                                            <input type="text" class="form-control" name="nettotal" [(ngModel)]="form.nettotal" disabled #nettotal="ngModel" />
+                                            <div class="text-danger" role="alert" *ngIf="f.submitted && nettotal.invalid">
+                                                Required Field !
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-4 col-sm-4">
+                                            <label for="name">Paid Amount</label>
+                                            <input type="text" class="form-control" name="paidAmount" [(ngModel)]="form.paidAmount" (keyup)="calculateDue()" #paidAmount="ngModel" />
+                                            <div class="text-danger" role="alert" *ngIf="f.submitted && paidAmount.invalid">
+                                                Required Field !
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-4 col-sm-4">
+                                            <label for="name">Due</label>
+                                            <input type="text" class="form-control" name="due" [(ngModel)]="form.due" disabled #due="ngModel" />
+                                            <div class="text-danger" role="alert" *ngIf="f.submitted && due.invalid">
+                                                Required Field !
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="card card-body overflow-auto">
+                            <div class="form-group row">
+                                <button type="button" class="btn btn-info mt-1" (click)="onNew()">New <i class="fas fa-sync-alt"></i></button> &nbsp;
+                                <button class="btn btn-success mt-1" type="submit">Save <i class="fas fa-save"></i></button> &nbsp;
+                                <button type="button" class="btn btn-danger mt-1" (click)="getPdf(this.form.id)">Print <i class="fa fa-download"></i></button> &nbsp;
+                                <button type="button" class="btn btn-warning mt-1" routerLink="/hims/reception-bill-cash_dues" [queryParams]="{ uhid: form.uhid}" >Cash Due <i class="fa fa-share-square"></i></button>&nbsp;
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+
+
+                <div class="row">
+                    <div class="card card-body overflow-auto">
+                        <div class="form-group row">
+
+                            <div class="form-group col-md-1 col-sm-1">
+                                <button type="button" class="btn btn-info mt-1" (click)="onTable(0)">Today</button>
+                            </div>
+                            <div class="form-group col-md-1 col-sm-1">
+                                <button type="button" class="btn btn-info mt-1" (click)="onTable(1)">Show All</button>
+                            </div>
+                            <div class="form-group col-md-3 col-sm-3">
+                                <div class="input-group mt-1">
+                                    <input type="date" class="form-control" name="getByDate" [(ngModel)]="form.getByDate" #getByDate="ngModel">
+                                    <span class="input-group-append">
+                                      <button type="button" class="btn btn-info" (click)="onTable(2)">Get</button>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <label class="mt-2 ml-3" for=""> Search: </label>
+                            <div class="form-group col-md-4 col-sm-4">
+                                <ng-select class="mt-1" [(ngModel)]="form.searchTable" name="searchTable" #searchTable="ngModel" (focusout)="onTableSearch(this.form.searchTable)" 
+                                        [loading]="tokensAreLoading_table" [addTag]="true" [isOpen]="openSuggestionDropdown_table" [ngModelOptions]="{standalone: true}" ng-model-options="{debounce: 4000}" [virtualScroll]="true" 
+                                        [dropdownPosition]="'down'" notFoundText="No Data Found" loadingText="loading..." [inputAttrs]="{autocomplete: 'off'}" [typeahead]="typeaheadTextInput_table" placeholder="Type to search (name, uhid, bill number)">
+                                    <ng-option *ngFor="let o of tableDistinctList" [value]="o.id">
+                                        <span class="search_table_name">{{o.name}}</span> | 
+                                        <span class="search_table_uhid">{{o.uhid}}</span> | 
+                                        <span class="search_table_bill">{{o.billNo}}</span> | 
+                                        {{o.date}}
+                                    </ng-option>
+                                </ng-select>
+                            </div>
+
+                            <div class="form-group col-md-12 col-sm-12">
+
+                                        <table id="customTable" *ngIf="showContent" datatable class="table  table-bordered" cellspacing="0" width="100%">
+                                            <thead class="thead-dark">
+                                                <tr>
+                                                    <th>Preview</th>
+                                                    <th>Print</th>
+                                                    <th>Bill No</th>
+                                                    <th>Patient Name</th>
+                                                    <th>Bill Type</th>
+                                                    <th>Date</th>
+                                                    <th>UHID</th>
+                                                    <!-- <th>SubDept</th> -->
+                                                    <th>methodOfPayment</th>
+                                                    <th>Total</th>
+                                                    <th>Paid Amount</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody style="color: black;">
+                                                <tr *ngFor="let item of table_data">
+                                                    <td>
+                                                        <span class="float-right">
+                                                            <button *ngIf="isedit_action" id="edit" type="button" (click)="onEdit(item)" class="btn btn-warning"><i class="fas fa-edit"></i></button> &nbsp;
+                                                            <button *ngIf="isdelete_action" id="delete" type="button" (click)="onDelete(item.bill.id)" class="btn btn-danger" ><i class="fa fa-trash"></i></button>
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <button id="" type="button" (click)="getPdf(item.bill.id)" class="btn btn-danger"><i class="fas fa-print"></i>
+                                                        </button>&nbsp;
+                                                    </td>
+                                                    <td>{{item.bill.billNo}}</td>
+                                                    <td>{{item.registration.name}}</td>
+                                                    <td>{{item.bill.billType}}</td>
+                                                    <td>{{item.bill.date}}</td>
+                                                    <td>{{item.bill.uhid}}</td>
+                                                    <!-- <td>{{item.bill.subDept}}</td> -->
+                                                     <td>{{item.bill.methodOfPayment}}</td>
+                                                    <td>{{item.bill.total}}</td>
+                                                    <td>{{item.bill.paidAmount}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>

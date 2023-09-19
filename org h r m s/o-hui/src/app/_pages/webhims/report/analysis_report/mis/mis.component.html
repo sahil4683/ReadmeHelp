@@ -1,0 +1,417 @@
+<div class="">
+    <div class="col-md-12 mt-3">
+        <div class="card card-outline card-danger">
+            <div class="card-header text-center">
+                <b style="font-size: 18px;"> MIS Report </b>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body row">
+
+                    <div class="col-sm-12 col-md-12">
+                        <div class="card card-body">
+                            <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+                                <div class="row">
+                                    <div class="form-group col-md-3 col-sm-3"></div>
+                                    <div class="form-group col-md-3 col-sm-3">
+                                        <label for="name">Form Date </label>
+                                        <input type="date" class="form-control" name="fromDate" [(ngModel)]="form.fromDate"  #fromDate="ngModel" />
+                                        <div class="text-danger" role="alert" *ngIf="f.submitted && fromDate.invalid">
+                                            Required Field !
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-3 col-sm-3">
+                                        <label for="name">To Date </label>
+                                        <input type="date" class="form-control" name="toDate" [(ngModel)]="form.toDate"  #toDate="ngModel" />
+                                        <div class="text-danger" role="alert" *ngIf="f.submitted && toDate.invalid">
+                                            Required Field !
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-3 col-sm-3"></div>
+                                    <div class="form-group col-md-12 col-sm-12 text-center">
+                                        <button type="submit" class="btn btn-primary mt-1">Show <i class="fa fa-eye"></i></button>&nbsp;
+                                        <button type="button" class="btn btn-danger mt-1" (click)="onExport('pdf')">Export PDF <i class="fas fa-file-pdf"></i></button>&nbsp;
+                                        <button type="button" class="btn btn-success mt-1" (click)="onExport('xlsx')">Export Excel <i class="fas fa-file-excel"></i></button>&nbsp;
+                                        <button type="button" class="btn btn-info mt-1" disabled >CEO SMS</button>&nbsp;
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+
+                    <div class="col-sm-6 col-md-6">
+                        <div class="card card-body">
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">Total No. Of New Bill OPD Patients :</label>
+                                <input type="text" name="newOpdBillPatients" [(ngModel)]="form.newOpdBillPatients" class="form-control col-sm-7 col-md-7" disabled style="background-color: #0099FF;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">Total No. Of Old Bill OPD Patients :</label>
+                                <input type="text" name="oldOpdBillPatients" [(ngModel)]="form.oldOpdBillPatients" class="form-control col-sm-7 col-md-7" disabled style="background-color: #0099FF;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">Total No. Of IPD Patients :</label>
+                                <input type="text" name="ipdpatients" [(ngModel)]="form.ipdpatients" class="form-control col-sm-7 col-md-7" disabled style="background-color: #0099FF;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">Total No. Of IPD Discharge :</label>
+                                <input type="text" name="ipddischarge" [(ngModel)]="form.ipddischarge" class="form-control col-sm-7 col-md-7" disabled style="background-color: #0099FF;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">Total No. Of OPD Bill :</label>
+                                <input type="text" name="totalOpdBillPatients" [(ngModel)]="form.totalOpdBillPatients" class="form-control col-sm-7 col-md-7" disabled style="background-color: #0099FF;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">Total No. Of IPD Bill :</label>
+                                <input type="text" name="ipdtotal" [(ngModel)]="form.ipdtotal" class="form-control col-sm-7 col-md-7" disabled style="background-color: #0099FF;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">Total No. Of LAB Bill :</label>
+                                <input type="text" name="totalLabBillPatients" [(ngModel)]="form.totalLabBillPatients" class="form-control col-sm-7 col-md-7" disabled style="background-color: #0099FF;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">Total No. Of RADIO Bill :</label>
+                                <input type="text" name="totalRadioBillPatients" [(ngModel)]="form.totalRadioBillPatients" class="form-control col-sm-7 col-md-7" disabled style="background-color: #0099FF;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">Total No. Of HEALTHCHECKUP Bill :</label>
+                                <input type="text" name="totalhealthCheckupBillPatients" [(ngModel)]="form.totalhealthCheckupBillPatients" class="form-control col-sm-7 col-md-7" disabled style="background-color: #0099FF;" />
+                            </div>
+                        </div>
+
+                        <div class="card card-body">
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">Total No. Of Admission :</label>
+                                <input type="text" name="totalAdmission" [(ngModel)]="form.totalAdmission" class="form-control col-sm-7 col-md-7" disabled style="background-color: #FF9900;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">Total No. Of Discharge :</label>
+                                <input type="text" name="totalDischarge" [(ngModel)]="form.totalDischarge" class="form-control col-sm-7 col-md-7" disabled style="background-color: #FF9900;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">Mortality (Death) :</label>
+                                <input type="text" name="totalDeath" [(ngModel)]="form.totalDeath" class="form-control col-sm-7 col-md-7" disabled style="background-color: #FF9900;" />
+                            </div>
+                        </div>
+
+                        <div class="card card-body">
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">Total Value Of OPD Bill Raised :</label>
+                                <input type="text" name="sumOpdBill" [(ngModel)]="form.sumOpdBill" class="form-control col-sm-7 col-md-7" disabled style="background-color: #CC99FF;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">Total Value Of OPD Bill Refund Raised :</label>
+                                <input type="text" name="sumOpdRefund" [(ngModel)]="form.sumOpdRefund" class="form-control col-sm-7 col-md-7" disabled style="background-color: #CC99FF;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">Total Value Of LAB Bill Raised :</label>
+                                <input type="text" name="sumLabBill" [(ngModel)]="form.sumLabBill" class="form-control col-sm-7 col-md-7" disabled style="background-color: #CC99FF;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">Total Value Of LAB Bill Refund Raised :</label>
+                                <input type="text" name="sumLabRefund" [(ngModel)]="form.sumLabRefund" class="form-control col-sm-7 col-md-7" disabled style="background-color: #CC99FF;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">Total Value Of RADIO Bill Raised :</label>
+                                <input type="text" name="sumRadioBill" [(ngModel)]="form.sumRadioBill" class="form-control col-sm-7 col-md-7" disabled style="background-color: #CC99FF;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">Total Value Of RADIO Bill Refund Raised :</label>
+                                <input type="text" name="sumRadioRefund" [(ngModel)]="form.sumRadioRefund" class="form-control col-sm-7 col-md-7" disabled style="background-color: #CC99FF;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">Total Value Of IPD Bill Raised :</label>
+                                <input type="text" name="sumIpdBill" [(ngModel)]="form.sumIpdBill" class="form-control col-sm-7 col-md-7" disabled style="background-color: #CC99FF;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">Total Value Of HEALTHCHECKUP Bill Raised :</label>
+                                <input type="text" name="sumHealthCheckupBill" [(ngModel)]="form.sumHealthCheckupBill" class="form-control col-sm-7 col-md-7" disabled style="background-color: #CC99FF;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">Total Value Of HEALTHCHECKUP Bill Refund Raised :</label>
+                                <input type="text" name="sumHealthCheckupRefund" [(ngModel)]="form.sumHealthCheckupRefund" class="form-control col-sm-7 col-md-7" disabled style="background-color: #CC99FF;" />
+                            </div>
+                            <hr>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label" style="color: #B86250;">Total Bill Raised :</label>
+                                <input type="text" name="totalSumBill" [(ngModel)]="form.totalSumBill" class="form-control col-sm-7 col-md-7" disabled style="background-color: #AC6D53;" />
+                            </div>
+                        </div>
+
+                        <div class="card card-body">
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">OPD Receipt Collected (Cash) :</label>
+                                <input type="text" name="sumOpdBillCash" [(ngModel)]="form.sumOpdBillCash" class="form-control col-sm-7 col-md-7" disabled style="background-color: #9999FF;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">OPD Receipt Collected (Cheque) :</label>
+                                <input type="text" name="sumOpdBillCheque" [(ngModel)]="form.sumOpdBillCheque" class="form-control col-sm-7 col-md-7" disabled style="background-color: #9999FF;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">OPD Receipt Collected (Plastic Money) :</label>
+                                <input type="text" name="sumOpdBillPlasticMoney" [(ngModel)]="form.sumOpdBillPlasticMoney" class="form-control col-sm-7 col-md-7" disabled style="background-color: #9999FF;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">OPD Deposit (Cash) :</label>
+                                <input type="text" name="sumOpdDepositCash" [(ngModel)]="form.sumOpdDepositCash" class="form-control col-sm-7 col-md-7" disabled style="background-color: #9999FF;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">OPD Deposit (Cheque) :</label>
+                                <input type="text" name="sumOpdDepositCheque" [(ngModel)]="form.sumOpdDepositCheque" class="form-control col-sm-7 col-md-7" disabled style="background-color: #9999FF;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">OPD Deposit (Plastic Money) :</label>
+                                <input type="text" name="sumOpdDepositPlasticMoney" [(ngModel)]="form.sumOpdDepositPlasticMoney" class="form-control col-sm-7 col-md-7" disabled style="background-color: #9999FF;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">OPD Refund Paid (Cash) :</label>
+                                <input type="text" name="sumOpdRefundCash" [(ngModel)]="form.sumOpdRefundCash" class="form-control col-sm-7 col-md-7" disabled style="background-color: #9999FF;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">OPD Refund Paid (Cheque) :</label>
+                                <input type="text" name="sumOpdRefundCheque" [(ngModel)]="form.sumOpdRefundCheque" class="form-control col-sm-7 col-md-7" disabled style="background-color: #9999FF;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">OPD Refund Paid (Plastic Money) :</label>
+                                <input type="text" name="sumOpdRefundPlasticMoney" [(ngModel)]="form.sumOpdRefundPlasticMoney" class="form-control col-sm-7 col-md-7" disabled style="background-color: #9999FF;" />
+                            </div>
+                        </div>
+
+                        <div class="card card-body">
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">HEALTHCHECKUP Receipt Collected (Cash) :</label>
+                                <input type="text" name="sumHealthCheckupBillCash" [(ngModel)]="form.sumHealthCheckupBillCash" class="form-control col-sm-7 col-md-7" disabled style="background-color: #9999FF;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">HEALTHCHECKUP Receipt Collected (Cheque) :</label>
+                                <input type="text" name="sumHealthCheckupBillCheque" [(ngModel)]="form.sumHealthCheckupBillCheque" class="form-control col-sm-7 col-md-7" disabled style="background-color: #9999FF;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">HEALTHCHECKUP Receipt Collected (Plastic Money) :</label>
+                                <input type="text" name="sumHealthCheckupBillPlasticMoney" [(ngModel)]="form.sumHealthCheckupBillPlasticMoney" class="form-control col-sm-7 col-md-7" disabled style="background-color: #9999FF;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">HEALTHCHECKUP Deposit (Cash) :</label>
+                                <input type="text" name="sumHealthCheckupDepositCash" [(ngModel)]="form.sumHealthCheckupDepositCash" class="form-control col-sm-7 col-md-7" disabled style="background-color: #9999FF;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">HEALTHCHECKUP Deposit (Cheque) :</label>
+                                <input type="text" name="sumHealthCheckupDepositCheque" [(ngModel)]="form.sumHealthCheckupDepositCheque" class="form-control col-sm-7 col-md-7" disabled style="background-color: #9999FF;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">HEALTHCHECKUP Deposit (Plastic Money) :</label>
+                                <input type="text" name="sumHealthCheckupDepositPlasticMoney" [(ngModel)]="form.sumHealthCheckupDepositPlasticMoney" class="form-control col-sm-7 col-md-7" disabled style="background-color: #9999FF;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">HEALTHCHECKUP Refund Paid (Cash) :</label>
+                                <input type="text" name="sumHealthCheckupRefundCash" [(ngModel)]="form.sumHealthCheckupRefundCash" class="form-control col-sm-7 col-md-7" disabled style="background-color: #9999FF;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">HEALTHCHECKUP Refund Paid (Cheque) :</label>
+                                <input type="text" name="sumHealthCheckupRefundCheque" [(ngModel)]="form.sumHealthCheckupRefundCheque" class="form-control col-sm-7 col-md-7" disabled style="background-color: #9999FF;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">HEALTHCHECKUP Refund Paid (Plastic Money) :</label>
+                                <input type="text" name="sumHealthCheckupRefundPlasticMoney" [(ngModel)]="form.sumHealthCheckupRefundPlasticMoney" class="form-control col-sm-7 col-md-7" disabled style="background-color: #9999FF;" />
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-sm-6 col-md-6">
+                        <div class="card card-body">
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">LAB Receipt Collected (Cash) :</label>
+                                <input type="text" name="sumLabBillCash" [(ngModel)]="form.sumLabBillCash" class="form-control col-sm-7 col-md-7" disabled style="background-color: #9999FF;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">LAB Receipt Collected (Cheque) :</label>
+                                <input type="text" name="sumLabBillCheque" [(ngModel)]="form.sumLabBillCheque" class="form-control col-sm-7 col-md-7" disabled style="background-color: #9999FF;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">LAB Receipt Collected (Plastic Money) :</label>
+                                <input type="text" name="sumLabBillPlasticMoney" [(ngModel)]="form.sumLabBillPlasticMoney" class="form-control col-sm-7 col-md-7" disabled style="background-color: #9999FF;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">LAB Deposit (Cash) :</label>
+                                <input type="text" name="sumLabDepositCash" [(ngModel)]="form.sumLabDepositCash" class="form-control col-sm-7 col-md-7" disabled style="background-color: #9999FF;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">LAB Deposit (Cheque) :</label>
+                                <input type="text" name="sumLabDepositCheque" [(ngModel)]="form.sumLabDepositCheque" class="form-control col-sm-7 col-md-7" disabled style="background-color: #9999FF;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">LAB Deposit (Plastic Money) :</label>
+                                <input type="text" name="sumLabDepositPlasticMoney" [(ngModel)]="form.sumLabDepositPlasticMoney" class="form-control col-sm-7 col-md-7" disabled style="background-color: #9999FF;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">LAB Refund Paid (Cash) :</label>
+                                <input type="text" name="sumLabRefundCash" [(ngModel)]="form.sumLabRefundCash" class="form-control col-sm-7 col-md-7" disabled style="background-color: #9999FF;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">LAB Refund Paid (Cheque) :</label>
+                                <input type="text" name="sumLabRefundCheque" [(ngModel)]="form.sumLabRefundCheque" class="form-control col-sm-7 col-md-7" disabled style="background-color: #9999FF;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">LAB Refund Paid (Plastic Money) :</label>
+                                <input type="text" name="sumLabRefundPlasticMoney" [(ngModel)]="form.sumLabRefundPlasticMoney" class="form-control col-sm-7 col-md-7" disabled style="background-color: #9999FF;" />
+                            </div>
+                        </div>
+
+                        <div class="card card-body">
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">RADIO Receipt Collected (Cash) :</label>
+                                <input type="text" name="sumRadioBillCash" [(ngModel)]="form.sumRadioBillCash" class="form-control col-sm-7 col-md-7" disabled style="background-color: #9999FF;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">RADIO Receipt Collected (Cheque) :</label>
+                                <input type="text" name="sumRadioBillCheque" [(ngModel)]="form.sumRadioBillCheque" class="form-control col-sm-7 col-md-7" disabled style="background-color: #9999FF;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">RADIO Receipt Collected (Plastic Money) :</label>
+                                <input type="text" name="sumRadioBillPlasticMoney" [(ngModel)]="form.sumRadioBillPlasticMoney" class="form-control col-sm-7 col-md-7" disabled style="background-color: #9999FF;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">RADIO Deposit (Cash) :</label>
+                                <input type="text" name="sumRadioDepositCash" [(ngModel)]="form.sumRadioDepositCash" class="form-control col-sm-7 col-md-7" disabled style="background-color: #9999FF;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">RADIO Deposit (Cheque) :</label>
+                                <input type="text" name="sumRadioDepositCheque" [(ngModel)]="form.sumRadioDepositCheque" class="form-control col-sm-7 col-md-7" disabled style="background-color: #9999FF;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">RADIO Deposit (Plastic Money) :</label>
+                                <input type="text" name="sumRadioDepositPlasticMoney" [(ngModel)]="form.sumRadioDepositPlasticMoney" class="form-control col-sm-7 col-md-7" disabled style="background-color: #9999FF;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">RADIO Refund Paid (Cash) :</label>
+                                <input type="text" name="sumRadioRefundCash" [(ngModel)]="form.sumRadioRefundCash" class="form-control col-sm-7 col-md-7" disabled style="background-color: #9999FF;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">RADIO Refund Paid (Cheque) :</label>
+                                <input type="text" name="sumRadioRefundCheque" [(ngModel)]="form.sumRadioRefundCheque" class="form-control col-sm-7 col-md-7" disabled style="background-color: #9999FF;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">RADIO Refund Paid (Plastic Money) :</label>
+                                <input type="text" name="sumRadioRefundPlasticMoney" [(ngModel)]="form.sumRadioRefundPlasticMoney" class="form-control col-sm-7 col-md-7" disabled style="background-color: #9999FF;" />
+                            </div>
+                        </div>
+
+                        <div class="card card-body">
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">Indoor Receipt Collected (Cash) :</label>
+                                <input type="text" name="sumIpdBillCash" [(ngModel)]="form.sumIpdBillCash" class="form-control col-sm-7 col-md-7" disabled style="background-color: #B6B4B5;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">Indoor Receipt Collected (Cheque) :</label>
+                                <input type="text" name="sumIpdBillCheque" [(ngModel)]="form.sumIpdBillCheque" class="form-control col-sm-7 col-md-7" disabled style="background-color: #B6B4B5;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">Indoor Receipt Collected (Plastic Money) :</label>
+                                <input type="text" name="sumIpdBillPlasticMoney" [(ngModel)]="form.sumIpdBillPlasticMoney" class="form-control col-sm-7 col-md-7" disabled style="background-color: #B6B4B5;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">Indoor Deposit (Cash) :</label>
+                                <input type="text" name="sumIpdDepositCash" [(ngModel)]="form.sumIpdDepositCash" class="form-control col-sm-7 col-md-7" disabled style="background-color: #B6B4B5;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">Indoor Deposit (Cheque) :</label>
+                                <input type="text" name="sumIpdDepositCheque" [(ngModel)]="form.sumIpdDepositCheque" class="form-control col-sm-7 col-md-7" disabled style="background-color: #B6B4B5;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">Indoor Deposit (Plastic Money) :</label>
+                                <input type="text" name="sumIpdDepositPlasticMoney" [(ngModel)]="form.sumIpdDepositPlasticMoney" class="form-control col-sm-7 col-md-7" disabled style="background-color: #B6B4B5;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">Indoor Refund Paid (Cash) :</label>
+                                <input type="text" name="sumIpdRefundCash" [(ngModel)]="form.sumIpdRefundCash" class="form-control col-sm-7 col-md-7" disabled style="background-color: #B6B4B5;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">Indoor Refund Paid (Cheque) :</label>
+                                <input type="text" name="sumIpdRefundCheque" [(ngModel)]="form.sumIpdRefundCheque" class="form-control col-sm-7 col-md-7" disabled style="background-color: #B6B4B5;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">Indoor Refund Paid (Plastic Money) :</label>
+                                <input type="text" name="sumIpdRefundPlasticMoney" [(ngModel)]="form.sumIpdRefundPlasticMoney" class="form-control col-sm-7 col-md-7" disabled style="background-color: #B6B4B5;" />
+                            </div>
+                        </div>
+                        
+                        <div class="card card-body">
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">Other Receipt (Cash) :</label>
+                                <input type="text" name="otherReceiptCash" [(ngModel)]="form.otherReceiptCash" class="form-control col-sm-7 col-md-7" disabled style="background-color: #FCF987;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">Other Receipt (Cheque) :</label>
+                                <input type="text" name="otherReceiptCheque" [(ngModel)]="form.otherReceiptCheque" class="form-control col-sm-7 col-md-7" disabled style="background-color: #FCF987;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">Other Receipt (Plastic Money) :</label>
+                                <input type="text" name="otherReceiptPlasticMoney" [(ngModel)]="form.otherReceiptPlasticMoney" class="form-control col-sm-7 col-md-7" disabled style="background-color: #FCF987;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">Other Refund Paid (Cash) :</label>
+                                <input type="text" name="otherRefundCash" [(ngModel)]="form.otherRefundCash" class="form-control col-sm-7 col-md-7" disabled style="background-color: #FCF987;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">Other Refund Paid (Cheque) :</label>
+                                <input type="text" name="otherRefundCheque" [(ngModel)]="form.otherRefundCheque" class="form-control col-sm-7 col-md-7" disabled style="background-color: #FCF987;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">Other Refund Paid (Plastic Money) :</label>
+                                <input type="text" name="otherRefundPlasticMoney" [(ngModel)]="form.otherRefundPlasticMoney" class="form-control col-sm-7 col-md-7" disabled style="background-color: #FCF987;" />
+                            </div>
+                        </div>
+
+                        <div class="card card-body">
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">TOTAL Receipt (Cash) <span class="text-danger"> A </span>  :</label>
+                                <input type="text" name="totalCash" [(ngModel)]="form.totalCash" class="form-control col-sm-7 col-md-7" disabled style="background-color: black; color: yellow;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">TOTAL Receipt (Cheque) <span class="text-danger"> B </span>  :</label>
+                                <input type="text" name="totalCheque" [(ngModel)]="form.totalCheque" class="form-control col-sm-7 col-md-7" disabled style="background-color: black; color: yellow;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">TOTAL Receipt (Plastic Money) <span class="text-danger"> C </span>  :</label>
+                                <input type="text" name="totalPlasticMoney" [(ngModel)]="form.totalPlasticMoney" class="form-control col-sm-7 col-md-7" disabled style="background-color: black; color: yellow;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">TOTAL Refund (Cash) <span class="text-danger"> D </span>  :</label>
+                                <input type="text" name="totalRefundCash" [(ngModel)]="form.totalRefundCash" class="form-control col-sm-7 col-md-7" disabled style="background-color: black; color: yellow;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">TOTAL Refund (Cheque) <span class="text-danger"> E </span>  :</label>
+                                <input type="text" name="totalRefundCheque" [(ngModel)]="form.totalRefundCheque" class="form-control col-sm-7 col-md-7" disabled style="background-color: black; color: yellow;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">TOTAL Refund (Plastic Money) <span class="text-danger"> F </span>  :</label>
+                                <input type="text" name="totalRefundPlasticMoney" [(ngModel)]="form.totalRefundPlasticMoney" class="form-control col-sm-7 col-md-7" disabled style="background-color: black; color: yellow;" />
+                            </div>
+                            <hr>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">Net Receipt Cash <span class="text-danger"> (A-D) </span>  :</label>
+                                <input type="text" name="netReceiptCash" [(ngModel)]="form.netReceiptCash" class="form-control col-sm-7 col-md-7" disabled style="background-color: black; color: yellow;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">Net Receipt Cheque <span class="text-danger"> (B-E) </span>  :</label>
+                                <input type="text" name="netReceiptCheque" [(ngModel)]="form.netReceiptCheque" class="form-control col-sm-7 col-md-7" disabled style="background-color: black; color: yellow;" />
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-md-4 form-label">Net Receipt Plastic Money <span class="text-danger"> (C-F) </span>  :</label>
+                                <input type="text" name="netReceiptPlasticMoney" [(ngModel)]="form.netReceiptPlasticMoney" class="form-control col-sm-7 col-md-7" disabled style="background-color: black; color: yellow;" />
+                            </div>
+
+                        </div>
+                    </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>

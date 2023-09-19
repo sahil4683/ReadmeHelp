@@ -1,0 +1,98 @@
+    <div class="col-md-12 mt-3">
+        <div class="card card-outline card-danger">
+            <div class="card-header text-center">
+                <b style="font-size: 18px;"> Discharge Summary Template Master  </b>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body overflow-auto">
+                <form name="form" (ngSubmit)="f.form.valid && onSave()" #f="ngForm" novalidate>
+
+                    <input type="hidden" name="id" [(ngModel)]="form.id" #id="ngModel"> 
+                    <h2 *ngIf="isEdit" style="color: orangered;"><b>Edit Mode</b></h2>
+
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="card card-body overflow-auto">
+                                <div class="form-group row">
+                                    
+                                    <div class="form-group col-md-4 col-sm-4">
+                                        <label for="name">Template Type</label>
+                                        <select class="form-control" [(ngModel)]="form.templateType" required #templateType="ngModel" name="templateType">
+                                            <option *ngFor="let o of TypeList" [ngValue]="o.id" style="color: black;">
+                                                {{o.type}}
+                                            </option>
+                                        </select>
+                                        <div class="text-danger" role="alert" *ngIf="f.submitted && templateType.invalid">
+                                            Required Field !
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-4 col-sm-4">
+                                        <label for="name">Template Name</label>
+                                        <input type="text" class="form-control" name="templateName" required [(ngModel)]="form.templateName"  #templateName="ngModel" />
+                                        <div class="text-danger" role="alert" *ngIf="f.submitted && templateName.invalid">
+                                            Required Field !
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-4 col-sm-4">
+                                        <label for="name">Template</label>
+                                        <input type="text" class="form-control" name="template" required [(ngModel)]="form.template"  #template="ngModel" />
+                                        <div class="text-danger" role="alert" *ngIf="f.submitted && template.invalid">
+                                            Required Field !
+                                        </div>
+                                    </div>
+                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-12 col-sm-12">
+                        <button type="button" class="btn btn-info mt-1" (click)="onNew()">New <i class="fas fa-sync-alt"></i></button>&nbsp;
+                        <button class="btn btn-success mt-1" type="submit">Save <i class="fas fa-save"></i></button> &nbsp;
+                    </div>
+
+                </form>
+
+                <div class="row">
+
+                    <div class="form-group col-md-12 col-sm-12">
+                        <div class="card card-body overflow-auto">
+                            <div class="form-group row">
+
+                                <div class="form-group col-md-12 col-sm-12">
+                                            <table id="customTable" *ngIf="showContent" datatable class="table  table-bordered" cellspacing="0" width="100%">
+                                                <thead class="thead-dark">
+                                                    <tr>
+                                                        <th>EDIT</th>
+                                                        <th>Template Type</th>
+                                                        <th>Template Name</th>
+                                                        <th>Template</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody style="color: black;">
+                                                    <tr *ngFor="let item of table_data">
+                                                        <td>
+                                                            <span class="float-right">
+                                                                <button *ngIf="isedit_action" id="edit" type="button" (click)="onEdit(item)" class="btn btn-warning"><i class="fas fa-edit"></i></button> &nbsp;
+                                                                <button *ngIf="isdelete_action" id="delete" type="button" (click)="onDelete(item.id)" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                                            </span>
+                                                        </td>
+                                                        <td>{{item.templateType}}</td>
+                                                        <td>{{item.templateName}}</td>
+                                                        <td>{{item.template}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

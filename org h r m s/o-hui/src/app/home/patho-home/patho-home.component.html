@@ -1,0 +1,19 @@
+<div class="">
+    <div class="col-md-12 mt-3" *ngIf="notAccess">
+        <div class="card shadow-none">
+            <div class="card-body">
+                <div class="container">
+                    <div class="row justify-content-center text-center">
+                        <div class="col-xl-7 col-lg-8 col-md-11">
+                            <h1 class="skipOrphan">🔬🧪 Pathology Department 🧪🔬</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 mt-3 text-center" *ngIf="!notAccess">
+        <!-- <h2 style="color: red;"> Sorry! You don't have permission to access this page</h2> -->
+        <app-no-access></app-no-access>
+    </div>
+</div>

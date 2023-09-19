@@ -1,0 +1,34 @@
+2022-10-28 22:45:36.162  INFO 7080 --- [restartedMain] com.as.OrangeHospitalServiceApplication  : Starting OrangeHospitalServiceApplication on DESKTOP-CMKH4DL with PID 7080 (C:\Users\Thread\git\orange-hospital-service\target\classes started by Thread in C:\Users\Thread\git\orange-hospital-service)
+2022-10-28 22:45:36.167  INFO 7080 --- [restartedMain] com.as.OrangeHospitalServiceApplication  : No active profile set, falling back to default profiles: default
+2022-10-28 22:45:36.315  INFO 7080 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-10-28 22:45:36.317  INFO 7080 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-10-28 22:45:45.338  INFO 7080 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+2022-10-28 22:45:46.307  INFO 7080 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 946ms. Found 101 JPA repository interfaces.
+2022-10-28 22:45:47.254  INFO 7080 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@3d40a953' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-10-28 22:45:47.264  INFO 7080 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-10-28 22:45:48.371  INFO 7080 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 5000 (http)
+2022-10-28 22:45:48.390  INFO 7080 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-10-28 22:45:48.391  INFO 7080 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.38]
+2022-10-28 22:45:48.714  INFO 7080 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/api]    : Initializing Spring embedded WebApplicationContext
+2022-10-28 22:45:48.716  INFO 7080 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 12396 ms
+2022-10-28 22:45:49.009  WARN 7080 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-10-28 22:45:49.268  INFO 7080 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2022-10-28 22:45:49.511  INFO 7080 --- [task-1] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-10-28 22:45:49.699  INFO 7080 --- [task-1] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.21.Final
+2022-10-28 22:45:50.183  INFO 7080 --- [task-1] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2022-10-28 22:45:50.564  INFO 7080 --- [task-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-10-28 22:45:51.730  INFO 7080 --- [task-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-10-28 22:45:51.818  INFO 7080 --- [task-1] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2022-10-28 22:45:57.716  INFO 7080 --- [task-1] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-10-28 22:45:57.733  INFO 7080 --- [task-1] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-10-28 22:45:57.875  INFO 7080 --- [task-2] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2022-10-28 22:45:58.810  INFO 7080 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@17fd400f, org.springframework.security.web.context.SecurityContextPersistenceFilter@67f42186, org.springframework.security.web.header.HeaderWriterFilter@395439b4, org.springframework.web.filter.CorsFilter@798a998f, org.springframework.security.web.authentication.logout.LogoutFilter@b6ace04, com.as.security.AuthTokenFilter@28bb6336, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@23c958c7, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6be0b040, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3376b246, org.springframework.security.web.session.SessionManagementFilter@77bac489, org.springframework.security.web.access.ExceptionTranslationFilter@61c592e, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@75d86860]
+2022-10-28 22:45:59.698  INFO 7080 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 5000 (http) with context path '/api'
+2022-10-28 22:45:59.701  INFO 7080 --- [restartedMain] DeferredRepositoryInitializationListener : Triggering deferred initialization of Spring Data repositories…
+2022-10-28 22:46:08.319  INFO 7080 --- [restartedMain] DeferredRepositoryInitializationListener : Spring Data repositories initialized!
+2022-10-28 22:46:08.340  INFO 7080 --- [restartedMain] com.as.OrangeHospitalServiceApplication  : Started OrangeHospitalServiceApplication in 32.914 seconds (JVM running for 34.915)
+2022-10-28 22:51:20.107  INFO 7080 --- [RMI TCP Connection(6)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2022-10-28 22:51:20.621  INFO 7080 --- [RMI TCP Connection(6)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-10-28 22:51:20.625  INFO 7080 --- [RMI TCP Connection(6)-127.0.0.1] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2022-10-28 22:51:20.630  INFO 7080 --- [RMI TCP Connection(6)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2022-10-28 22:51:20.726  INFO 7080 --- [RMI TCP Connection(6)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

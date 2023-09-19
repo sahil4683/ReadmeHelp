@@ -1,0 +1,82 @@
+<div class="">
+    <div class="col-md-12 mt-3">
+        <div class="card card-outline card-danger">
+            <div class="card-header text-center">
+                <b style="font-size: 18px;"> Scanned Images </b>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body overflow-auto">
+                
+                <div class="row">
+                    
+                    <div class="col-md-6 col-sm-6">
+                        <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+                        <div class="row">
+                            
+                            <div class="form-group col-md-6 col-sm-6">
+                                <label for="name">UHID No</label>
+                                <input type="text" class="form-control" name="uhid" [(ngModel)]="form.uhid"  #uhid="ngModel" />
+                                <div class="text-danger" role="alert" *ngIf="f.submitted && uhid.invalid">
+                                    Required Field !
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6 col-sm-6">
+                                <label for="name">Date</label>
+                                <input type="date" class="form-control" name="date" [(ngModel)]="form.date"  #date="ngModel" />
+                                <div class="text-danger" role="alert" *ngIf="f.submitted && date.invalid">
+                                    Required Field !
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6 col-sm-6">
+                                <label for="name">Patient Name</label>
+                                <input type="text" class="form-control" name="patientName" [(ngModel)]="form.patientName"  #patientName="ngModel" />
+                                <div class="text-danger" role="alert" *ngIf="f.submitted && patientName.invalid">
+                                    Required Field !
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6 col-sm-6">
+                                <label for="name">Remarks</label>
+                                <input type="text" class="form-control" name="remarks" [(ngModel)]="form.remarks"  #remarks="ngModel" />
+                                <div class="text-danger" role="alert" *ngIf="f.submitted && remarks.invalid">
+                                    Required Field !
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-12 col-sm-12">
+                                <label for="name">Remarks</label>
+                                <input type="file" multiple class="form-control" name="remarks" [(ngModel)]="form.remarks"  #remarks="ngModel" />
+                                <div class="text-danger" role="alert" *ngIf="f.submitted && remarks.invalid">
+                                    Required Field !
+                                </div>
+                                <div class="row" style="background: antiquewhite; height: 200px;">
+                                    <!-- Image List -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <input type="button" class="btn btn-info mt-1" value="New"> &nbsp;
+                            <button type="button" class="btn btn-info mt-1">Save <i class="fas fa-save"></i> F1</button> &nbsp;
+                            <button class="btn btn-success mt-1">Preview</button> &nbsp;
+                            <button type="button" class="btn btn-info mt-1">Delete</button> &nbsp;
+                        </div>
+                    </form>
+                    </div>
+               
+                    <div class="col-md-6 col-sm-6">
+                        <div class="col-md-12 col-sm-12" style="background: antiquewhite; height: 430px;"> 
+                           <!-- Image Previre -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

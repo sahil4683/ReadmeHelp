@@ -1,0 +1,431 @@
+<div class="">
+    <div class="col-md-12 mt-3">
+        <div class="card card-outline card-warning">
+            <div class="card-header">
+                <b style="font-size: 18px;"> Number Sequence Utility </b>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                    <div class="row">
+
+
+                        <div class="col-md-6">                            
+                            <div class="card card-outline card-primary">
+                                <div class="card-header">
+                                    <h2 class="card-title"><strong>{{uhidForm.name}}</strong></h2>
+                                </div>
+                                <div class="card-body" style="display: block;">
+                                    <div class="row">
+                                        <input type="hidden" class="form-control" name="name" [(ngModel)]="uhidForm.name" #name="ngModel" />
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <label for="username">Start From</label>
+                                            <input type="text" class="form-control" name="sequence" [(ngModel)]="uhidForm.sequence" #sequence="ngModel" />
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <label for="username">Prefix</label>
+                                            <input type="text" class="form-control" name="prefix" [(ngModel)]="uhidForm.prefix" #prefix="ngModel" />
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <label for="username">Suffix</label>
+                                            <input type="text" class="form-control" name="suffix" [(ngModel)]="uhidForm.suffix" #suffix="ngModel" />
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <button type="button" class="btn btn-primary" (click)="onSubmit(uhidForm)" style="margin-top: 30px;"><b>Save</b>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6">                            
+                            <div class="card card-outline card-primary">
+                                <div class="card-header">
+                                    <h2 class="card-title"><strong>{{ipdForm.name}}</strong></h2>
+                                </div>
+                                <div class="card-body" style="display: block;">
+                                    <div class="row">
+                                        <input type="hidden" class="form-control" name="name" [(ngModel)]="ipdForm.name" #name="ngModel" />
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <label for="username">Start From</label>
+                                            <input type="text" class="form-control" name="sequence" [(ngModel)]="ipdForm.sequence" #sequence="ngModel" />
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <label for="username">Prefix</label>
+                                            <input type="text" class="form-control" name="prefix" [(ngModel)]="ipdForm.prefix" #prefix="ngModel" />
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <label for="username">Suffix</label>
+                                            <input type="text" class="form-control" name="suffix" [(ngModel)]="ipdForm.suffix" #suffix="ngModel" />
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <button type="button" class="btn btn-primary" (click)="onSubmit(ipdForm)" style="margin-top: 30px;"><b>Save</b>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6">                            
+                            <div class="card card-outline card-primary">
+                                <div class="card-header">
+                                    <h2 class="card-title"><strong>{{ipdBillForm.name}}</strong></h2>
+                                </div>
+                                <div class="card-body" style="display: block;">
+                                    <div class="row">
+                                        <input type="hidden" class="form-control" name="name" [(ngModel)]="ipdBillForm.name" #name="ngModel" />
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <label for="username">Start From</label>
+                                            <input type="text" class="form-control" name="sequence" [(ngModel)]="ipdBillForm.sequence" #sequence="ngModel" />
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <label for="username">Prefix</label>
+                                            <input type="text" class="form-control" name="prefix" [(ngModel)]="ipdBillForm.prefix" #prefix="ngModel" />
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <label for="username">Suffix</label>
+                                            <input type="text" class="form-control" name="suffix" [(ngModel)]="ipdBillForm.suffix" #suffix="ngModel" />
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <button type="button" class="btn btn-primary" (click)="onSubmit(ipdBillForm)" style="margin-top: 30px;"><b>Save</b>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">                            
+                            <div class="card card-outline card-primary">
+                                <div class="card-header">
+                                    <h2 class="card-title"><strong>{{provisionalBillForm.name}}</strong></h2>
+                                </div>
+                                <div class="card-body" style="display: block;">
+                                    <div class="row">
+                                        <input type="hidden" class="form-control" name="name" [(ngModel)]="provisionalBillForm.name" #name="ngModel" />
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <label for="username">Start From</label>
+                                            <input type="text" class="form-control" name="sequence" [(ngModel)]="provisionalBillForm.sequence" #sequence="ngModel" />
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <label for="username">Prefix</label>
+                                            <input type="text" class="form-control" name="prefix" [(ngModel)]="provisionalBillForm.prefix" #prefix="ngModel" />
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <label for="username">Suffix</label>
+                                            <input type="text" class="form-control" name="suffix" [(ngModel)]="provisionalBillForm.suffix" #suffix="ngModel" />
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <button type="button" class="btn btn-primary" (click)="onSubmit(provisionalBillForm)" style="margin-top: 30px;"><b>Save</b>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">                            
+                            <div class="card card-outline card-primary">
+                                <div class="card-header">
+                                    <h2 class="card-title"><strong>{{opdBillForm.name}}</strong></h2>
+                                </div>
+                                <div class="card-body" style="display: block;">
+                                    <div class="row">
+                                        <input type="hidden" class="form-control" name="name" [(ngModel)]="opdBillForm.name" #name="ngModel" />
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <label for="username">Start From</label>
+                                            <input type="text" class="form-control" name="sequence" [(ngModel)]="opdBillForm.sequence" #sequence="ngModel" />
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <label for="username">Prefix</label>
+                                            <input type="text" class="form-control" name="prefix" [(ngModel)]="opdBillForm.prefix" #prefix="ngModel" />
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <label for="username">Suffix</label>
+                                            <input type="text" class="form-control" name="suffix" [(ngModel)]="opdBillForm.suffix" #suffix="ngModel" />
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <button type="button" class="btn btn-primary" (click)="onSubmit(opdBillForm)" style="margin-top: 30px;"><b>Save</b>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">                            
+                            <div class="card card-outline card-primary">
+                                <div class="card-header">
+                                    <h2 class="card-title"><strong>{{opdBillRefundForm.name}}</strong></h2>
+                                </div>
+                                <div class="card-body" style="display: block;">
+                                    <div class="row">
+                                        <input type="hidden" class="form-control" name="name" [(ngModel)]="opdBillRefundForm.name" #name="ngModel" />
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <label for="username">Start From</label>
+                                            <input type="text" class="form-control" name="sequence" [(ngModel)]="opdBillRefundForm.sequence" #sequence="ngModel" />
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <label for="username">Prefix</label>
+                                            <input type="text" class="form-control" name="prefix" [(ngModel)]="opdBillRefundForm.prefix" #prefix="ngModel" />
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <label for="username">Suffix</label>
+                                            <input type="text" class="form-control" name="suffix" [(ngModel)]="opdBillRefundForm.suffix" #suffix="ngModel" />
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <button type="button" class="btn btn-primary" (click)="onSubmit(opdBillRefundForm)" style="margin-top: 30px;"><b>Save</b>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">                            
+                            <div class="card card-outline card-primary">
+                                <div class="card-header">
+                                    <h2 class="card-title"><strong>{{labBillForm.name}}</strong></h2>
+                                </div>
+                                <div class="card-body" style="display: block;">
+                                    <div class="row">
+                                        <input type="hidden" class="form-control" name="name" [(ngModel)]="labBillForm.name" #name="ngModel" />
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <label for="username">Start From</label>
+                                            <input type="text" class="form-control" name="sequence" [(ngModel)]="labBillForm.sequence" #sequence="ngModel" />
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <label for="username">Prefix</label>
+                                            <input type="text" class="form-control" name="prefix" [(ngModel)]="labBillForm.prefix" #prefix="ngModel" />
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <label for="username">Suffix</label>
+                                            <input type="text" class="form-control" name="suffix" [(ngModel)]="labBillForm.suffix" #suffix="ngModel" />
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <button type="button" class="btn btn-primary" (click)="onSubmit(labBillForm)" style="margin-top: 30px;"><b>Save</b>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">                            
+                            <div class="card card-outline card-primary">
+                                <div class="card-header">
+                                    <h2 class="card-title"><strong>{{labBillRefundForm.name}}</strong></h2>
+                                </div>
+                                <div class="card-body" style="display: block;">
+                                    <div class="row">
+                                        <input type="hidden" class="form-control" name="name" [(ngModel)]="labBillRefundForm.name" #name="ngModel" />
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <label for="username">Start From</label>
+                                            <input type="text" class="form-control" name="sequence" [(ngModel)]="labBillRefundForm.sequence" #sequence="ngModel" />
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <label for="username">Prefix</label>
+                                            <input type="text" class="form-control" name="prefix" [(ngModel)]="labBillRefundForm.prefix" #prefix="ngModel" />
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <label for="username">Suffix</label>
+                                            <input type="text" class="form-control" name="suffix" [(ngModel)]="labBillRefundForm.suffix" #suffix="ngModel" />
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <button type="button" class="btn btn-primary" (click)="onSubmit(labBillRefundForm)" style="margin-top: 30px;"><b>Save</b>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">                            
+                            <div class="card card-outline card-primary">
+                                <div class="card-header">
+                                    <h2 class="card-title"><strong>{{radioBillForm.name}}</strong></h2>
+                                </div>
+                                <div class="card-body" style="display: block;">
+                                    <div class="row">
+                                        <input type="hidden" class="form-control" name="name" [(ngModel)]="radioBillForm.name" #name="ngModel" />
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <label for="username">Start From</label>
+                                            <input type="text" class="form-control" name="sequence" [(ngModel)]="radioBillForm.sequence" #sequence="ngModel" />
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <label for="username">Prefix</label>
+                                            <input type="text" class="form-control" name="prefix" [(ngModel)]="radioBillForm.prefix" #prefix="ngModel" />
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <label for="username">Suffix</label>
+                                            <input type="text" class="form-control" name="suffix" [(ngModel)]="radioBillForm.suffix" #suffix="ngModel" />
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <button type="button" class="btn btn-primary" (click)="onSubmit(radioBillForm)" style="margin-top: 30px;"><b>Save</b>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">                            
+                            <div class="card card-outline card-primary">
+                                <div class="card-header">
+                                    <h2 class="card-title"><strong>{{radioBillRefundForm.name}}</strong></h2>
+                                </div>
+                                <div class="card-body" style="display: block;">
+                                    <div class="row">
+                                        <input type="hidden" class="form-control" name="name" [(ngModel)]="radioBillRefundForm.name" #name="ngModel" />
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <label for="username">Start From</label>
+                                            <input type="text" class="form-control" name="sequence" [(ngModel)]="radioBillRefundForm.sequence" #sequence="ngModel" />
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <label for="username">Prefix</label>
+                                            <input type="text" class="form-control" name="prefix" [(ngModel)]="radioBillRefundForm.prefix" #prefix="ngModel" />
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <label for="username">Suffix</label>
+                                            <input type="text" class="form-control" name="suffix" [(ngModel)]="radioBillRefundForm.suffix" #suffix="ngModel" />
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <button type="button" class="btn btn-primary" (click)="onSubmit(radioBillRefundForm)" style="margin-top: 30px;"><b>Save</b>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">                            
+                            <div class="card card-outline card-primary">
+                                <div class="card-header">
+                                    <h2 class="card-title"><strong>{{healthCheckupBillForm.name}}</strong></h2>
+                                </div>
+                                <div class="card-body" style="display: block;">
+                                    <div class="row">
+                                        <input type="hidden" class="form-control" name="name" [(ngModel)]="healthCheckupBillForm.name" #name="ngModel" />
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <label for="username">Start From</label>
+                                            <input type="text" class="form-control" name="sequence" [(ngModel)]="healthCheckupBillForm.sequence" #sequence="ngModel" />
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <label for="username">Prefix</label>
+                                            <input type="text" class="form-control" name="prefix" [(ngModel)]="healthCheckupBillForm.prefix" #prefix="ngModel" />
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <label for="username">Suffix</label>
+                                            <input type="text" class="form-control" name="suffix" [(ngModel)]="healthCheckupBillForm.suffix" #suffix="ngModel" />
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <button type="button" class="btn btn-primary" (click)="onSubmit(healthCheckupBillForm)" style="margin-top: 30px;"><b>Save</b>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">                            
+                            <div class="card card-outline card-primary">
+                                <div class="card-header">
+                                    <h2 class="card-title"><strong>{{healthCheckupBillRefundForm.name}}</strong></h2>
+                                </div>
+                                <div class="card-body" style="display: block;">
+                                    <div class="row">
+                                        <input type="hidden" class="form-control" name="name" [(ngModel)]="healthCheckupBillRefundForm.name" #name="ngModel" />
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <label for="username">Start From</label>
+                                            <input type="text" class="form-control" name="sequence" [(ngModel)]="healthCheckupBillRefundForm.sequence" #sequence="ngModel" />
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <label for="username">Prefix</label>
+                                            <input type="text" class="form-control" name="prefix" [(ngModel)]="healthCheckupBillRefundForm.prefix" #prefix="ngModel" />
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <label for="username">Suffix</label>
+                                            <input type="text" class="form-control" name="suffix" [(ngModel)]="healthCheckupBillRefundForm.suffix" #suffix="ngModel" />
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <button type="button" class="btn btn-primary" (click)="onSubmit(healthCheckupBillRefundForm)" style="margin-top: 30px;"><b>Save</b>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">                            
+                            <div class="card card-outline card-primary">
+                                <div class="card-header">
+                                    <h2 class="card-title"><strong>{{paymentForm.name}}</strong></h2>
+                                </div>
+                                <div class="card-body" style="display: block;">
+                                    <div class="row">
+                                        <input type="hidden" class="form-control" name="name" [(ngModel)]="paymentForm.name" #name="ngModel" />
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <label for="username">Start From</label>
+                                            <input type="text" class="form-control" name="sequence" [(ngModel)]="paymentForm.sequence" #sequence="ngModel" />
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <label for="username">Prefix</label>
+                                            <input type="text" class="form-control" name="prefix" [(ngModel)]="paymentForm.prefix" #prefix="ngModel" />
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <label for="username">Suffix</label>
+                                            <input type="text" class="form-control" name="suffix" [(ngModel)]="paymentForm.suffix" #suffix="ngModel" />
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <button type="button" class="btn btn-primary" (click)="onSubmit(paymentForm)" style="margin-top: 30px;"><b>Save</b>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">                            
+                            <div class="card card-outline card-primary">
+                                <div class="card-header">
+                                    <h2 class="card-title"><strong>{{receiptForm.name}}</strong></h2>
+                                </div>
+                                <div class="card-body" style="display: block;">
+                                    <div class="row">
+                                        <input type="hidden" class="form-control" name="name" [(ngModel)]="receiptForm.name" #name="ngModel" />
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <label for="username">Start From</label>
+                                            <input type="text" class="form-control" name="sequence" [(ngModel)]="receiptForm.sequence" #sequence="ngModel" />
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <label for="username">Prefix</label>
+                                            <input type="text" class="form-control" name="prefix" [(ngModel)]="receiptForm.prefix" #prefix="ngModel" />
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <label for="username">Suffix</label>
+                                            <input type="text" class="form-control" name="suffix" [(ngModel)]="receiptForm.suffix" #suffix="ngModel" />
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <button type="button" class="btn btn-primary" (click)="onSubmit(receiptForm)" style="margin-top: 30px;"><b>Save</b>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>

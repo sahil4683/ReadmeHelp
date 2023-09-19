@@ -1,0 +1,9 @@
+/* ng-select {
+    display: contents !important;
+}
+select {
+    border-left: 1px solid;
+}
+.ng-valid[required], .ng-valid.required{
+    border-left:  1px solid #42A948 !important;
+} */

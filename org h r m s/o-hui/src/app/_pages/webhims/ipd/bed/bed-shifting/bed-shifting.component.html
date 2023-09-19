@@ -1,0 +1,237 @@
+    <div class="col-md-12 mt-3">
+        <div class="card card-outline card-danger">
+            <div class="card-header text-center">
+                <b style="font-size: 18px;"> Bed Shifting </b>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body overflow-auto">
+                <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+
+                    <input type="hidden" name="id" [(ngModel)]="form.id" #id="ngModel"> 
+                    <h2 *ngIf="isEdit" style="color: orangered;"><b>Edit Mode</b></h2>
+                    <h2 *ngIf="isShifting" style="color: orangered;"><b>Shifting Mode</b></h2>
+
+                    <div class="row">
+                        <div class="form-group col-md-3 col-sm-3">
+                            <label for="name">Date</label>
+                            <input type="text" disabled class="form-control" name="date" [(ngModel)]="form.date" #date="ngModel" />
+                            <div class="text-danger" role="alert" *ngIf="f.submitted && date.invalid">
+                                Required Field !
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3 col-sm-3">
+                            <label for="name">UHID</label>
+                            <input type="text" disabled class="form-control" name="uhid" [(ngModel)]="form.uhid" #uhid="ngModel" />
+                            <div class="text-danger" role="alert" *ngIf="f.submitted && uhid.invalid">
+                                Required Field !
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3 col-sm-3">
+                            <label for="name">IPD No</label>
+                            <input type="text" disabled class="form-control" name="ipdno" [(ngModel)]="form.ipdno" #ipdno="ngModel" />
+                            <div class="text-danger" role="alert" *ngIf="f.submitted && ipdno.invalid">
+                                Required Field !
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3 col-sm-3">
+                            <label for="name">Patient Name</label>
+                            <input type="text" disabled class="form-control" name="name" [(ngModel)]="form.name" #name="ngModel" />
+                            <div class="text-danger" role="alert" *ngIf="f.submitted && name.invalid">
+                                Required Field !
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3 col-sm-3">
+                            <label for="name">Previous Bed No</label>
+                            <input style="background-color: red; color: white;" type="text" disabled class="form-control" name="bedno" [(ngModel)]="form.bedno" #bedno="ngModel" />
+                            <div class="text-danger" role="alert" *ngIf="f.submitted && bedno.invalid">
+                                Required Field !
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3 col-sm-3">
+                            <label for="name">Shifted Bed No</label>
+                            <input style="background-color: green; color: white;" type="text" disabled class="form-control" name="shiftedbedno" [(ngModel)]="form.shiftedbedno" #shiftedbedno="ngModel" />
+                            <div class="text-danger" role="alert" *ngIf="f.submitted && shiftedbedno.invalid">
+                                Required Field !
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3 col-sm-3">
+                            <label for="name">Shifting Date</label>
+                            <input type="date" required class="form-control" name="shiftingDate" [(ngModel)]="form.shiftingDate" #shiftingDate="ngModel" />
+                            <div class="text-danger" role="alert" *ngIf="f.submitted && shiftingDate.invalid">
+                                Required Field !
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3 col-sm-3">
+                            <label for="name">Shifting Time</label>
+                            <input type="time" required class="form-control" name="shiftingTime" [(ngModel)]="form.shiftingTime" #shiftingTime="ngModel" />
+                            <div class="text-danger" role="alert" *ngIf="f.submitted && shiftingTime.invalid">
+                                Required Field !
+                            </div>
+                        </div>
+                        <div class="form-group col-md-12 col-sm-12">
+                            <button type="button" class="btn btn-info mt-1" (click)="onNew()">New <i class="fas fa-sync-alt"></i></button>&nbsp;
+                            <button type="submit" class="btn btn-success mt-1">Save <i class="fas fa-save"></i></button>&nbsp;
+                        </div>
+
+                    </div>
+                </form>
+
+                <div class="form-group row">
+
+                    <div class="form-group col-md-6 col-sm-6">
+                        <div class="card card-body card-outline card-danger">
+                            <div class="card-header bg-danger">
+                                <h3>Admitted Patient Details 📃</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+
+                                    <div class="col-md-12 col-sm-12">
+                                            <table id="customTable" *ngIf="showContent2" datatable class="table  table-bordered" cellspacing="0" width="100%">
+                                                <thead class="thead-dark">
+                                                    <tr>
+                                                        <th>Select</th>
+                                                        <th>Bed No</th>
+                                                        <th>UHID</th>
+                                                        <th>IPD</th>
+                                                        <th>Patient Name</th>
+                                                        <th>Admit Date</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody style="color: black;">
+                                                    <tr *ngFor="let item of patientDetails">
+                                                        <td> <span class="float-right">
+                                                            <button id="edit" type="button" (click)="onPatientEdit(item)"  class="btn btn-warning"><i class="fas fa-edit"></i></button>
+                                                        </span>
+                                                        </td>
+                                                        <td>{{item.bedno}}</td>
+                                                        <td>{{item.uhid}}</td>
+                                                        <td>{{item.ipdno}}</td>
+                                                        <td>{{item.name}}</td>
+                                                        <td>{{item.date}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6 col-sm-6">
+                        <div class="card card-body card-outline card-success">
+                            <div class="card-header bg-success">
+                                <h3>Available Bed Details 🛌</h3>
+                            </div>
+                            <div class="card-body ">
+                                <div class="row">
+                                  
+                                    <div class="col-md-12 col-sm-12">
+                                            <table id="customTable" *ngIf="showContent3 && showContent2" datatable class="table  table-bordered" cellspacing="0" width="100%">
+                                                <thead class="thead-dark">
+                                                    <tr>
+                                                        <th>Select</th>
+                                                        <th>Class Name</th>
+                                                        <th>Bed No</th>
+                                                        <th>UHID</th>
+                                                        <th>Romm Type</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody style="color: black;">
+                                                    <tr *ngFor="let item of bedDetails">
+                                                        <td>
+                                                            <span class="float-right">
+                                                            <button id="edit" type="button" (click)="onEdit(item)"
+                                                                class="btn btn-warning"><i
+                                                                    class="fas fa-edit"></i></button>
+                                                        </span>
+                                                        </td>
+                                                        <td>{{item.wardname}}</td>
+                                                        <td>{{item.bedno}}</td>
+                                                        <td>{{item.id}}</td>
+                                                        <td>{{item.roomType}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="row">
+                    <div class="card card-body overflow-auto">
+                        <div class="row">
+                          
+                            <div class="form-group col-md-12 col-sm-12">
+
+                                <div class="row">
+                                    <div class="form-group col-md-1 col-sm-1">
+                                        <button class="btn btn-info mt-1" (click)="bedMasterHistory(0)">Today</button>
+                                    </div> 
+                                    <div class="form-group col-md-1 col-sm-1">
+                                        <button class="btn btn-info mt-1" (click)="bedMasterHistory(1)">Show All</button>
+                                    </div> 
+                                    <div class="form-group col-md-3 col-sm-3">
+                                        <div class="input-group mt-1">
+                                            <input type="date" class="form-control"  name="getByDate" [(ngModel)]="getByDate"  >
+                                            <span class="input-group-append">
+                                              <button type="button" class="btn btn-info" (click)="bedMasterHistory(2)">Get</button>
+                                            </span>
+                                          </div>
+                                    </div>
+                                </div>
+
+                                        <table id="customTable1" *ngIf="showContent1" datatable class="table  table-bordered" cellspacing="0" width="100%">
+                                            <thead class="thead-dark">
+                                                <tr>
+                                                    <th>Edit</th>
+                                                    <th>Admission Date</th>
+                                                    <th>UHID</th>
+                                                    <th>IPD No</th>
+                                                    <th>Patient Name</th>
+                                                    <th>Previous Bed No</th>
+                                                    <th>Shifted Bed No</th>
+                                                    <th>Shifting Date</th>
+                                                    <th>Shifting Time</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody style="color: black;">
+
+                                                <tr *ngFor="let item of bedHistoryDetails">
+                                                    <td>
+                                                        <span class="float-right">
+                                                            <button *ngIf="isedit_action" id="edit" type="button" (click)="onEdit(item)" class="btn btn-warning"><i class="fas fa-edit"></i></button> &nbsp;
+                                                            <button *ngIf="isdelete_action" id="delete" type="button" (click)="onDelete(item.id)" class="btn btn-danger" ><i class="fa fa-trash"></i></button>
+                                                        </span> 
+                                                    </td>
+                                                    <td>{{item.admitDate}}</td>
+                                                    <td>{{item.uhid}}</td>
+                                                    <td>{{item.ipdno}}</td>
+                                                    <td>{{item.pname}}</td>
+                                                    <td>{{item.preBedNo}}</td>
+                                                    <td>{{item.shiftBedNo}}</td>
+                                                    <td>{{item.shiftDate}}</td>
+                                                    <td>{{item.shiftTime}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                   
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>

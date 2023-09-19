@@ -1,0 +1,511 @@
+    <div class="col-md-12 mt-3">
+        <div class="card card-outline card-danger">
+            <div class="card-header text-center">
+                <b style="font-size: 18px;"> IPD Dashboard </b>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body overflow-auto">
+                <form name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
+
+                    <div class="row">
+                        <div class="form-group col-md-6 col-sm-6">
+                            <div class="row">
+                                <div class="form-group col-md-12 col-sm-12">
+                                    
+                                    <div class="row">
+                                        <div class="form-group col-md-12 col-sm-12">
+                                            <label for="name">Patient Name</label>
+                                            <ng-select [(ngModel)]="form.name" name="name" #name="ngModel" (focusout)="getPatientDetails_IPD(this.form.name)" required class="ng-select-focused" [loading]="tokensAreLoading" [addTag]="true" [isOpen]="openSuggestionDropdown" [ngModelOptions]="{standalone: true}"
+                                            ng-model-options="{debounce: 4000}" [virtualScroll]="true" [dropdownPosition]="'down'" notFoundText="No Data Found" loadingText="loading..." [inputAttrs]="{autocomplete: 'off'}" [typeahead]="typeaheadTextInput"
+                                            placeholder="Type to search">
+                                                <ng-option *ngFor="let o of PatientDetails" [value]="o.ipd">
+                                                    {{o.name}} | {{o.uhid}} | <b style="color: red;">{{o.ipd}}</b>
+                                                </ng-option>
+                                            </ng-select>
+                                            <div class="text-danger" role="alert" *ngIf="f.submitted && name.invalid">
+                                                Required Field !
+                                            </div>
+                                        </div>
+    
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <label>UHID</label>
+                                            <input type="text" class="form-control" name="uhid" [(ngModel)]="form.uhid" #uhid="ngModel" />
+                                            <div class="text-danger" role="alert" *ngIf="f.submitted && uhid.invalid">
+                                                Required Field !
+                                            </div>
+                                        </div>
+    
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <label>IPD No &nbsp; <a (click)="openPatientDetailsModel(PatientDetailsModel)" class="btn btn-outline-success btn-xs">Take From Admission</a> 
+                                            </label>
+                                            <input type="text" class="form-control" name="ipdno" [(ngModel)]="form.ipdno" #ipdno="ngModel" />
+                                            <div class="text-danger" role="alert" *ngIf="f.submitted && ipdno.invalid">
+                                                Required Field !
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <label>DOB</label>
+                                            <input type="text" class="form-control" name="dob" [(ngModel)]="form.dob" #dob="ngModel" />
+                                            <div class="text-danger" role="alert" *ngIf="f.submitted && dob.invalid">
+                                                Required Field !
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <label>Sex</label>
+                                            <select class="form-control" name="sex" [(ngModel)]="form.sex" #sex="ngModel">
+                                                <option value="MALE">MALE</option>
+                                                <option value="FEMALE">FEMALE</option>
+                                                <option value="HERMAPHRODITE">HERMAPHRODITE</option>
+                                                <option value="ENANCH">ENANCH</option>
+                                            </select>
+                                            <div class="text-danger" role="alert" *ngIf="f.submitted && age.invalid">
+                                                Required Field !
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6 col-sm-6">
+                                            <label>Age</label>
+                                            <input type="text" class="form-control" name="age" [(ngModel)]="form.age" #age="ngModel" />
+                                            <div class="text-danger" role="alert" *ngIf="f.submitted && age.invalid">
+                                                Required Field !
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                                <!-- Redirect Buttons -->
+                                <div class="form-group col-md-12 col-sm-12">
+                                    <div class="row">
+                                        <div class="col-md-4 col-sm-4">
+                                            <button type="button" style="width: 250px;" class="btn btn-info mt-2" routerLink="/hims/report-routine_report-admission_discharge" [queryParams]="{ ipdno: form.ipdno}" >Admission/Dis Register <i class="fa fa-share-square"></i>
+                                            </button>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4">
+                                            <button type="button" style="width: 250px;" class="btn btn-warning mt-2" routerLink="/ipd/webipd_discharge_summery" [queryParams]="{ ipdno: form.ipdno}" >Discharge Summery <i class="fa fa-share-square"></i>
+                                            </button>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4">
+                                            <button type="button" style="width: 250px;" class="btn btn-warning mt-2" routerLink="/ipd/webipd_death_summery" [queryParams]="{ ipdno: form.ipdno}"  >Death Summery <i class="fa fa-share-square"></i>
+                                            </button>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4">
+                                            <button type="button" style="width: 250px;" class="btn btn-info mt-2" routerLink="/hims/ipd-bill-bill_detail_sheet" [queryParams]="{ ipdno: form.ipdno}" >Bill Detail Sheet <i class="fa fa-share-square"></i>
+                                            </button>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4">
+                                            <button type="button" style="width: 250px;" disabled class="btn btn-info mt-2" routerLink="/ipd/">Doctors Order <i class="fa fa-share-square"></i>
+                                            </button>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4">
+                                            <button type="button" style="width: 250px;" disabled class="btn btn-info mt-2" routerLink="/ipd/">Medical Records <i class="fa fa-share-square"></i>
+                                            </button>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4">
+                                            <button type="button" style="width: 250px;" disabled class="btn btn-info mt-2" routerLink="/ipd/">Anaesthesia <i class="fa fa-share-square"></i>
+                                            </button>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4">
+                                            <button type="button" style="width: 250px;" disabled class="btn btn-info mt-2" routerLink="/ipd/">Investigation Done <i class="fa fa-share-square"></i>
+                                            </button>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4">
+                                            <button type="button" style="width: 250px;" disabled class="btn btn-info mt-2" routerLink="/ipd/">Operation Details <i class="fa fa-share-square"></i>
+                                            </button>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4">
+                                            <button type="button" style="width: 250px;" disabled class="btn btn-info mt-2" routerLink="/ipd/">Store/View Photo <i class="fa fa-share-square"></i>
+                                            </button>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4">
+                                            <button type="button" style="width: 250px;" disabled class="btn btn-info mt-2" routerLink="/ipd/">Vitals Stats Sheet <i class="fa fa-share-square"></i>
+                                            </button>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4">
+                                            <button type="button" style="width: 250px;" disabled class="btn btn-info mt-2" routerLink="/ipd/">Patient History <i class="fa fa-share-square"></i>
+                                            </button>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4">
+                                            <button type="button" style="width: 250px;" disabled class="btn btn-info mt-2" routerLink="/ipd/">Nurse Order <i class="fa fa-share-square"></i> 
+                                            </button>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4">
+                                            <button type="button" style="width: 250px;" disabled class="btn btn-warning mt-2" routerLink="/ipd/">Doctor Instructions <i class="fa fa-share-square"></i>
+                                            </button>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4">
+                                            <button type="button" style="width: 250px;" disabled class="btn btn-info mt-2" routerLink="/ipd/">Check History <i class="fa fa-share-square"></i>
+                                            </button>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4">
+                                            <button type="button" style="width: 250px;" disabled class="btn btn-default mt-2" routerLink="/ipd/">Scanned Image <i class="fa fa-share-square"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6 col-sm-6">
+                            <div class="card card-body overflow-auto">
+                                <fieldset disabled="disabled">
+                                <div class="row">
+
+                                    <!-- Search Inputs -->
+                                    <div class="form-group col-md-12 col-sm-12">
+                                        <div class="row">
+
+                                            <div class="form-group col-md-6 col-sm-6">
+                                                <label>Title: <a>Add New Title>></a> 
+                                                </label>
+                                                <input type="text" class="form-control" name="title" [(ngModel)]="form.title" #title="ngModel" />
+                                                <div class="text-danger" role="alert" *ngIf="f.submitted && title.invalid">
+                                                    Required Field !
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-6 col-sm-6">
+                                                <label>Dose</label>
+                                                <input type="text" class="form-control" name="dose" [(ngModel)]="form.dose" #dose="ngModel" />
+                                                <div class="text-danger" role="alert" *ngIf="f.submitted && dose.invalid">
+                                                    Required Field !
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-6 col-sm-6">
+                                                <label>Qty</label>
+                                                <input type="text" class="form-control" name="qty" [(ngModel)]="form.qty" #qty="ngModel" />
+                                                <div class="text-danger" role="alert" *ngIf="f.submitted && qty.invalid">
+                                                    Required Field !
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-6 col-sm-6">
+                                                <label>Medicine <a>Add New Medicine>></a>
+                                                </label>
+                                                <input type="text" class="form-control" name="medicine" [(ngModel)]="form.medicine" #medicine="ngModel" />
+                                                <div class="text-danger" role="alert" *ngIf="f.submitted && medicine.invalid">
+                                                    Required Field !
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-6 col-sm-6">
+                                                <label>Spl. Instruction</label>
+                                                <input type="text" class="form-control" name="splInstruction" [(ngModel)]="form.splInstruction" #splInstruction="ngModel" />
+                                                <div class="text-danger" role="alert" *ngIf="f.submitted && splInstruction.invalid">
+                                                    Required Field !
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-6 col-sm-6">
+                                                <label>&nbsp;</label>
+                                                <button type="button" class="btn btn-info mt-1">Update Rx.</button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <!-- Search Inputs -->
+                                    <div class="form-group col-md-12 col-sm-12">
+                                        <div class="row">
+                                            <div class="form-group col-md-12 col-sm-12">
+                                                <label for="">No RX. Found</label>
+                                            </div>
+
+                                            <div class="form-group col-md-6 col-sm-6">
+                                                <label>Investigation: <a>Radio>></a>  <a>Patho>></a>
+                                                </label>
+                                                <input type="text" class="form-control" name="investigation" [(ngModel)]="form.investigation" #investigation="ngModel" />
+                                                <div class="text-danger" role="alert" *ngIf="f.submitted && investigation.invalid">
+                                                    Required Field !
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-6 col-sm-6">
+                                                <label>+ Diagnosis: <a>Add Diagnosis >></a> 
+                                                    <button type="button">Nurse Instruction</button>
+                                                </label>
+                                                <input type="text" class="form-control" name="diagnosis" [(ngModel)]="form.diagnosis" #diagnosis="ngModel" />
+                                                <div class="text-danger" role="alert" *ngIf="f.submitted && diagnosis.invalid">
+                                                    Required Field !
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-12 col-sm-12">
+                                                <button type="button" class="btn btn-info mt-1">Last Rx</button>&nbsp;
+                                                <button type="button" class="btn btn-info mt-1">Clear Rx</button>&nbsp;
+                                                <button type="button" class="btn btn-info mt-1">Transfer To Standard Rx</button>&nbsp;
+                                                <button type="button" class="btn btn-info mt-1">Retrieve Rx</button>&nbsp;
+                                                <button type="button" class="btn btn-info mt-1">Save <i class="fas fa-save"></i> Rx</button>&nbsp;
+                                                <button type="button" class="btn btn-info mt-1">Save <i class="fas fa-save"></i> & Print Rx</button>&nbsp;
+                                            </div>
+                                            <div class="form-group col-md-6 col-sm-6">
+                                                <label>Next Visit</label>
+                                                <input type="date" class="form-control" name="nextVisit" [(ngModel)]="form.nextVisit" #nextVisit="ngModel" />
+                                                <div class="text-danger" role="alert" *ngIf="f.submitted && nextVisit.invalid">
+                                                    Required Field !
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-6 col-sm-6">
+                                                <label>User Name</label>
+                                                <input type="text" disabled class="form-control" name="userName" [(ngModel)]="form.userName" #userName="ngModel" />
+                                                <div class="text-danger" role="alert" *ngIf="f.submitted && userName.invalid">
+                                                    Required Field !
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row" *ngIf="doneTestOfPatientShow" >
+                        <div class="card card-body">
+                            <table id="customTable" datatable class="table table-bordered" cellspacing="0" width="100%">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Action</th>
+                                        <th>Test Type</th>
+                                        <th>Test Name</th>
+                                        <th>Date</th>
+                                        <th>Time</th>
+                                        <!-- <th>Time</th> -->
+                                    </tr>
+                                </thead>
+                                <tbody style="color: black;">
+                                    <tr *ngFor="let item of DoneTestOfPatient; let i = index;">
+                                     <td>
+                                    <span class="">
+                                        <button id="delete" type="button" (click)="deleteDoneTestOfPatient(item.requestid,i)" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                    </span>
+                                    </td> 
+                                    <td>{{item.type}}</td>
+                                    <td>{{item.testName}}</td>
+                                    <td>{{item.date | date:"dd-MM-y"}}</td>
+                                    <td>{{item.time | convertFrom24To12Format}}</td>
+                                    <!-- <td>{{item.time}}</td> -->
+                                    </tr>
+                                </tbody>
+                            </table>
+                </div>
+                    </div>
+
+
+
+                    <div class="row">
+                        <div class="card card-body">
+                            <div class="form-group col-md-12 col-sm-12">
+                                <button type="button" class="btn btn-info mt-1" disabled>Pharma Indent</button>&nbsp;
+                                <button type="button" class="btn btn-info mt-1" (click)="openRadioRequestModel(LabRequestModel)" >Radio Request</button>&nbsp;
+                                <button type="button" class="btn btn-info mt-1" (click)="openLabRequestModel(LabRequestModel)">Lab Request</button>&nbsp;
+                                <button type="button" class="btn btn-info mt-1" disabled>View Patho Report</button>&nbsp;
+                                <button type="button" class="btn btn-info mt-1" disabled>View Radio Report</button>&nbsp;
+                                <button type="button" class="btn btn-info mt-1" disabled>View Radio Image</button>&nbsp;
+                                <button type="button" class="btn btn-info mt-1" disabled>View Discharge Summery</button>&nbsp;
+                                <button type="button" class="btn btn-info mt-1" disabled>OPD SOAP Notes</button>&nbsp;
+                                <button type="button" class="btn btn-success mt-1" disabled>Next Case >></button>&nbsp;
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
+    <ng-template #PatientDetailsModel let-modal>
+        <div class="modal-header">
+            <h5 class="modal-title">IPD Patient</h5>
+            <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+
+                <div class="form-group col-md-4 col-sm-4">
+                    <label>Patient Name & UHID</label>
+
+                    <ng-select [(ngModel)]="admissionModel.name" name="name" #name="ngModel" (focusout)="getPatientDetails_IPD_ForAdmissionModel(this.admissionModel.name)" required class="ng-select-focused" [loading]="tokensAreLoading" [addTag]="true" [isOpen]="openSuggestionDropdown" [ngModelOptions]="{standalone: true}"
+                    ng-model-options="{debounce: 4000}" [virtualScroll]="true" [dropdownPosition]="'down'" notFoundText="No Data Found" loadingText="loading..." [inputAttrs]="{autocomplete: 'off'}" [typeahead]="typeaheadTextInput"
+                    placeholder="Type to search">
+                        <ng-option *ngFor="let o of PatientDetails" [value]="o.ipd">
+                            {{o.name}} | {{o.uhid}} | <b style="color: red;">{{o.ipd}}</b>
+                        </ng-option>
+                    </ng-select>
+                   
+                </div>
+
+                <div class="form-group col-md-4 col-sm-4">
+                    <label>Doctor Name</label>
+                    <input type="text" class="form-control" name="doctorName" [(ngModel)]="admissionModel.doctorName" #doctorName="ngModel" />
+                   
+                </div>
+                <div class="form-group col-md-4 col-sm-4">
+                    <label>IPD No</label>
+                    <input type="text" class="form-control" name="ipdno" [(ngModel)]="admissionModel.ipdno" #ipdno="ngModel" />
+                    <div class="text-danger" role="alert" *ngIf="f.submitted && ipdno.invalid">
+                        Required Field !
+                    </div>
+                </div>
+
+                <div class="form-group col-md-12 col-sm-12">
+                    <button type="button" class="btn btn-warning mt-1">Admited Patient</button>&nbsp;
+                    <button type="button" class="btn btn-info mt-1">Discharge Patient</button>&nbsp;
+                    <button type="button" class="btn btn-info mt-1">Show All</button>&nbsp;
+                </div>
+
+                <div class="form-group col-md-12 col-sm-12">
+
+                            <table id="customTable" datatable class="table  table-bordered" cellspacing="0" width="100%">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Select</th>
+                                        <th>Name</th>
+                                        <th>UHID</th>
+                                        <th>IPD NO</th>
+                                        <th>Discharge</th>
+                                        <th>Doctor</th>
+                                        <th>Age</th>
+                                        <th>Sex</th>
+                                        <th>Bed No</th>
+                                        <th>Organization</th>
+                                    </tr>
+                                </thead>
+                                <tbody style="color: black;">
+                                    <tr *ngFor="let item of admissionModel_Table">
+                                        <td>
+                                            <span class="float-right">
+                                                    <button id="edit" type="button" (click)="admissionModel_Table_Edit(item,myModal)" class="btn btn-warning"><i class="fas fa-edit"></i></button> &nbsp;
+                                                </span>
+                                        </td>
+                                        <td>{{item.registration.name}}</td>
+                                        <td>{{item.admission.uhid}}</td>
+                                        <td>{{item.admission.ipdno}}</td>
+                                        <td>{{item.admission.discharge}}</td>
+                                        <td>{{item.admission.doctor}}</td>
+                                        <td>{{item.admission.age}}</td>
+                                        <td>{{item.admission.sex}}</td>
+                                        <td>{{item.admission.bedNo}}</td>
+                                        <td>{{item.admission.organization}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                </div>
+
+            </div>
+
+            <div class=" col-md-12 col-sm-12">
+                <button type="submit" class="btn btn-secondary" (click)="modal.dismiss()"><b>&nbsp; Close &nbsp;</b>
+                </button>
+            </div>
+        </div>
+    </ng-template>
+
+
+
+
+    <ng-template #LabRequestModel let-modal>
+        <div class="modal-header">
+            <h5 class="modal-title">Lab Request Sheet</h5>
+            <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <!-- <form name="multiReceiptNumber" (ngSubmit)="r.form.valid && onMultiCalculate()" #r="ngForm" novalidate> -->
+            <div class="row">
+
+                <div class="form-group col-md-4 col-sm-4">
+                    <label>Name</label>
+                    <input type="text" disabled class="form-control" name="name" [(ngModel)]="labRequestModel.name" />
+                </div>
+                <div class="form-group col-md-4 col-sm-4">
+                    <label>UHID</label>
+                    <input type="text" disabled class="form-control" name="uhid" [(ngModel)]="labRequestModel.uhid" />
+                </div>
+                <div class="form-group col-md-4 col-sm-4">
+                    <label>IPD No</label>
+                    <input type="text" disabled class="form-control" name="ipdno" [(ngModel)]="labRequestModel.ipdno" />
+                </div>
+                <div class="form-group col-md-4 col-sm-4">
+                    <label>Date</label>
+                    <input type="text" disabled class="form-control" name="date" [(ngModel)]="labRequestModel.date" />
+                </div>
+            </div>
+            <div class="row">
+                <!-- AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA -->
+                <div class=" col-md-6 col-sm-6">
+
+                    <div class="row" style="height: 300px;">
+
+                        <div class="col-md-12" >
+                            <input type="text" class="form-control" id="IPDTestList_Input" (keyup)="filterIPDTestList()" placeholder="Search for names..">
+                        </div>
+                        
+                        <div class="col-md-12 direct-chat-messages" >
+                                <ul id="IPDTestList_UL">
+                                    <li *ngFor="let item of IPDTestList">
+                                        <input *ngIf = "item.checked" style="width: 15px; height: 15px;" checked type="checkbox" name="testItem" [value]="item.id" class="form-check-input" (change)="addTestToList($event,item)" [ngModelOptions]="{standalone: true}">
+                                        
+                                        <input *ngIf = "!item.checked" style="width: 15px; height: 15px;" type="checkbox" name="testItem" [value]="item.id" class="form-check-input" (change)="addTestToList($event,item)" [ngModelOptions]="{standalone: true}">
+                                        <label class="form-check-label">{{item.testName}}</label>
+                                    </li>
+                                </ul>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <!-- BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB -->
+                <div class=" col-md-6 col-sm-6">
+                    <div class="row">
+                        &nbsp;
+                        <button type="button" class="btn btn-success mt-1">New</button>&nbsp;
+                        <button (click)="onSubmit()" type="button" class="btn btn-warning  mt-1">Save <i class="fas fa-save"></i></button>&nbsp;
+                    </div>
+                    <div class="row" style="height: 300px;">
+                        
+                        <div class="col-md-12 direct-chat-messages" >
+                            <div class="row">
+                                <div class="table-responsive">
+                                    <table  class="table  table-bordered">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th>SNo</th>
+                                                <th>TestName</th>
+                                                <th>Remove</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody style="color: black;">
+                                            <tr *ngFor="let item of IPDTestAvailableList">
+                                                <td>{{item.sno}}</td>
+                                                <td>{{item.testName}}</td>
+                                                <td><button type="button" (click)="addTestToList($event,item)" class="btn btn-outline-danger btn-xs float-right">X</button></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class=" col-md-12 col-sm-12">
+                <button type="submit" class="btn btn-secondary mt-1" (click)="modal.dismiss()"><b>&nbsp; Close &nbsp;</b>
+                </button>
+            </div>
+        </div>
+    </ng-template>
