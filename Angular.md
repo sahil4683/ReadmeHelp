@@ -259,4 +259,28 @@ sort(column: string) {
   
   // Fetch data with the updated sorting criteria.
   this.fetchData();
+
+
+
+
+
+
+
+
+
+
+fetchData() {
+  const params = new HttpParams()
+    .set('firstNameFilter', this.filters.firstNameFilter)
+    .set('lastNameFilter', this.filters.lastNameFilter)
+    .set('emailFilter', this.filters.emailFilter)
+    .set('sortColumn', this.sortColumn)
+    .set('sortDirection', this.sortDirection)
+    .set('page', (this.currentPage + 1).toString()) // Page number is 1-based
+    .set('size', this.pageSize.toString());
+
+  this.httpClient.get<any>('/api/employees', { params }).subscribe(data => {
+    this.filteredEmployees = data.content; // Fetched items for the current page
+    this.totalItems = data.totalElements; // Total number of items
+  });
 }
