@@ -1,3 +1,51 @@
+
+<div class="container">
+  <h2>Employee List</h2>
+
+  <!-- Filter Input Fields -->
+  <div class="form-group">
+    <label for="firstNameFilter">First Name:</label>
+    <input type="text" class="form-control" id="firstNameFilter" [(ngModel)]="filters.firstNameFilter">
+  </div>
+
+  <div class="form-group">
+    <label for="lastNameFilter">Last Name:</label>
+    <input type="text" class="form-control" id="lastNameFilter" [(ngModel)]="filters.lastNameFilter">
+  </div>
+
+  <div class="form-group">
+    <label for="emailFilter">Email:</label>
+    <input type="text" class="form-control" id="emailFilter" [(ngModel)]="filters.emailFilter">
+  </div>
+
+  <!-- Apply Filters Button -->
+  <button class="btn btn-primary" (click)="applyFilters()">Apply Filters</button>
+
+  <!-- Employee Table with Sorting -->
+  <table class="table">
+    <thead>
+      <tr>
+        <th (click)="sort('id')">ID <i class="fa" [ngClass]="{'fa-sort': sortColumn !== 'id', 'fa-sort-asc': sortColumn === 'id' && sortDirection === 'asc', 'fa-sort-desc': sortColumn === 'id' && sortDirection === 'desc'}"></i></th>
+        <th (click)="sort('firstName')">First Name <i class="fa" [ngClass]="{'fa-sort': sortColumn !== 'firstName', 'fa-sort-asc': sortColumn === 'firstName' && sortDirection === 'asc', 'fa-sort-desc': sortColumn === 'firstName' && sortDirection === 'desc'}"></i></th>
+        <th (click)="sort('lastName')">Last Name <i class="fa" [ngClass]="{'fa-sort': sortColumn !== 'lastName', 'fa-sort-asc': sortColumn === 'lastName' && sortDirection === 'asc', 'fa-sort-desc': sortColumn === 'lastName' && sortDirection === 'desc'}"></i></th>
+        <th (click)="sort('email')">Email <i class="fa" [ngClass]="{'fa-sort': sortColumn !== 'email', 'fa-sort-asc': sortColumn === 'email' && sortDirection === 'asc', 'fa-sort-desc': sortColumn === 'email' && sortDirection === 'desc'}"></i></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee of filteredEmployees">
+        <td>{{ employee.id }}</td>
+        <td>{{ employee.firstName }}</td>
+        <td>{{ employee.lastName }}</td>
+        <td>{{ employee.email }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+
+
 <div class="container">
   <h2>Employee List</h2>
 
