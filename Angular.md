@@ -249,3 +249,14 @@ paginate(page: number) {
   </ul>
 </div>
 
+
+
+
+sort(column: string) {
+  // If the column is already the sorting key, reverse the sorting direction; otherwise, set it to 'asc'.
+  this.sortDirection = (column === this.sortColumn && this.sortDirection === 'asc') ? 'desc' : 'asc';
+  this.sortColumn = column;
+  
+  // Fetch data with the updated sorting criteria.
+  this.fetchData();
+}
