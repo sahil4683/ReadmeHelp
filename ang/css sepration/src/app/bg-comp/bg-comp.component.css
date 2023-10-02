@@ -1,0 +1,31 @@
+:host ::ng-deep .mat-focused .mat-form-field-label {
+    color: rgb(255, 255, 255) !important;
+}
+
+:host ::ng-deep.mat-form-field-underline {
+    background-color: rgb(255, 255, 255) !important;
+}
+
+:host ::ng-deep.mat-form-field-ripple {
+    background-color: rgb(255, 255, 255) !important;
+}
+
+:host ::ng-deep .mat-input-element {
+    color: rgb(255, 255, 255) !important;
+}
+
+:host ::ng-deep .mat-form-field-label {
+    color: rgb(255, 255, 255) !important;
+}
+
+:host ::ng-deep .mat-select-value {
+    color: rgb(255, 255, 255) !important;
+}
+
+:host ::ng-deep .mat-select-arrow {
+    color: rgb(255, 255, 255) !important;
+}
+
+.form-container mat-form-field + mat-form-field {
+    margin-left: 10px;
+  }
